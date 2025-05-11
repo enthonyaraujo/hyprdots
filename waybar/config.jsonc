@@ -1,0 +1,101 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "spacing": 5,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": [ "memory", "temperature","custom/cpu", "custom/gpu_temp", "wireplumber", "battery", "backlight","hyprland/language", "bluetooth", "tray"],
+
+    "hyprland/workspaces": {
+        "format": "<span size='larger'>{icon}</span>",
+        "on-click": "activate",
+        "icon-size": 10,
+        "sort-by-number": true,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+    },
+
+    "clock": {
+        //"format": "{:%d.%m.%Y | %H:%M}"
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    "wireplumber": {
+        "format": "\udb81\udd7e  {volume}%",
+        "max-volume": 100,
+        "scroll-step": 5,
+        "on-click": "pavucontrol"
+    },
+
+    "battery": {
+        "bat": "BAT1",
+        "interval": 60,
+        "format": "{icon}  {capacity}%",
+        "format-icons": ["\udb80\udc8e", "\udb80\udc7b", "\udb80\udc7e", "\udb80\udc81", "\udb80\udc79"]
+    },
+
+    "backlight": {
+        "format": "\udb80\udce0 {percent}%"
+    },
+
+    "memory": {
+        "interval": 30,       
+       // "format": "{short}",
+        "format": "\uefc5 {used:0.1f}G"
+    },
+
+    "custom/gpu_temp": {
+    "exec": "/home/enthony/.config/waybar/scripts/gpu_temp.sh",
+    "interval": 5,
+    "return-type": "text",
+    "tooltip": false 
+    },
+
+    "temperature": {
+        "format": "CPU  {temperatureC}°C" //\uef2a
+    },
+    "custom/cpu": {
+        "exec": "~/.config/waybar/scripts/cpu_usage.sh",
+        "interval": 5,
+        "return-type": "json"
+    },
+
+
+    "network": {
+        "format": "",
+        "format-ethernet": "\udb80\ude00",
+        "format-wifi": "{icon}",
+        "format-disconnected": "\udb83\udc9c",
+        "format-icons": ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname}",
+        "tooltip-format-disconnected": "Disconnected",
+	    // "on-click":"kitty -e nmtui"
+    },
+
+    "bluetooth": {
+        "format": "\udb80\udcaf",
+        "format-disabled": "\udb80\udcb2",
+        "format-connected": "\udb80\udcb1",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click":"blueman-manager"
+    },
+    "hyprland/language": {
+        "format": "{short}"
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 16
+    }
+}

@@ -4,12 +4,13 @@
     "height": 24,
     "spacing": 5,
 
-    "modules-left": ["custom/launcher","hyprland/workspaces"],
-    "modules-center": ["hyprland/window"],
+    "modules-left": ["custom/launcher","hyprland/window","hyprland/workspaces"],
+    "modules-center": [],
     "modules-right": [ "memory", "temperature","cpu", "custom/gpu_temp_usage", "wireplumber", "battery","hyprland/language", "bluetooth", "tray", "clock","custom/powermenu"],
     //, "backlight"
     "hyprland/workspaces": {
-        "format": "<span size='larger'>{icon}</span>",
+        "format": "{icon}",
+        "format-active": "<span color='#00ff00' size='larger'><b>{icon}</b></span>",
         "on-click": "activate",
         "icon-size": 10,
         "sort-by-number": true,
@@ -19,6 +20,13 @@
             "3": [],
             "4": [],
             "5": []
+        },
+        "format-icons": {
+            "1": "<span size='small'>1</span>",
+            "2": "<span size='small'>2</span>",
+            "3": "<span size='small'>3</span>",
+            "4": "<span size='small'>4</span>",
+            "5": "<span size='small'>5</span>"
         }
     },
 
@@ -128,14 +136,14 @@
 
 // custons modulos left
     "hyprland/window": {
-      "format": "{class}",
+      "format": " {class}",
       "max-length": 20,
       "rewrite": {
         "^(?!.*\\S).*": ""
       }
     },
     "custom/launcher": {
-      "format": "",
+      "format": " ",
       "on-click": "wofi --show drun",
       "tooltip": false
     }

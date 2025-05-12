@@ -3,7 +3,7 @@
 @define-color background #000000;
 
 * {
-    font-family: JetBrainsMono Nerd Font;
+    font-family: JetBrainsMono Nerd Font; /* */
     font-size: 15px;
     padding: 0;
     margin: 0;

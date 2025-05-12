@@ -1,6 +1,6 @@
 Hyprland Configs :)
 
 <p align="center">
-<img src="wallpaper-hyprland.png">
+<img src="preview.png">
 </p>
 

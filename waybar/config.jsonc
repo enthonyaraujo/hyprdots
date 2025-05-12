@@ -4,10 +4,10 @@
     "height": 24,
     "spacing": 5,
 
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": [ "memory", "temperature","custom/cpu", "custom/gpu_temp", "wireplumber", "battery", "backlight","hyprland/language", "bluetooth", "tray"],
-
+    "modules-left": ["custom/launcher","hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": [ "memory", "temperature","cpu", "custom/gpu_temp", "wireplumber", "battery","hyprland/language", "bluetooth", "tray", "clock"],
+    //, "backlight"
     "hyprland/workspaces": {
         "format": "<span size='larger'>{icon}</span>",
         "on-click": "activate",
@@ -23,26 +23,40 @@
     },
 
     "clock": {
-        //"format": "{:%d.%m.%Y | %H:%M}"
-        // "timezone": "America/New_York",
+        //"format": "{}",
+        //"exec": "LC_TIME=pt_BR.utf8 date '+%A, %d de %B · %H:%M'",
+        // "timezone": "America/Fortaleza",
+        //"locale": "pt_BR.utf8",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
 
     "wireplumber": {
-        "format": "\udb81\udd7e  {volume}%",
+        "format": "\udb81\udd7e",
         "max-volume": 100,
         "scroll-step": 5,
         "on-click": "pavucontrol"
     },
 
-    "battery": {
-        "bat": "BAT1",
-        "interval": 60,
-        "format": "{icon}  {capacity}%",
-        "format-icons": ["\udb80\udc8e", "\udb80\udc7b", "\udb80\udc7e", "\udb80\udc81", "\udb80\udc79"]
+    "custom/battery": {
+        "exec": "/home/enthony/.config/waybar/scripts/battery.sh",
+        "interval": 10,
+        "return-type": "json",
+        "tooltip": true
     },
 
+    "battery": {
+        "format": "{icon}",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾" , "󰁿", "󰂀", "󰂁", "󰂂","󰁹"],
+        "format-charging": "󰂄",
+        "interval": 3,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "tooltip": true,
+        "tooltip-format": "{capacity}%"
+    },
     "backlight": {
         "format": "\udb80\udce0 {percent}%"
     },
@@ -61,8 +75,13 @@
     },
 
     "temperature": {
-        "format": "CPU  {temperatureC}°C" //\uef2a
+        "format": "CPU: {temperatureC}°C" //\uef2a
     },
+
+    "cpu": {
+        "format": "{usage}%"
+    },
+
     "custom/cpu": {
         "exec": "~/.config/waybar/scripts/cpu_usage.sh",
         "interval": 5,
@@ -93,9 +112,24 @@
     },
     "hyprland/language": {
         "format": "{short}"
+
     },
     "tray": {
         "icon-size": 16,
         "spacing": 16
+    },
+
+// custons modulos left
+    "hyprland/window": {
+      "format": "{class}",
+      "max-length": 20,
+      "rewrite": {
+        "^(?!.*\\S).*": "Finder"
+      }
+    },
+    "custom/launcher": {
+      "format": "",
+      "on-click": "wofi --show drun",
+      "tooltip": false
     }
 }

@@ -23,8 +23,15 @@
     color: @foreground-inactive;
 }
 
+#custom-launcher
+#hyprland-window{
+    padding-left: 0.5em 
+}
+
 #memory,
-#temperature {
+#temperature,
+#cpu,
+#custom-gpu_temp {
     padding-right: 0.5em
 }
 

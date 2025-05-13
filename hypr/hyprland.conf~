@@ -20,11 +20,9 @@ $menu = wofi --show drun
 
 exec = gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 exec = gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3-dark"
-exec-once = waybar & hyprpaper 
+exec-once = waybar & hyprpaper
 exec-once = nm-applet &
-#exec-once = nwg-dock-hyprland -x
-exec-once = udiskie -t 
-
+exec-once = nwg-dock-hyprland -r -x
 
 #############################
 ### ENVIRONMENT VARIABLES ###
@@ -172,7 +170,6 @@ output = HDMI-A-2 #lembrar de trocar
 $mainMod = SUPER # Sets "Windows" key as main modifier
 
 bind = $mainMod, W, exec, killall waybar && waybar
-bind = $mainMod, N, exec, killall nwg-dock-hyprland && nwg-dock-hyprland -x
 bind = $mainMod, P, exec, grim -g "$(slurp)" ~/Imagens/print.png
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more

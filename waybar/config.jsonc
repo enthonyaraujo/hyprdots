@@ -5,8 +5,8 @@
     "spacing": 5,
 
     "modules-left": ["custom/launcher","hyprland/window"],
-    "modules-center": [],
-    "modules-right": [ "memory","cpu", "temperature", "custom/gpu_temp_usage", "wireplumber", "battery","hyprland/language", "bluetooth", "tray", "clock","custom/powermenu"],
+    "modules-center": ["clock"],
+    "modules-right": [ "memory","cpu", "temperature", "custom/gpu_temp_usage", "wireplumber", "battery","hyprland/language", "bluetooth", "tray","nm-applet"],
     //, "backlight"
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -29,7 +29,9 @@
             "5": "<span size='small'>5</span>"
         }
     },
-
+    "nm-applet":{
+        "format" : "{icon}"
+    },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
@@ -144,7 +146,7 @@
     },
     "custom/launcher": {
       "format": " ",
-      "on-click": "wofi --show drun",
+      "on-click": " $HOME/.config/waybar/scripts/wofipowermenu.py", //wofi --show drun",
       "tooltip": false
     }
 }

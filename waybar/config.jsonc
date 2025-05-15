@@ -6,7 +6,7 @@
 
     "modules-left": ["custom/launcher","hyprland/window"],
     "modules-center": ["clock"],
-    "modules-right": [ "memory","cpu", "temperature", "custom/gpu_temp_usage", "wireplumber", "battery","hyprland/language", "bluetooth", "tray","nm-applet"],
+    "modules-right": [ "memory","cpu", "temperature", "custom/gpu_temp_usage", "wireplumber", "battery","hyprland/language", "bluetooth", "tray"],
     //, "backlight"
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -28,9 +28,6 @@
             "4": "<span size='small'>4</span>",
             "5": "<span size='small'>5</span>"
         }
-    },
-    "nm-applet":{
-        "format" : "{icon}"
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",

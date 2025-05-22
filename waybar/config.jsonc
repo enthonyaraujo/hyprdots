@@ -4,11 +4,11 @@
     "height": 24,
     "spacing": 5,
 
-    "modules-left": ["custom/launcher","hyprland/window"],
+    "modules-left": ["custom/launcher","hyprland/workspaces","hyprland/window"],
     "modules-center": ["clock"],
     "modules-right": [ "memory","cpu", "temperature", "custom/gpu_temp_usage", "wireplumber", "battery","bluetooth", "tray"],
     //, "backlight"
-    "hyprland/workspaces": {
+ /*   "hyprland/workspaces": {
         "format": "{icon}",
         "format-active": "<span color='#00ff00' size='larger'><b>{icon}</b></span>",
         "on-click": "activate",
@@ -28,7 +28,8 @@
             "4": "<span size='small'>4</span>",
             "5": "<span size='small'>5</span>"
         }
-    },
+    }, */
+
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
@@ -66,7 +67,7 @@
         "interval": 30,       
        // "format": "{short}",
         "format": "MEM: {used:0.1f}G"
-    },
+    }, 
 
     "custom/gpu_temp_usage": {
     "exec": "$HOME/.config/waybar/scripts/gpu_temp_usage.sh",
@@ -129,7 +130,7 @@
       }
     },
     "custom/launcher": {
-      "format": " ",
+      "format": "  ",
       "on-click": " $HOME/.config/waybar/scripts/wofipowermenu.py", //wofi --show drun",
       "tooltip": false
     }

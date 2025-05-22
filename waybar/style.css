@@ -1,6 +1,6 @@
 @define-color foreground #eeeeee;
 @define-color foreground-inactive #aaaaaa;
-@define-color background #000000;
+@define-color background rgba(0, 0, 0, 0.0);
 
 * {
     font-family: FiraCode Nerd Font;
@@ -16,7 +16,20 @@
 
 #workspaces button {
     color: @foreground;
-    padding-left: 0.7em;
+    background: transparent;
+    padding: 2px 4px;        /* Espaço interno proporcional */
+    margin: 0;
+    border: none;
+    min-width: 0;
+    border-radius: 0;        /* Retângulo (sem arredondamento) */
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background-color: #4c566a;
+    border-bottom: 1px solid #81a1c1;
+    padding: 2px 4px;
+    border-radius: 0;        /* Também retangular para o botão ativo */
 }
 
 #workspaces button.empty {

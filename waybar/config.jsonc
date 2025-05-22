@@ -6,7 +6,7 @@
 
     "modules-left": ["custom/launcher","hyprland/window"],
     "modules-center": ["clock"],
-    "modules-right": [ "memory","cpu", "temperature", "custom/gpu_temp_usage", "wireplumber", "battery","hyprland/language", "bluetooth", "tray"],
+    "modules-right": [ "memory","cpu", "temperature", "custom/gpu_temp_usage", "wireplumber", "battery","bluetooth", "tray"],
     //, "backlight"
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -98,8 +98,7 @@
         "format-icons": ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}",
-        "tooltip-format-disconnected": "Disconnected"
-	    // "on-click":"kitty -e nmtui"
+        "tooltip-format-disconnected": "Disconnected",
     },
 
     "bluetooth": {
@@ -112,8 +111,9 @@
         "on-click":"blueman-manager"
     },
     "hyprland/language": {
-        "format": "{short}"
-
+        "format": "{}",
+        "format-pt": "br",
+        "format-en": "us"
     },
     "tray": {
         "icon-size": 16,

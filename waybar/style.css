@@ -54,6 +54,7 @@
 #language,
 #network,
 #bluetooth,
-#tray {
+#tray,
+#clock {
     padding-right: 0.5em 
 }

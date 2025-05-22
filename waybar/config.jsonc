@@ -4,9 +4,9 @@
     "height": 24,
     "spacing": 5,
 
-    "modules-left": ["custom/launcher","hyprland/workspaces","hyprland/window"],
-    "modules-center": ["clock"],
-    "modules-right": [ "memory","cpu", "temperature", "custom/gpu_temp_usage", "wireplumber", "battery","bluetooth", "tray"],
+    "modules-left": ["custom/launcher","hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": [ "memory","cpu", "temperature", "custom/gpu_temp_usage", "wireplumber", "battery","bluetooth", "tray","clock"],
     //, "backlight"
  /*   "hyprland/workspaces": {
         "format": "{icon}",
@@ -31,8 +31,8 @@
     }, */
 
     "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>  ",
+        "format-alt": "{:%Y-%m-%d}  "
     },
 
     "wireplumber": {

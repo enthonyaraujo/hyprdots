@@ -6,7 +6,7 @@
 
     "modules-left": ["custom/launcher","hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": [ "memory","cpu",/*"temperature" ,*/ "custom/gpu_temp_usage", "wireplumber", "battery","bluetooth", "tray","clock"],
+    "modules-right": [ "memory","cpu",/*"temperature" ,*/ "custom/gpu_temp_usage", "wireplumber","backlight", "battery", "tray","clock"],
 	//    
 
  //, "backlight"
@@ -62,7 +62,7 @@
         "tooltip-format": "{capacity}%"
     },
     "backlight": {
-        "format": "\udb80\udce0 {percent}%"
+        "format": "\udb80\udce0   {percent}%"
     },
 
     "memory": {

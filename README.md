@@ -1,11 +1,12 @@
 Hyprland Configs :)
 
-Dependencies
+Dependencies:
 
 ```bash
 sudo pacman -S network-manager-applet blueman waybar hyprpaper udiskie
 ```
 
+Install:
 ```bash
 git clone https://github.com/enthonyaraujo/hyprdots.git
 

@@ -41,7 +41,8 @@
         "format": "\udb81\udd7e",
         "max-volume": 100,
         "scroll-step": 5,
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "tooltip-format": "{volume}%"
     },
     "custom/powermenu": {
         "on-click": "$HOME/.config/waybar/scripts/wofipowermenu.py",
@@ -62,13 +63,14 @@
         "tooltip-format": "{capacity}%"
     },
     "backlight": {
-        "format": "\udb80\udce0   {percent}%"
+        "format": "\udb80\udce0", //   {percent}% copia com espaco
+        "tooltip-format": "{percent}%"
     },
 
     "memory": {
         "interval": 30,       
        // "format": "{short}",
-        "format": "MEM: {used:0.1f}G"
+        "format": "RAM: {used:0.1f}G"
     }, 
 
     "custom/gpu_temp_usage": {

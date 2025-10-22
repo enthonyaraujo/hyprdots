@@ -55,7 +55,7 @@ def run_menu():
         "hyprlock",
         "systemctl reboot",
         "systemctl reboot --firmware-setup",
-        "sudo /usr/bin/systemctl poweroff"
+        "systemctl poweroff"
 ,
     )
 

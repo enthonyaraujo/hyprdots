@@ -4,7 +4,6 @@
 
 * {
     font-family: FiraCode Nerd Font;
-    font-size: 13px;
     padding: 0;
     margin: 0;
 }
@@ -15,6 +14,7 @@
 }
 
 #workspaces button {
+    font-size: 16px;
     color: @foreground;
     background: transparent;
     padding: 2px 4px;        /* Espaço interno proporcional */
@@ -40,14 +40,19 @@
 #hyprland-window{
     padding-left: 0.5em 
 }
-
-#memory,
-#temperature,
-#cpu,
-#custom-gpu_temp_usage {
-    padding-right: 0.5em
+#memory{
+    font-size: 13px;
 }
-
+#temperature{
+    font-size: 13px;
+}
+#cpu{
+    font-size: 13px;
+}
+#custom-gpu_temp_usage {
+    padding-right: 0.5em;
+    font-size: 13px;
+}
 #wireplumber,
 #battery,
 #backlight,
@@ -56,5 +61,6 @@
 #bluetooth,
 #tray,
 #clock {
+    font-size: 15px;
     padding-right: 0.5em 
 }

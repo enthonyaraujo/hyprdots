@@ -4,17 +4,16 @@
     "height": 15,
     "spacing": 5,
 
-    "modules-left": ["custom/launcher","hyprland/workspaces"],
-    "modules-center": ["hyprland/window"],
-    "modules-right": [ "memory","cpu","temperature" , "custom/gpu_temp_usage", "wireplumber","backlight", "battery", "tray","clock"],
-	//    
+    "modules-left": ["custom/launcher","hyprland/workspaces"], //,"hyprland/window"
+    "modules-center": ["clock"],
+    "modules-right": [ "memory","cpu","temperature" , "custom/gpu_temp_usage", "wireplumber","backlight", "battery", "tray"],
 
- //, "backlight"
- /*   "hyprland/workspaces": {
+
+    "hyprland/workspaces": {
         "format": "{icon}",
         "format-active": "<span color='#00ff00' size='larger'><b>{icon}</b></span>",
         "on-click": "activate",
-        "icon-size": 10,
+        "font-size": 20,
         "sort-by-number": true,
         "persistent-workspaces": {
             "1": [],
@@ -30,15 +29,19 @@
             "4": "<span size='small'>4</span>",
             "5": "<span size='small'>5</span>"
         }
-    }, */
+    }, 
 
     "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>  ",
-        "format-alt": "{:%Y-%m-%d}  "
+        "locale": "pt_BR.UTF-8",
+        "format": "{:L%A %H:%M}",
+        "format-alt": "{:L%d %B de %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
     },
 
     "wireplumber": {
-        "format": "\udb81\udd7e",
+        "format": "{icon}",
+        "format-muted":"󰝟",
+        "format-icons": "\udb81\udd7e", 
         "max-volume": 100,
         "scroll-step": 5,
         "on-click": "pavucontrol",
@@ -87,13 +90,6 @@
     "cpu": {
         "format": "CPU: {usage}%"
     },
-
-    "custom/cpu": {
-        "exec": "$HOME/.config/waybar/scripts/cpu_usage.sh",
-        "interval": 5,
-        "return-type": "json"
-    },
-
 
     "network": {
         "format": "",

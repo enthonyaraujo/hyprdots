@@ -5,7 +5,7 @@ Dependências
 ```bash
 sudo pacman -S network-manager-applet blueman waybar hyprpaper udiskie ttf-fira-code hyprlock1 hypridleco nautilus
 ```
-Modificar **day** para maiúsculo em:
+Modificar **day** para maiúsculo em (para que no relogio a primeira letra fique maiúscula):
 
 ```bash
 sudo nano /usr/share/i18n/locales/pt_BR 

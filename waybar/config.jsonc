@@ -12,7 +12,9 @@
     "modules-right":  [ "memory",
                         "cpu",
                         "temperature" , 
-                        "custom/gpu_temp_usage",  
+                        "custom/gpu_temp_usage",
+                        "custom/recorder",
+                        "custom/webcam",  
                         "group/tray-expander",
                         "hyprland/language",
                         "network",
@@ -155,6 +157,16 @@
     "custom/expand-icon":{
         "format": "\ue602",
         "tooltip": false
-    }
+    },
+    "custom/webcam": {
+        "exec": "~/.config/waybar/scripts/webcam-check.sh",
+        "return-type": "json",
+        "interval": 2 
+    },
+    "custom/recorder": {
+        "exec": "~/.config/waybar/scripts/recorder-check.sh", 
+        "return-type": "json",   
+        "interval": 2 
+    }             
 
 }

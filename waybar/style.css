@@ -3,8 +3,9 @@
 @define-color background rgba(0, 0, 0, 0.7);
 
 * {
-    font-family: FiraCode Nerd Font;
-    padding: 0;
+    font-family: "FiraCode Nerd Font", "Fira Code", monospace;
+    font-size: 15px;
+    padding: 0 0px;
     margin: 0;
 }
 
@@ -14,45 +15,38 @@
 }
 
 #workspaces button {
-    font-size: 16px;
     color: @foreground;
+    font-size: 18px;
     background: transparent;
-    padding: 2px 4px;        /* Espaço interno proporcional */
-    margin: 0;
+    padding: 2px 6px;
+    margin: 0 2px;  /* Pequeno espaço entre botões */
     border: none;
     min-width: 0;
-    border-radius: 0;        /* Retângulo (sem arredondamento) */
+    border-radius: 0;
 }
-
 #workspaces button.active {
     color: #ffffff;
     background-color: #4c566a;
     border-bottom: 1px solid #81a1c1;
-    padding: 2px 4px;
-    border-radius: 0;        /* Também retangular para o botão ativo */
 }
 
 #workspaces button.empty {
     color: @foreground-inactive;
 }
 
-#custom-launcher
-#hyprland-window{
-    padding-left: 0.5em 
+#custom-launcher,
+#hyprland-window {
+    padding-left: 0.1em;
+    padding-right: 0.1em;
 }
-#memory{
-    font-size: 13px;
-}
-#temperature{
-    font-size: 13px;
-}
-#cpu{
-    font-size: 13px;
-}
+#memory,
+#temperature,
+#cpu,
 #custom-gpu_temp_usage {
     padding-right: 0.5em;
-    font-size: 13px;
+    
 }
+#custom-expand-icon,
 #wireplumber,
 #battery,
 #backlight,
@@ -61,6 +55,5 @@
 #bluetooth,
 #tray,
 #clock {
-    font-size: 15px;
-    padding-right: 0.5em 
+    padding-right: 9px 
 }

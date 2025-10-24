@@ -4,23 +4,32 @@
     "height": 15,
     "spacing": 5,
 
-    "modules-left": ["custom/launcher","hyprland/workspaces"], //,"hyprland/window"
+    "modules-left": ["custom/launcher",
+                    "hyprland/workspaces"], //,"hyprland/window"
+    
     "modules-center": ["clock"],
-    "modules-right": [ "memory","cpu","temperature" , "custom/gpu_temp_usage", "wireplumber","backlight", "battery", "tray"],
-
+    
+    "modules-right":  [ "memory",
+                        "cpu",
+                        "temperature" , 
+                        "custom/gpu_temp_usage",  
+                        "group/tray-expander",
+                        "hyprland/language",
+                        "network",
+                        "wireplumber",
+                        "battery"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
         "format-active": "<span color='#00ff00' size='larger'><b>{icon}</b></span>",
         "on-click": "activate",
-        "font-size": 20,
         "sort-by-number": true,
         "persistent-workspaces": {
-            "1": [],
-            "2": [],  
-            "3": [],
-            "4": [],
-            "5": []
+            "1": []//,
+            //"2": [],  
+            //"3": [],
+            //"4": [],
+            //"5": []
         },
         "format-icons": {
             "1": "<span size='small'>1</span>",
@@ -52,7 +61,7 @@
         "format": " ⏻ ",
         "tooltip": false
     },
-
+    
     "battery": {
         "format": "{icon}",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾" , "󰁿", "󰂀", "󰂁", "󰂂","󰁹"],
@@ -73,7 +82,7 @@
     "memory": {
         "interval": 30,       
        // "format": "{short}",
-        "format": "RAM: {used:0.1f}G"
+        "format": "{used:0.1f}G"
     }, 
 
     "custom/gpu_temp_usage": {
@@ -88,18 +97,19 @@
     },
 
     "cpu": {
-        "format": "CPU: {usage}%"
+        "format": "\uf4bc  {usage}%"
     },
 
     "network": {
-        "format": "",
-        "format-ethernet": "",
+        "format-icons": ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
+        "format":"{icon}",
+        "format-ethernet": "\udb80\udf22",
         "format-wifi": "{icon}",
         "format-disconnected": "\udb83\udc9c",
-        "format-icons": ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}",
         "tooltip-format-disconnected": "Disconnected",
+        "interval": 3
     },
 
     "bluetooth": {
@@ -112,16 +122,14 @@
         "on-click":"blueman-manager"
     },
     "hyprland/language": {
-        "format": "{}",
-        "format-pt": "br",
-        "format-en": "us"
+        "format": "{short}"
     },
+
     "tray": {
         "icon-size": 16,
         "spacing": 16
     },
 
-// custons modulos left
     "hyprland/window": {
       "format": " {class}",
       "max-length": 20,
@@ -129,9 +137,24 @@
         "^(?!.*\\S).*": ""
       }
     },
-    "custom/launcher": {
+      "custom/launcher": {
       "format": "  ",
       "on-click": " $HOME/.config/waybar/scripts/wofipowermenu.py", //wofi --show drun",
       "tooltip": false
+    },
+
+    "group/tray-expander":{
+        "orientation": "inherit",
+        "drawer":{
+            "transition-duration": 600,
+            "children-class": "tray-group-item"
+        },
+        "modules": ["custom/expand-icon", "tray"]
+    },
+
+    "custom/expand-icon":{
+        "format": "\ue602",
+        "tooltip": false
     }
+
 }

@@ -23,7 +23,7 @@ sudo pacman -S --noconfirm --needed linux-headers base-devel nvidia nvidia-utils
 flatpak install flathub com.github.reds.LogisimEvolution 
 flatpak install flathub com.rtosta.zapzap
 flatpak install flathub org.gnome.Snapshot
-flatpak install flathub com.visualstudio.code
+#flatpak install flathub com.visualstudio.code
 flatpak install flathub org.libreoffice.LibreOffice
 
 
@@ -35,6 +35,11 @@ git clone https://aur.archlinux.org/networkmanager-dmenu-git.git
 (
 	cd networkmanager-dmenu-git/
 	makepkg -si --noconfirm
+)
+git clone https://aur.archlinux.org/visual-studio-code-bin.git
+(
+    cd visual-studio-code-bin/
+    makepkg -si --noconfirm
 )
 
 cd ..

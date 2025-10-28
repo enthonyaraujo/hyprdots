@@ -39,3 +39,5 @@ echo "Copiando arquivos para .config..."
 cp -r /$HOME/hyprdots/waybar/ /$HOME/hyprdots/wofi/ /$HOME/hyprdots/hypr/ /$HOME/hyprdots/kitty/ /$HOME/.config/
 
 echo "Terminado!"
+
+sudo reboot

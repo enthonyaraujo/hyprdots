@@ -76,7 +76,7 @@ def system_menu():
 def menu_main():
     keys = (
         "󰣇   Archlinux Wiki",
-        "   Hyprland Wiki ",
+        "   Hyprland Wiki",
         "󰀻   Aplicativos",
         "   Configurações",
         "   Monitor do sistema",
@@ -87,7 +87,7 @@ def menu_main():
 
     actions = (
         "firefox --new-tab https://wiki.archlinux.org/title/Main_page",
-        "firefox --new-tab https://wiki.hypr.land/",
+        "firefox --new-tab https://wiki.hypr.land",
         "wofi --show drun", 
         config_menu,
         "sh -c 'TERMINAL=kitty kitty --start-as maximized --hold -e btop'",

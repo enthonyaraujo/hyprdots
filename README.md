@@ -13,6 +13,7 @@ cp -r /$HOME/hyprdots/waybar/ /$HOME/hyprdots/wofi/ /$HOME/hyprdots/hypr/ /$HOME
 Instalar SETUP Completo:
 ```bash
 git clone https://github.com/enthonyaraujo/hyprdots.git
+cd hyprdots/
 ./install.sh
 ```
 

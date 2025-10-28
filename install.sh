@@ -23,8 +23,15 @@ echo "Instalando dependências via pacman..."
 
 sudo pacman -S --noconfirm --needed linux-headers base-devel nvidia nvidia-utils nvidia-settings lib32-nvidia-utils steam fastfetch obsidian gcc cmake firefox spotify-launcher discord xournalpp flatpak gnome-boxes gnome-software showtime papers gnome-text-editor network-manager-applet python-pip blueman wofi waybar hyprpaper hyprlock hypridle udiskie ttf-firacode-nerd nautilus btop kitty adw-gtk-theme polkit
 
-mkdir aur
-cd aur/
+flatpak install flathub com.github.reds.LogisimEvolution 
+flatpak install flathub com.rtosta.zapzap
+flatpak install flathub org.gnome.Snapshot
+flatpak install flathub com.visualstudio.code
+flatpak install flathub org.libreoffice.LibreOffice
+
+
+mkdir /$HOME/aur
+cd /$HOME/aur/
 echo "Instalando dependências via aur..."
 
 git clone https://aur.archlinux.org/networkmanager-dmenu-git.git
@@ -32,21 +39,7 @@ git clone https://aur.archlinux.org/networkmanager-dmenu-git.git
 	cd networkmanager-dmenu-git/
 	makepkg -si --noconfirm
 )
-git clone https://aur.archlinux.org/visual-studio-code-bin.git
-(
-	cd visual-studio-code-bin/
-	makepkg -si --noconfirm
-)
-git clone https://aur.archlinux.org/logisim-evolution.git
-(
-	cd logisim-evolution/
-	makepkg -si --noconfirm
-)
-git clone https://aur.archlinux.org/zapzap.git
-(
-	cd zapzap/
-	makepkg -si --noconfirm
-)
+
 cd ..
 
 pip install nautilus-open-any-terminal --break-system-packages

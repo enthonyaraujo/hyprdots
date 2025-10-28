@@ -9,7 +9,7 @@ sudo locale-gen
 
 echo "Instalando dependências via pacman..."
 
-sudo pacman -S --noconfirm --needed network-manager-applet blueman wofi waybar hyprpaper hyprlock hypridle udiskie ttf-fira-code nautilus btop kitty adw-gtk-theme polkit
+sudo pacman -S --noconfirm --needed obsidian firefox spotify-launcher discord xournalpp flatpak gnome-boxes gnome-software showtime papers gnome-text-editor network-manager-applet python-pip blueman wofi waybar hyprpaper hyprlock hypridle udiskie ttf-firacode-nerd nautilus btop kitty adw-gtk-theme polkit
 
 mkdir aur
 cd aur/
@@ -20,15 +20,22 @@ git clone https://aur.archlinux.org/networkmanager-dmenu-git.git
 	cd networkmanager-dmenu-git
 	makepkg -si --noconfirm
 )
-
-git clone https://aur.archlinux.org/nautilus-open-any-terminal.git
+git clone https://aur.archlinux.org/visual-studio-code-bin.git
 (
-	cd nautilus-open-any-terminal
+	cd visual-studio-code-bin
 	makepkg -si --noconfirm
 )
+git clone https://aur.archlinux.org/logisim-evolution.git
+(
+	cd logisim-evolution 
+	makepkg -si --noconfirm
+)
+cd ..
+
+pip install nautilus-open-any-terminal --break-system-packages
 
 echo "Copiando arquivos para .config..."
 
-cp -r waybar/ wofi/ hypr/ kitty/ /$HOME/.config/
+cp -r /$HOME/hyprdots/waybar/ /$HOME/hyprdots/wofi/ /$HOME/hyprdots/hypr/ /$HOME/hyprdots/kitty/ /$HOME/.config/
 
 echo "Terminado!"

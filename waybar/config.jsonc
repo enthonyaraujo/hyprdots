@@ -13,9 +13,9 @@
     "modules-center": ["clock"],
     
     "modules-right":  [ "memory",
-                        /*"cpu",
+                        "cpu",
                         "temperature" , 
-                        "custom/gpu_temp_usage" */
+                        /*"custom/gpu_temp_usage" */
                         /*"group/tray-expander-cpu",*/
                         /*"group/tray-expander-gpu",*/
                         "custom/recorder",
@@ -104,7 +104,7 @@
     },
 
     "cpu": {
-        "format": " {usage}%" //\uf4bc  
+        "format": "{usage}%" //\uf4bc  
     },
 
     "network": {
@@ -189,7 +189,7 @@
     },
 
     "custom/expand-icon":{
-        "format": "\ue602",
+        "format": "",
         "tooltip": false
     },
     "custom/webcam": {

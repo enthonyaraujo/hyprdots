@@ -18,5 +18,6 @@ device{
 
 name = ugtablet-ugee-s640-pen
 transform = 0
-output = HDMI-A-2 # MUDAR A TELA DE ACORDO COM A QUE VAI USAR
+output = HDMI-A-2
+ # MUDAR A TELA DE ACORDO COM A QUE VAI USAR
 }

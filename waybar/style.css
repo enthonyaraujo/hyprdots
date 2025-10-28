@@ -38,13 +38,16 @@
 #hyprland-window {
     padding-left: 0.1em;
     padding-right: 0.1em;
+    
 }
 #memory,
+#group-tray-expander-cpu,
+#group-tray-expander-gpu,
+
 #temperature,
 #cpu,
 #custom-gpu_temp_usage {
     padding-right: 0.5em;
-    
 }
 #custom-expand-icon,
 #wireplumber,
@@ -57,3 +60,4 @@
 #clock {
     padding-right: 9px 
 }
+

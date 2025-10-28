@@ -1,8 +1,8 @@
 width=600
-height=350
+height=600
 location=center
 show=drun
-prompt=Search...
+prompt=Pesquisa...
 filter_rate=100
 allow_markup=true
 no_actions=true
@@ -13,3 +13,4 @@ insensitive=true
 allow_images=true
 image_size=40
 gtk_dark=true
+

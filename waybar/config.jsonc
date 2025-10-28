@@ -5,14 +5,19 @@
     "spacing": 5,
 
     "modules-left": ["custom/launcher",
-                    "hyprland/workspaces"], //,"hyprland/window"
+                    "hyprland/workspaces"/*,
+                    "memory",
+                    "group/tray-expander-cpu",
+                    "group/tray-expander-gpu"*/], //,"hyprland/window"
     
     "modules-center": ["clock"],
     
     "modules-right":  [ "memory",
-                        "cpu",
+                        /*"cpu",
                         "temperature" , 
-                        "custom/gpu_temp_usage",
+                        "custom/gpu_temp_usage" */
+                        /*"group/tray-expander-cpu",*/
+                        /*"group/tray-expander-gpu",*/
                         "custom/recorder",
                         "custom/webcam",  
                         "group/tray-expander",
@@ -59,7 +64,7 @@
         "tooltip-format": "{volume}%"
     },
     "custom/powermenu": {
-        "on-click": "$HOME/.config/waybar/scripts/wofipowermenu.py",
+        "on-click": "$HOME/.config/waybar/Scripts/wofipowermenu.py",
         "format": " ⏻ ",
         "tooltip": false
     },
@@ -88,7 +93,7 @@
     }, 
 
     "custom/gpu_temp_usage": {
-    "exec": "$HOME/.config/waybar/scripts/gpu_temp_usage.sh",
+    "exec": "$HOME/.config/waybar/Scripts/gpu_temp_usage.sh",
     "interval": 5,
     "return-type": "text",
     "tooltip": false 
@@ -99,7 +104,7 @@
     },
 
     "cpu": {
-        "format": "\uf4bc  {usage}%"
+        "format": " {usage}%" //\uf4bc  
     },
 
     "network": {
@@ -111,7 +116,8 @@
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}",
         "tooltip-format-disconnected": "Disconnected",
-        "interval": 3
+        "interval": 3,
+        "on-click": "networkmanager_dmenu"
     },
 
     "bluetooth": {
@@ -141,7 +147,7 @@
     },
       "custom/launcher": {
       "format": "  ",
-      "on-click": " $HOME/.config/waybar/scripts/wofipowermenu.py", //wofi --show drun",
+      "on-click": " $HOME/.config/waybar/Scripts/wofimenuabove.py", //wofi --show drun",
       "tooltip": false
     },
 
@@ -153,18 +159,46 @@
         },
         "modules": ["custom/expand-icon", "tray"]
     },
+    "group/tray-expander-cpu":{
+        "orientation": "horizontal",
+        "drawer":{
+            "transition-duration": 600,
+            "children-class": "tray-group-item"
+        },
+        "modules": ["custom/expand-icon-cpu", "cpu", "temperature"]
+    },
+
+    "custom/expand-icon-cpu":{
+        "format": "\uf4bc ",
+        "tooltip": false
+    },
+
+    "group/tray-expander-gpu":{
+        "orientation": "inherit",
+        "drawer":{
+            "transition-duration": 600,
+            "children-class": "tray-group-item"
+        },
+        "modules": ["custom/expand-icon-gpu", "custom/gpu_temp_usage"]
+    },
+
+
+    "custom/expand-icon-gpu":{
+        "format": "󰢮 ",
+        "tooltip": false
+    },
 
     "custom/expand-icon":{
         "format": "\ue602",
         "tooltip": false
     },
     "custom/webcam": {
-        "exec": "~/.config/waybar/scripts/webcam-check.sh",
+        "exec": "~/.config/waybar/Scripts/webcam-check.sh",
         "return-type": "json",
         "interval": 2 
     },
     "custom/recorder": {
-        "exec": "~/.config/waybar/scripts/recorder-check.sh", 
+        "exec": "~/.config/waybar/Scripts/recorder-check.sh", 
         "return-type": "json",   
         "interval": 2 
     }             

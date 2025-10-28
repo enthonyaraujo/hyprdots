@@ -18,7 +18,7 @@ fi
 
 echo "Instalando dependências via pacman..."
 
-sudo pacman -S --noconfirm --needed linux-headers base-devel nvidia nvidia-utils nvidia-settings lib32-nvidia-utils steam fastfetch obsidian gcc cmake spotify-launcher discord xournalpp flatpak gnome-boxes gnome-software showtime papers gnome-text-editor network-manager-applet python-pip blueman wofi waybar hyprpaper hyprlock hypridle udiskie ttf-firacode-nerd nautilus btop kitty adw-gtk-theme polkit
+sudo pacman -S --noconfirm --needed brightnessctl pavucontrol pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse linux-headers base-devel nvidia nvidia-utils nvidia-settings lib32-nvidia-utils steam fastfetch obsidian gcc cmake spotify-launcher discord xournalpp flatpak gnome-boxes gnome-software showtime papers gnome-text-editor network-manager-applet python-pip blueman wofi waybar hyprpaper hyprlock hypridle udiskie ttf-firacode-nerd nautilus btop kitty adw-gtk-theme polkit
 
 flatpak install flathub com.github.reds.LogisimEvolution 
 flatpak install flathub com.rtosta.zapzap

@@ -19,7 +19,12 @@ read -p "Deseja remover TODOS os pacotes listados acima? (s/N) " remove_all_pkgs
 
 if [[ "$remove_all_pkgs" == "s" || "$remove_all_pkgs" == "S" ]]; then
     echo "Removendo todos os pacotes do pacman e AUR..."
-    sudo pacman -Rns --noconfirm obsidian firefox spotify-launcher discord xournalpp flatpak gnome-boxes gnome-software showtime papers gnome-text-editor network-manager-applet python-pip blueman wofi waybar hyprpaper hyprlock hypridle udiskie ttf-firacode-nerd nautilus btop kitty adw-gtk-theme polkit networkmanager-dmenu-git visual-studio-code-bin logisim-evolution
+    sudo pacman -Rns --noconfirm obsidian firefox spotify-launcher discord xournalpp flatpak gnome-boxes gnome-software showtime papers gnome-text-editor network-manager-applet python-pip blueman wofi waybar hyprpaper hyprlock hypridle udiskie ttf-firacode-nerd nautilus btop kitty adw-gtk-theme polkit networkmanager-dmenu-git 
+    flatpak uninstall flathub com.github.reds.LogisimEvolution 
+    flatpak uninstall flathub com.rtosta.zapzap
+    flatpak uninstall flathub org.gnome.Snapshot
+    flatpak uninstall flathub com.visualstudio.code
+    flatpak uninstall flathub org.libreoffice.LibreOffice
 else
     echo "Pulando remoção de pacotes."
     echo "Se desejar, você pode remover manualmente apenas os pacotes específicos do Hyprdots:"

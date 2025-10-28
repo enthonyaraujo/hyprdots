@@ -3,7 +3,7 @@ Hyprland Configs :)
 Instalar:
 ```bash
 git clone https://github.com/enthonyaraujo/hyprdots.git
-./install
+./install.sh
 
 ```
 <p align="center">

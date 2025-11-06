@@ -5,26 +5,32 @@
     "spacing": 5,
 
     "modules-left": ["custom/launcher",
-                    "hyprland/workspaces"/*,
-                    "memory",
-                    "group/tray-expander-cpu",
-                    "group/tray-expander-gpu"*/], //,"hyprland/window"
+                    "hyprland/workspaces",
+                    "hyprland/window"
+                    //"memory",
+                    //"group/tray-expander-cpu",
+                    //"group/tray-expander-gpu"*/
+                    ], 
     
-    "modules-center": ["clock"],
+    "modules-center": [
+                    "clock"
+                    ],
     
-    "modules-right":  [ "memory",
-                        "cpu",
-                        "temperature" , 
-                        /*"custom/gpu_temp_usage" */
-                        /*"group/tray-expander-cpu",*/
-                        /*"group/tray-expander-gpu",*/
+    "modules-right":  [ //"memory",
+                        //"cpu",
+                        //"temperature" , 
+                        //"custom/gpu_temp_usage",
+                        //"group/tray-expander-cpu",
+                        //"group/tray-expander-gpu",
+                        "wlr/taskbar",
                         "custom/recorder",
                         "custom/webcam",  
                         "group/tray-expander",
                         "hyprland/language",
                         "network",
                         "wireplumber",
-                        "battery"],
+                        "custom/battery"
+                        ],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -43,12 +49,17 @@
             "2": "<span size='small'>2</span>",
             "3": "<span size='small'>3</span>",
             "4": "<span size='small'>4</span>",
-            "5": "<span size='small'>5</span>"
+            "5": "<span size='small'>5</span>",
+            "6": "<span size='small'>6</span>",
+            "7": "<span size='small'>7</span>",
+            "8": "<span size='small'>8</span>",
+            "9": "<span size='small'>9</span>",
+            "10": "<span size='small'>10</span>"
         }
     }, 
 
     "clock": {
-        "locale": "pt_BR.UTF-8",
+  "locale": "pt_BR.UTF-8",
         "format": "{:L%A %H:%M}",
         "format-alt": "{:L%d %B de %Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
@@ -69,6 +80,12 @@
         "tooltip": false
     },
     
+    "custom/battery": {
+        "exec": "~/.config/waybar/Scripts/custom-battery.sh",
+        "interval": 3,
+        "return-type": "json"
+    },
+
     "battery": {
         "format": "{icon}",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾" , "󰁿", "󰂀", "󰂁", "󰂂","󰁹"],
@@ -83,13 +100,13 @@
     },
     "backlight": {
         "format": "\udb80\udce0", //   {percent}% copia com espaco
-        "tooltip-format": "{percent}%"
+        "tooltip-format": "{state} {percent}%"
     },
 
     "memory": {
         "interval": 30,       
        // "format": "{short}",
-        "format": "{used:0.1f}G"
+        "format": "\uefc5 {used:0.1f}G"
     }, 
 
     "custom/gpu_temp_usage": {
@@ -100,17 +117,17 @@
     },
 
     "temperature": {
-        "format": "{temperatureC}°C" //\uef2a
+        "format": "{temperatureC}°C" 
     },
 
     "cpu": {
-        "format": "{usage}%" //\uf4bc  
+        "format": "\uf4bc {usage}%"  
     },
 
     "network": {
         "format-icons": ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
         "format":"{icon}",
-        "format-ethernet": "\udb80\udf22",
+        "format-ethernet": "\udb80\udf17",
         "format-wifi": "{icon}",
         "format-disconnected": "\udb83\udc9c",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
@@ -143,14 +160,22 @@
       "max-length": 20,
       "rewrite": {
         "^(?!.*\\S).*": ""
-      }
+        }
     },
+
       "custom/launcher": {
       "format": "  ",
-      "on-click": " $HOME/.config/waybar/Scripts/wofimenuabove.py", //wofi --show drun",
+      "on-click": " $HOME/.config/waybar/Scripts/wofimenuabove.py", 
       "tooltip": false
     },
 
+    ////////////////////////////////
+    ///////////TRAY EXPAND /////////
+    /////////////////////////////////
+    "custom/expand-icon":{
+        "format": "",
+        "tooltip": false
+    },
     "group/tray-expander":{
         "orientation": "inherit",
         "drawer":{
@@ -159,6 +184,10 @@
         },
         "modules": ["custom/expand-icon", "tray"]
     },
+
+    ////////////////////////////////
+    //////// TRAY EXPAND CPU ///////
+    ////////////////////////////////
     "group/tray-expander-cpu":{
         "orientation": "horizontal",
         "drawer":{
@@ -167,11 +196,14 @@
         },
         "modules": ["custom/expand-icon-cpu", "cpu", "temperature"]
     },
-
     "custom/expand-icon-cpu":{
-        "format": "\uf4bc ",
+        "format": "\uf4bc  ",
         "tooltip": false
     },
+
+    ////////////////////////////////
+    //////// TRAY EXPAND GPU ///////
+    ////////////////////////////////
 
     "group/tray-expander-gpu":{
         "orientation": "inherit",
@@ -182,25 +214,36 @@
         "modules": ["custom/expand-icon-gpu", "custom/gpu_temp_usage"]
     },
 
-
     "custom/expand-icon-gpu":{
         "format": "󰢮 ",
         "tooltip": false
     },
 
-    "custom/expand-icon":{
-        "format": "",
-        "tooltip": false
-    },
+    ////////////////////////////////
+    ////////// WEBCAM CHECK ////////
+    ////////////////////////////////   
     "custom/webcam": {
         "exec": "~/.config/waybar/Scripts/webcam-check.sh",
         "return-type": "json",
         "interval": 2 
     },
+
+    ///////////////////////////////
+    //////// RECORDER CHECK ///////
+    ///////////////////////////////
     "custom/recorder": {
         "exec": "~/.config/waybar/Scripts/recorder-check.sh", 
         "return-type": "json",   
         "interval": 2 
-    }             
+    },
 
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 18,
+      "spacing": 4,
+      "on-click-middle": "close",
+      "tooltip-format": "{title}",
+      "ignore-list": [],
+      "on-click": "activate"
+    }
 }

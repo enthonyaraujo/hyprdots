@@ -1,5 +1,5 @@
 [global]
-    origin = center
+    #origin = center
     geometry = "300x60-0-0"
     corner_radius = 16
     frame_width = 0

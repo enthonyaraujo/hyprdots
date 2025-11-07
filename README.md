@@ -2,7 +2,7 @@ Hyprland Configs :)
 
 Instalar apenas as configurações do **waybar**, **wofi** e **hyprland**:
 ```bash
-sudo pacman -S brightnessctl wofi waybar hyprpaper hyprlock hypridle udiskie ttf-firacode-nerd
+sudo pacman -S brightnessctl wofi waybar hyprpaper hyprlock hypridle udiskie ttf-firacode-nerd dunst
  
 git clone https://github.com/enthonyaraujo/hyprdots.git
 

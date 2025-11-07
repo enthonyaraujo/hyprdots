@@ -166,7 +166,7 @@
 
       "custom/launcher": {
       "format": "  ",
-      "on-click": " $HOME/.config/waybar/Scripts/wofimenuabove.py", 
+      "on-click": " $HOME/.config/waybar/Scripts/wofimenu.py", 
       "tooltip": false
     },
 

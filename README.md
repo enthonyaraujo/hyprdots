@@ -15,6 +15,22 @@ sudo locale-gen
 cp -r /$HOME/hyprdots/waybar/ /$HOME/hyprdots/wofi/ /$HOME/hyprdots/hypr/ /$HOME/hyprdots/kitty/ /$HOME/.config/
 ```
 
+
+```text
+~/
+├── config
+├── style.css
+├── wallpapers
+│   ├── wallpaper-light.png
+│   └── wallpaper-dark.png
+├── preview
+│   ├── preview.png
+|   ├──top_preview.png
+│   └── bottom_preview.png
+├── README
+
+```
+
 <p align="center">
 <img src="preview.png">
 </p>

@@ -5,7 +5,6 @@
 
 * {
     font-family: "FiraCode", monospace;
-    font-size: 16px; 
     padding: 0 0px;
     margin: 0;
 }
@@ -17,7 +16,7 @@
 
 #workspaces button {
     color: @foreground;
-    font-size: 15px;
+    font-size: 16px;
     background: transparent;
     padding: 2px 6px;
     margin: 0 2px; 
@@ -46,8 +45,7 @@
     
 }
 #memory,
-#group-tray-expander-cpu,
-#group-tray-expander-gpu,
+
 
 #temperature,
 #cpu,

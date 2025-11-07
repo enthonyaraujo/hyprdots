@@ -1,29 +1,19 @@
 #!/bin/bash
 
-step=5  
+step=5 
 
 case "$1" in
     up)
-
-        current=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -1 | tr -d '%')
-        current=${current:-0}
-        new=$((current + step))
-        if [ "$new" -gt 100 ]; then
-            new=100
-        fi
-        pactl set-sink-volume @DEFAULT_SINK@ ${new}%
+       
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ ${step}%+
         ;;
     down)
-        current=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -1 | tr -d '%')
-        current=${current:-0}
-        new=$((current - step))
-        if [ "$new" -lt 0 ]; then
-            new=0
-        fi
-        pactl set-sink-volume @DEFAULT_SINK@ ${new}%
+       
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ ${step}%-
         ;;
     mute)
-        pactl set-sink-mute @DEFAULT_SINK@ toggle
+       
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
         ;;
     *)
         echo "Uso: $0 {up|down|mute}"
@@ -31,12 +21,13 @@ case "$1" in
         ;;
 esac
 
-volume=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -1 | tr -d '%')
+
+volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')
 volume=${volume:-0}
 
-mute=$(pactl get-sink-mute @DEFAULT_SINK@ | grep -oP '(yes|no)')
+mute=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '\[MUTED\]')
 
-if [ "$mute" = "yes" ]; then
+if [ -n "$mute" ]; then
     icon="󰝟"
     msg="Mudo"
     level=0

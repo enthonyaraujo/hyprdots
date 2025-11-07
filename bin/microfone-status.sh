@@ -8,7 +8,7 @@ if [ -z "$state" ]; then
 fi
 
 if [ "$state" = "yes" ]; then
-    echo "󰍭"
+    echo "󰍭 "
 else
-    echo "󰍮"
+    echo "󰍮 "
 fi

@@ -4,16 +4,16 @@ import subprocess
 
 def config_menu():
     app_keys = (
-        "󰫧   Variáveis de Ambiente",
-        "󱊬   Atalhos de Teclado",
-        "   Mouse e Teclado",
-        "󰀻   Aplicativos de Inicialização",
-        "󰍹   Monitores",
-        "   Espaços de Trabalho",
-        "   Gerenciador de Áudio",
-        "   Gerenciador de Bluetooth",
-        "󰈀   Gerenciador de Internet",
-        "󰌑   Voltar",
+        "󰫧   Environment Variables",
+        "󱊬   Keyboard Shortcuts",
+        "   Mouse and Keyboard",
+        "󰀻   Startup Applications",
+        "󰍹   Monitors",
+        "   Workspaces",
+        "   Audio Manager",
+        "   Bluetooth Manager",
+        "󰈀   Network Manager",
+        "󰌑   Back",
     )
     
     app_actions = (
@@ -31,7 +31,7 @@ def config_menu():
 
     options = "\n".join(app_keys)
     result = subprocess.run(
-        ["wofi", "--dmenu", "--prompt", "", "--width", "500", "--height", "360"],
+        ["wofi", "--dmenu", "--prompt", "Settings...", "--width", "500", "--height", "360"],
         input=options,
         text=True,
         stdout=subprocess.PIPE
@@ -48,11 +48,11 @@ def config_menu():
 
 def system_menu():
     keys = (
-        "󰤄   Suspender",
-        "󰌾   Bloquear",
-        "󰜉   Reiniciar",
+        "󰤄   Suspend",
+        "󰌾   Lock",
+        "󰜉   Restart",
         "   UEFI Firmware",
-        "󰐥   Desligar",
+        "󰐥   Power Off",
     )
     actions = (
         "systemctl suspend",
@@ -64,7 +64,7 @@ def system_menu():
 
     options = "\n".join(keys)
     result = subprocess.run(
-        ["wofi","--dmenu", "--prompt", "", "--width", "500", "--height", "190"],
+        ["wofi","--dmenu", "--prompt", "System...", "--width", "500", "--height", "190"],
         input=options,
         text=True,
         stdout=subprocess.PIPE
@@ -77,12 +77,12 @@ def menu_main():
     keys = (
         "󰣇   Archlinux Wiki",
         "   Hyprland Wiki",
-        "󰀻   Aplicativos",
-        "   Configurações",
-        "   Monitor do sistema",
-        "   Sistema",
-        "󰚰   Atualizar",
-        "   Sobre",
+        "󰀻   Applications",
+        "   Settings",
+        "   System Monitor",
+        "   System",
+        "󰚰   Update",
+        "   About",
     )
 
     actions = (
@@ -99,7 +99,7 @@ def menu_main():
     
     options = "\n".join(keys)
     result = subprocess.run(
-        ["wofi", "--dmenu", "--prompt", "", "--width", "500", "--height", "300"],
+        ["wofi", "--dmenu", "--prompt", "Menu...", "--width", "500", "--height", "300"],
         input=options,
         text=True,
         stdout=subprocess.PIPE

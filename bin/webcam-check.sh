@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if fuser /dev/video* &> /dev/null; then  
-    echo '{"text": "󰖠 ", "class": "camera-on", "tooltip": "Webcam em uso"}'
+    echo '{"text": "󰵝 ", "class": "camera-on", "tooltip": "Webcam em uso"}'
 else
-    echo '{}'
+    echo '{"text": "󱦿 ", "class": "camera-on", "tooltip": "Webcam desligada"}'
 fi
+

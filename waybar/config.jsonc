@@ -6,30 +6,27 @@
 
     "modules-left": ["custom/launcher",
                     "hyprland/workspaces",
-                    "hyprland/window"
-                    //"memory",
-                    //"group/tray-expander-cpu",
-                    //"group/tray-expander-gpu"*/
+                    "memory",
+                    "cpu",
+                    "temperature"//,
+                    //"custom/gpu_temp_usage"
+    
                     ], 
     
     "modules-center": [
-                    "clock"
+                    "hyprland/window"
                     ],
     
-    "modules-right":  [ "memory",
-                        "cpu",
-                        "temperature" , 
-                        //"custom/gpu_temp_usage",
-                        //"group/tray-expander-cpu",
-                        //"group/tray-expander-gpu",
-                        //"wlr/taskbar",
+    "modules-right":  [ 
                         "custom/recorder",
+                        "custom/mic",
                         "custom/webcam",  
                         "group/tray-expander",
                         "hyprland/language",
                         "network",
                         "wireplumber",
-                        "custom/battery"
+                        "custom/battery",
+                        "clock"
                         ],
 
     "hyprland/workspaces": {
@@ -60,8 +57,11 @@
 
     "clock": {
         "locale": "pt_BR.UTF-8",
-        "format": "{:L%A %H:%M}",
-        "format-alt": "{:L%d %B de %Y}",
+        //"format": "{:L%A %H:%M}",
+        //"format-alt": "{:L%d %B de %Y}",
+
+        "format": "{:L%H:%M}",
+        "format-alt": "{:L%d/%m/%Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
     },
 
@@ -87,6 +87,7 @@
         "tooltip": true,
         "tooltip-format": "{capacity}%"
     },
+
     "backlight": {
         "format": "\udb80\udce0", //   {percent}% copia com espaco
         "tooltip-format": "{state} {percent}%"
@@ -95,7 +96,7 @@
     "memory": {
         "interval": 30,       
        // "format": "{short}",
-        "format": "{used:0.1f}G",
+        "format": " {used:0.1f}G",
         "tooltip": false
     }, 
 
@@ -111,7 +112,7 @@
     },
 
     "cpu": {
-        "format": "{usage}%"  //\uf4bc
+        "format": "\uf4bc {usage}%"  //\uf4bc
     },
 
     "network": {
@@ -136,6 +137,7 @@
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "on-click":"blueman-manager"
     },
+
     "hyprland/language": {
         "format": "{short}"
     },
@@ -166,6 +168,7 @@
         "format": "",
         "tooltip": false
     },
+
     "group/tray-expander":{
         "orientation": "inherit",
         "drawer":{
@@ -173,40 +176,6 @@
             "children-class": "tray-group-item"
         },
         "modules": ["custom/expand-icon", "tray"]
-    },
-
-    ////////////////////////////////
-    //////// TRAY EXPAND CPU ///////
-    ////////////////////////////////
-    "group/tray-expander-cpu":{
-        "orientation": "horizontal",
-        "drawer":{
-            "transition-duration": 600,
-            "children-class": "tray-group-item"
-        },
-        "modules": ["custom/expand-icon-cpu", "cpu", "temperature"]
-    },
-    "custom/expand-icon-cpu":{
-        "format": "\uf4bc ",
-        "tooltip": true
-    },
-
-    ////////////////////////////////
-    //////// TRAY EXPAND GPU ///////
-    ////////////////////////////////
-
-    "group/tray-expander-gpu":{
-        "orientation": "inherit",
-        "drawer":{
-            "transition-duration": 600,
-            "children-class": "tray-group-item"
-        },
-        "modules": ["custom/expand-icon-gpu", "custom/gpu_temp_usage"]
-    },
-
-    "custom/expand-icon-gpu":{
-        "format": "󰢮 ",
-        "tooltip": false
     },
 
     ////////////////////////////////
@@ -239,7 +208,7 @@
     },
 
     "custom/mic": {
-    "exec": "~/.config/bin/mic-status.sh",
+    "exec": "~/.config/bin/microfone-status.sh",
     "interval": 2,
     "tooltip": false,
     "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"

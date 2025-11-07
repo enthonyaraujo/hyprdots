@@ -28,12 +28,8 @@ else
     icon="󰃠"    
 fi
 
-#notify-send -h int:value:"$percent" \
-            #-h string:x-canonical-private-synchronous:brightness \
-            #-u low "$icon  Brilho" "${percent}%"
-
 dunstify -a "Brilho" \
          -u low \
          -r 9999 \
          -h int:value:"$percent" \
-         "$icon  Brilho" "${percent}%"
+         "$icon ${percent}%"

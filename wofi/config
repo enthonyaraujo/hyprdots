@@ -1,8 +1,8 @@
-width=600
+width=500
 height=600
 location=center
 show=drun
-prompt=Pesquisa...
+prompt=
 filter_rate=100
 allow_markup=true
 no_actions=true

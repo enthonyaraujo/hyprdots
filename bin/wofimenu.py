@@ -31,7 +31,7 @@ def config_menu():
 
     options = "\n".join(app_keys)
     result = subprocess.run(
-        ["wofi", "--dmenu", "--prompt", "Menu Configurações", "--width", "600", "--height", "500"],
+        ["wofi", "--dmenu", "--prompt", "", "--width", "500", "--height", "360"],
         input=options,
         text=True,
         stdout=subprocess.PIPE
@@ -64,7 +64,7 @@ def system_menu():
 
     options = "\n".join(keys)
     result = subprocess.run(
-        ["wofi", "--dmenu", "--prompt", "Power Menu", "--width", "600", "--height", "300"],
+        ["wofi","--dmenu", "--prompt", "", "--width", "500", "--height", "190"],
         input=options,
         text=True,
         stdout=subprocess.PIPE
@@ -99,7 +99,7 @@ def menu_main():
     
     options = "\n".join(keys)
     result = subprocess.run(
-        ["wofi", "--dmenu", "--prompt", "", "--width", "500", "--height", "350"],
+        ["wofi", "--dmenu", "--prompt", "", "--width", "500", "--height", "300"],
         input=options,
         text=True,
         stdout=subprocess.PIPE

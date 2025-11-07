@@ -17,11 +17,11 @@
                     ],
     
     "modules-right":  [ "memory",
-                        //"cpu",
-                        //"temperature" , 
+                        "cpu",
+                        "temperature" , 
                         //"custom/gpu_temp_usage",
-                        "group/tray-expander-cpu",
-                        "group/tray-expander-gpu",
+                        //"group/tray-expander-cpu",
+                        //"group/tray-expander-gpu",
                         //"wlr/taskbar",
                         "custom/recorder",
                         "custom/webcam",  
@@ -59,7 +59,7 @@
     }, 
 
     "clock": {
-  "locale": "pt_BR.UTF-8",
+        "locale": "pt_BR.UTF-8",
         "format": "{:L%A %H:%M}",
         "format-alt": "{:L%d %B de %Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
@@ -73,17 +73,6 @@
         "scroll-step": 5,
         "on-click": "pavucontrol",
         "tooltip-format": "{volume}%"
-    },
-    "custom/powermenu": {
-        "on-click": "$HOME/.config/waybar/scripts/wofipowermenu.py",
-        "format": " ⏻ ",
-        "tooltip": false
-    },
-    
-    "custom/battery": {
-        "exec": "~/.config/waybar/scripts/custom-battery.sh",
-        "interval": 3,
-        "return-type": "json"
     },
 
     "battery": {
@@ -111,7 +100,7 @@
     }, 
 
     "custom/gpu_temp_usage": {
-    "exec": "$HOME/.config/waybar/scripts/gpu_temp_usage.sh",
+    "exec": "$HOME/.config/bin/gpu_temp_usage.sh",
     "interval": 5,
     "return-type": "text",
     "tooltip": false 
@@ -166,7 +155,7 @@
 
       "custom/launcher": {
       "format": "  ",
-      "on-click": " $HOME/.config/waybar/scripts/wofimenu.py", 
+      "on-click": " $HOME/.config/bin/wofimenu.py", 
       "tooltip": false
     },
 
@@ -224,7 +213,7 @@
     ////////// WEBCAM CHECK ////////
     ////////////////////////////////   
     "custom/webcam": {
-        "exec": "~/.config/waybar/scripts/webcam-check.sh",
+        "exec": "~/.config/bin/webcam-check.sh",
         "return-type": "json",
         "interval": 2 
     },
@@ -233,10 +222,11 @@
     //////// RECORDER CHECK ///////
     ///////////////////////////////
     "custom/recorder": {
-        "exec": "~/.config/waybar/scripts/recorder-check.sh", 
+        "exec": "~/.config/bin/recorder-check.sh", 
         "return-type": "json",   
         "interval": 2 
     },
+
 
     "wlr/taskbar": {
       "format": "{icon}",
@@ -246,5 +236,14 @@
       "tooltip-format": "{title}",
       "ignore-list": [],
       "on-click": "activate"
-    }
+    },
+
+    "custom/mic": {
+    "exec": "~/.config/bin/mic-status.sh",
+    "interval": 2,
+    "tooltip": false,
+    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+    }   
+
 }
+

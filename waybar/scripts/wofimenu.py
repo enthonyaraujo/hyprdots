@@ -17,12 +17,12 @@ def config_menu():
     )
     
     app_actions = (
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/Configs/environment_variables.conf'",  # environment_variables
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/Configs/keybindings.conf'",  # keybindings
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/Configs/input.conf'",  # input
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/Configs/autostart.conf'",  # autostart
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/Configs/monitors.conf'",  # monitors
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/Configs/workspaces.conf'",
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/environment_variables.conf'",  # environment_variables
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/keybindings.conf'",  # keybindings
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/input.conf'",  # input
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/autostart.conf'",  # autostart
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/monitors.conf'",  # monitors
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/workspaces.conf'",
         "pavucontrol",
         "blueman-manager",
         "sh -c 'TERMINAL=kitty kitty -e nmtui'",

@@ -75,13 +75,13 @@
         "tooltip-format": "{volume}%"
     },
     "custom/powermenu": {
-        "on-click": "$HOME/.config/waybar/Scripts/wofipowermenu.py",
+        "on-click": "$HOME/.config/waybar/scripts/wofipowermenu.py",
         "format": " ⏻ ",
         "tooltip": false
     },
     
     "custom/battery": {
-        "exec": "~/.config/waybar/Scripts/custom-battery.sh",
+        "exec": "~/.config/waybar/scripts/custom-battery.sh",
         "interval": 3,
         "return-type": "json"
     },
@@ -111,7 +111,7 @@
     }, 
 
     "custom/gpu_temp_usage": {
-    "exec": "$HOME/.config/waybar/Scripts/gpu_temp_usage.sh",
+    "exec": "$HOME/.config/waybar/scripts/gpu_temp_usage.sh",
     "interval": 5,
     "return-type": "text",
     "tooltip": false 
@@ -166,7 +166,7 @@
 
       "custom/launcher": {
       "format": "  ",
-      "on-click": " $HOME/.config/waybar/Scripts/wofimenu.py", 
+      "on-click": " $HOME/.config/waybar/scripts/wofimenu.py", 
       "tooltip": false
     },
 
@@ -224,7 +224,7 @@
     ////////// WEBCAM CHECK ////////
     ////////////////////////////////   
     "custom/webcam": {
-        "exec": "~/.config/waybar/Scripts/webcam-check.sh",
+        "exec": "~/.config/waybar/scripts/webcam-check.sh",
         "return-type": "json",
         "interval": 2 
     },
@@ -233,7 +233,7 @@
     //////// RECORDER CHECK ///////
     ///////////////////////////////
     "custom/recorder": {
-        "exec": "~/.config/waybar/Scripts/recorder-check.sh", 
+        "exec": "~/.config/waybar/scripts/recorder-check.sh", 
         "return-type": "json",   
         "interval": 2 
     },

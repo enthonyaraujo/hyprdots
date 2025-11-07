@@ -5,7 +5,7 @@
 
 * {
     font-family: "FiraCode Nerd Font", monospace;
-   /* font-size: 16px; */
+    font-size: 16px; 
     padding: 0 0px;
     margin: 0;
 }
@@ -64,11 +64,5 @@
 #tray,
 #clock {
     padding-right: 9px 
-}
-
-#custom-os_button{
-    border-radius: 2%;
-    font-size: 30px;
-    padding-right: 10px 
 }
 

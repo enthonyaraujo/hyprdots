@@ -8,14 +8,34 @@ git clone https://github.com/enthonyaraujo/hyprdots.git
 
 cd hyprdots/
 
-sudo mv pt_BR /usr/share/i18n/locales/pt_BR
-
-sudo locale-gen
-
 cp -r /$HOME/hyprdots/waybar/ /$HOME/hyprdots/wofi/ /$HOME/hyprdots/hypr/ /$HOME/hyprdots/kitty/ /$HOME/.config/
 ```
 
 <p align="center">
-<img src="preview.png">
+<img src="preview/preview.png">
 </p>
+
+<p align="center">
+<img src="preview/waybar.png">
+</p>
+
+<p align="center">
+<img src="preview/wofi.png">
+</p>
+
+<p align="center">
+<img src="preview/menu.png">
+</p>
+
+<p align="center">
+<img src="preview/backlight.png">
+</p>
+
+<p align="center">
+<img src="preview/volume.png">
+</p>
+
+
+
+
 

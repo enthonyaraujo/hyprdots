@@ -5,10 +5,10 @@
     "spacing": 5,
 
     "modules-left": ["custom/launcher",
-                    "hyprland/workspaces",
-                    "memory",
-                    "cpu",
-                    "temperature"//,
+                    "hyprland/workspaces"
+                    //"memory",
+                    //"cpu",
+                    //"temperature"//,
                     //"custom/gpu_temp_usage"
     
                     ], 

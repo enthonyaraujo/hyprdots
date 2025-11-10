@@ -25,7 +25,7 @@
                         "hyprland/language",
                         "network",
                         "wireplumber",
-                        "custom/battery",
+                        "battery",
                         "clock"
                         ],
 

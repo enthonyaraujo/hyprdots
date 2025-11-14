@@ -12,6 +12,5 @@ configuration{
     display-window: "   Window";
     sidebar-mode: true;
 }
-//@theme "/home/enthony/.local/share/rofi/themes/rounded-nord-dark.rasi"
 
 @theme "/home/enthony/.local/share/rofi/themes/theme-dark.rasi"

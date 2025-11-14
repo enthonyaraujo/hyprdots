@@ -6,11 +6,6 @@
 
     "modules-left": ["custom/launcher",
                     "hyprland/workspaces"
-                    //"memory",
-                    //"cpu",
-                    //"temperature"//,
-                    //"custom/gpu_temp_usage"
-    
                     ], 
     
     "modules-center": [
@@ -155,9 +150,9 @@
         }
     },
 
-      "custom/launcher": {
+    "custom/launcher": {
       "format": "  ",
-      "on-click": " $HOME/.config/bin/wofimenu.py", 
+      "on-click": " $HOME/.config/bin/rofimenu.py", //" $HOME/.config/bin/wofimenu.py",
       "tooltip": false
     },
 

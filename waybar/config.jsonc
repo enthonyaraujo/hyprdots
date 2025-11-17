@@ -152,7 +152,7 @@
 
     "custom/launcher": {
       "format": "  ",
-      "on-click": " $HOME/.config/bin/rofimenu.py", //" $HOME/.config/bin/wofimenu.py",
+      "on-click": " $HOME/.config/bin/wofimenu.py", //" $HOME/.config/bin/wofimenu.py",
       "tooltip": false
     },
 

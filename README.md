@@ -12,28 +12,21 @@ cp -r /$HOME/hyprdots/waybar/ /$HOME/hyprdots/wofi/ /$HOME/hyprdots/hypr/ /$HOME
 ```
 
 <p align="center">
-<img src="preview/preview.png">
+<img src="preview/preview4.png">
 </p>
 
 <p align="center">
-<img src="preview/waybar.png">
+<img src="preview/preview3.png">
 </p>
 
 <p align="center">
-<img src="preview/wofi.png">
+<img src="preview/preview2.png">
 </p>
 
 <p align="center">
-<img src="preview/menu.png">
+<img src="preview/preview1.png">
 </p>
 
-<p align="center">
-<img src="preview/backlight.png">
-</p>
-
-<p align="center">
-<img src="preview/volume.png">
-</p>
 
 
 

@@ -15,10 +15,11 @@
     "modules-right":  [ 
                         "custom/recorder",
                         "custom/mic",
-                        "custom/webcam",  
-                        "group/tray-expander",
+                        "custom/webcam",
+                        "tray",  
+                        //"group/tray-expander",
                         "hyprland/language",
-                        "network",
+                        //"network",
                         "wireplumber",
                         "battery",
                         "clock"

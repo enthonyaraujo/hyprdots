@@ -9,7 +9,8 @@
                     ], 
     
     "modules-center": [
-                    "hyprland/window"
+                    //"hyprland/window",
+                    "clock"
                     ],
     
     "modules-right":  [ 
@@ -21,8 +22,7 @@
                         "hyprland/language",
                         //"network",
                         "wireplumber",
-                        "battery",
-                        "clock"
+                        "battery"
                         ],
 
     "hyprland/workspaces": {
@@ -52,13 +52,10 @@
     }, 
 
     "clock": {
-        "locale": "pt_BR.UTF-8",
-        //"format": "{:L%A %H:%M}",
-        //"format-alt": "{:L%d %B de %Y}",
-
-        "format": "{:L%H:%M}",
-        "format-alt": "{:L%d/%m/%Y}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
+    "locale": "pt_BR.UTF-8",
+    "format": "{:L%d de %b %H:%M}",
+    "format-alt": "{:L%d/%m/%Y}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
     },
 
     "wireplumber": {

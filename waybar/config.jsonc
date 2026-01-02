@@ -28,11 +28,7 @@
         "on-click": "activate",
         "sort-by-number": true,
         "persistent-workspaces": {
-            "1": []//,
-            //"2": [],  
-            //"3": [],
-            //"4": [],
-            //"5": []
+            "1": []
         },
         "format-icons": {
             "1": "<span size='small'>1</span>",
@@ -49,8 +45,8 @@
     }, 
 
     "clock": {
-    "locale": "pt_BR.UTF-8",
-    "format": "{:L%d de %b %H:%M}",
+    "locale": "en_US.UTF-8",
+    "format": "{:%b %d | %H:%M}",
     //"format-alt": "{:L%d/%m/%Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
     },
@@ -113,7 +109,7 @@
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}",
         "tooltip-format-disconnected": "Disconnected",
-        "interval": 3,
+        "interval": 3
     },
 
     "bluetooth": {
@@ -144,7 +140,7 @@
     },
 
     "custom/launcher": {
-      "format": "  ",
+      "format": "  ",
       "on-click": " $HOME/.config/bin/wofimenu.py",
       "tooltip": false
     },

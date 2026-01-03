@@ -1,6 +1,7 @@
 {
     "layer": "top",
     "position": "top",
+    "output": ["DP-1","eDP-1"],
     "height": 15,
     "spacing": 5,
 

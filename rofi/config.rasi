@@ -1,0 +1,7 @@
+configuration {
+    show-icons: true;
+    drun-display-format: "{name}";
+    prompt: "";
+}
+
+@theme "/home/enthony/.config/rofi/themes/theme.rasi"

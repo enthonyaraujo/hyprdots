@@ -20,6 +20,7 @@ max_brightness=$(brightnessctl max)
 percent=$((100 * brightness / max_brightness))
 
 
+
 if [ "$percent" -lt 30 ]; then
     icon="󰃞"    
 elif [ "$percent" -lt 70 ]; then

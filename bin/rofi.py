@@ -94,7 +94,7 @@ def menu_main():
     
     options = "\n".join(keys)
     result = subprocess.run(
-        ["rofi", "-dmenu", "--prompt", "", "--width", "500", "--height", "300"],
+        ["rofi", "-dmenu", "--prompt", "", "-width", "700", "-height", "500"],
         input=options,
         text=True,
         stdout=subprocess.PIPE

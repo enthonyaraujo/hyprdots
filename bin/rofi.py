@@ -91,7 +91,8 @@ def menu_main():
         "sh -c 'TERMINAL=kitty kitty --hold -e fastfetch'",
         
     )
-    
+     
+     
     options = "\n".join(keys)
     result = subprocess.run(
         ["rofi", "-dmenu", "--prompt", "", "-width", "700", "-height", "500"],

@@ -4,34 +4,29 @@ import subprocess
 
 def config_menu():
     app_keys = (
-        "󰫧   Environment Variables",
-        "󱊬   Keyboard Shortcuts",
-        "   Mouse and Keyboard",
-        "󰀻   Startup Applications",
         "󰍹   Monitors",
+        "󰫧   Environment Variables",
+        "   Mouse and Keyboard",
+        "󰀻   Programs",
         "   Workspaces",
         "   Audio Manager",
         "   Bluetooth Manager",
-        "󰈀   Network Manager",
         "󰌑   Back",
     )
     
     app_actions = (
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/environment_variables.conf'",  # environment_variables
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/keybindings.conf'",  # keybindings
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/input.conf'",  # input
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/autostart.conf'",  # autostart
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/monitors.conf'",  # monitors
-        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/conf.d/workspaces.conf'",
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/monitors.conf'",  # monitors
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/environmentvariables.conf'",  # environment_variables
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/input_keybinds.conf'",  # input and keybindings
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/my_programs.conf'",  # autostart
+        "sh -c 'TERMINAL=kitty EDITOR=nano kitty -e nano ~/.config/hypr/window_workspaces.conf'",
         "pavucontrol",
         "blueman-manager",
-        "sh -c 'TERMINAL=kitty kitty -e nmtui'",
-        "back",
     )
 
     options = "\n".join(app_keys)
     result = subprocess.run(
-        ["wofi", "--dmenu", "--prompt", "Settings...", "--width", "500", "--height", "360"],
+        ["rofi", "-dmenu","--prompt", "", "--width", "300", "--height", "300"],
         input=options,
         text=True,
         stdout=subprocess.PIPE
@@ -64,7 +59,7 @@ def system_menu():
 
     options = "\n".join(keys)
     result = subprocess.run(
-        ["wofi","--dmenu", "--prompt", "System...", "--width", "500", "--height", "190"],
+        ["rofi","-dmenu", "--prompt", "", "--width", "500", "--height", "190"],
         input=options,
         text=True,
         stdout=subprocess.PIPE
@@ -78,7 +73,7 @@ def menu_main():
         "󰣇   Archlinux Wiki",
         "   Hyprland Wiki",
         "󰀻   Applications",
-        # "   Settings",
+        "   Settings",
         "   System Monitor",
         "   System",
         "󰚰   Update",
@@ -88,8 +83,8 @@ def menu_main():
     actions = (
         "firefox --new-tab https://wiki.archlinux.org/title/Main_page",
         "firefox --new-tab https://wiki.hypr.land",
-        "wofi --show drun", 
-        # config_menu,
+        "rofi -show drun", 
+        config_menu,
         "sh -c 'TERMINAL=kitty kitty --start-as maximized --hold -e btop'",
         system_menu,
         "sh -c 'TERMINAL=kitty kitty --hold -e sudo pacman -Syu'",
@@ -99,7 +94,7 @@ def menu_main():
     
     options = "\n".join(keys)
     result = subprocess.run(
-        ["wofi", "--dmenu", "--prompt", "Menu...", "--width", "500", "--height", "300"],
+        ["rofi", "-dmenu", "--prompt", "", "--width", "500", "--height", "300"],
         input=options,
         text=True,
         stdout=subprocess.PIPE

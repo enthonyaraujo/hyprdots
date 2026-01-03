@@ -23,6 +23,8 @@
                         "battery"
                         ],
 
+        
+                        
     "hyprland/workspaces": {
         "format": "{icon}",
         "format-active": "<span color='#00ff00' size='larger'><b>{icon}</b></span>",

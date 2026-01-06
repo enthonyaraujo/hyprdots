@@ -1,6 +1,6 @@
 @define-color foreground #eeeeee;
 @define-color foreground-inactive #aaaaaa;
-@define-color background rgba(0, 0, 0, 0.7);
+@define-color background rgba(0, 0, 0, 1);
 
 
 * {

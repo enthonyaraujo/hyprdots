@@ -1,3 +1,5 @@
+@import "mocha.css";
+
 @define-color foreground #eeeeee;
 @define-color foreground-inactive #aaaaaa;
 @define-color background rgba(0, 0, 0, 1);
@@ -7,6 +9,16 @@
     font-family: "FiraCodeNerdFont", monospace;
     padding: 0 0px;
     margin: 0;
+}
+* {
+  /* reference the color by using @color-name */
+  color: @text;
+}
+
+window#waybar {
+  /* you can also GTK3 CSS functions! */
+  background-color: shade(@base, 0.9);
+  border: 2px solid alpha(@crust, 0.3);
 }
 
 #waybar {

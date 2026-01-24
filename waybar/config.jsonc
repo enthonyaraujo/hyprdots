@@ -14,7 +14,6 @@
                     ],
     
     "modules-right":  [ 
-                        
                         "memory",
                         "cpu",
                         "tray",  
@@ -56,9 +55,9 @@
     },
 
     "wireplumber": {
-        "format": "{icon}",
+        "format": "{icon}{volume}%",
         "format-muted":"󰝟",
-        "format-icons": "\udb81\udd7e", 
+        "format-icons": "\udb81\udd7e ", 
         "max-volume": 100,
         "scroll-step": 5,
         "on-click": "pavucontrol",
@@ -66,9 +65,9 @@
     },
 
     "battery": {
-        "format": "{icon}",
-        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾" , "󰁿", "󰂀", "󰂁", "󰂂","󰁹"],
-        "format-charging": "󰂄",
+        "format": "{icon} {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾" , "󰁿", "󰂀", "󰂁", "󰂂",""],
+        "format-charging": "",
         "interval": 3,
         "states": {
             "warning": 25,
@@ -99,15 +98,11 @@
     },
 
     "network": {
-        "format-icons": ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
-        "format":"{icon}",
-        "format-ethernet": "\udb80\udf17",
-        "format-wifi": "{icon}",
-        "format-disconnected": "\udb83\udc9c",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-        "tooltip-format-ethernet": "{ifname}",
-        "tooltip-format-disconnected": "Disconnected",
-        "interval": 3
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "format-wifi": "{icon}  ↓{bandwidthDown} ↑{bandwidthUp}",
+        "format-ethernet": "󰈀  ↓{bandwidthDown} ↑{bandwidthUp}",
+        "format-disconnected": "󰤮",
+        "interval": 2
     },
 
     "bluetooth": {
@@ -138,7 +133,7 @@
     },
 
     "custom/launcher": {
-      "format": "  ",
+      "format": " 󰣇 ",
       "on-click": " $HOME/.config/bin/rofi.py",
       "tooltip": false
     },

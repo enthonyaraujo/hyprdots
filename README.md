@@ -1,7 +1,7 @@
 Hyprland Configs :)
 
 ```bash
-sudo pacman -S brightnessctl rofi waybar hyprpaper hyprlock hypridle ttf-firacode-nerd dunst libnotify grim slurp network-manager-applet blueman wl-clipboard 
+sudo pacman -S hyprland hyprpaper hyprlock hypridle waybar rofi brightnessctl ttf-firacode-nerd dunst libnotify grim slurp wl-clipboard network-manager-applet blueman xdg-desktop-portal-hyprland nemo firefox
 ```
 ![Preview](preview.png)
 

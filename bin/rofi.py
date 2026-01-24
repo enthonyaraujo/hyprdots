@@ -11,7 +11,6 @@ def config_menu():
         "   Workspaces",
         "   Audio Manager",
         "   Bluetooth Manager",
-        "󰌑   Back",
     )
     
     app_actions = (
@@ -23,10 +22,15 @@ def config_menu():
         "pavucontrol",
         "blueman-manager",
     )
-
     options = "\n".join(app_keys)
     result = subprocess.run(
-        ["rofi", "-dmenu","--prompt", "", "--width", "300", "--height", "300"],
+        [
+            "rofi",
+            "-dmenu",
+            "-p", "",
+            "-lines", "5",
+            "-theme-str", "window { width: 500px; height: 500; }"
+        ],
         input=options,
         text=True,
         stdout=subprocess.PIPE
@@ -59,7 +63,13 @@ def system_menu():
 
     options = "\n".join(keys)
     result = subprocess.run(
-        ["rofi","-dmenu", "--prompt", "", "--width", "500", "--height", "190"],
+        [
+            "rofi",
+            "-dmenu",
+            "-p", "",
+            "-lines", "5",
+            "-theme-str", "window { width: 500px; height: 550; }"
+        ],
         input=options,
         text=True,
         stdout=subprocess.PIPE
@@ -95,7 +105,13 @@ def menu_main():
      
     options = "\n".join(keys)
     result = subprocess.run(
-        ["rofi", "-dmenu", "--prompt", "", "-width", "700", "-height", "500"],
+        [
+            "rofi",
+            "-dmenu",
+            "-p", "",
+            "-lines", "5",
+            "-theme-str", "window { width: 500px; height: 550; }"
+        ],
         input=options,
         text=True,
         stdout=subprocess.PIPE

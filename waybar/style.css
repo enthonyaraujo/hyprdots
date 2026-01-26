@@ -1,85 +1,84 @@
 @import "mocha.css";
 
-@define-color foreground #eeeeee;
-@define-color foreground-inactive #aaaaaa;
-@define-color background rgba(0, 0, 0, 1);
-
-
 * {
-    font-family: "FiraCodeNerdFont", monospace;
-    padding: 0 0px;
+    font-family: "FiraCode Nerd Font", monospace;
     margin: 0;
-}
-* {
-  /* reference the color by using @color-name */
-  color: @text;
-}
-
-window#waybar {
-  /* you can also GTK3 CSS functions! */
-  background-color: shade(@base, 0.9);
-  border: 2px solid alpha(@crust, 0.3);
-}
-
-#waybar {
-    color: @foreground;
-    background-color: @background;
-}
-
-/* Workspaces sway */
-
-/* 
-#workspaces button.focused,
-#workspaces button.active {
-    color: #ffffff;
-    background-color: #4c566a;
-    border-bottom: 1px solid #81a1c1;
-}
-
-#workspaces button:not(.active):not(.focused) {
-    color: @foreground-inactive;
-}
-*/
-
-
-#workspaces button {
-    color: @foreground;
-    font-size: 16px;
-    background: transparent;
-    padding: 2px 6px;
-    margin: 0 2px; 
+    padding: 0;
     border: none;
-    min-width: 0;
+    box-shadow: none;
+    outline: none;
+}
+
+/* =========================
+   Waybar
+   ========================= */
+window#waybar {
+    background-color: @base;
+    color: @text;
+    border: 2px solid alpha(@crust, 0.0);
+}
+
+/* =========================
+   Workspaces
+   ========================= */
+#workspaces button {
+    font-size: 16px;
+    color: @text;
+    background-color: transparent;
+    background-image: none;
+
+    padding: 2px 6px;
+    margin: 0 2px;
+
     border-radius: 0;
+    min-width: 0;
+
+    box-shadow: none;
+    outline: none;
+    transition: none;
 }
+
+
+#workspaces button:hover,
+#workspaces button:focus,
+#workspaces button:active {
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    color: @text;
+}
+
+/* Workspace ativo */
 #workspaces button.active {
-    color: #ffffff;
-    background-color: #4c566a;
-    border-bottom: 1px solid #81a1c1;
+    color: @base;
+    background-color: @lavender;
+    border-bottom: 1px solid @blue;
 }
 
-#workspaces button.empty {
-    color: @foreground-inactive;
+/* Workspace vazio */
+#workspaces button.empty:not(.active) {
+    color: alpha(@text, 0.5);
 }
 
-.modules-right{
+/* =========================
+   Módulos
+   ========================= */
+.modules-right {
     font-size: 16px;
 }
 
 #custom-launcher,
 #hyprland-window {
-    padding-left: 0.1em;
-    padding-right: 0.1em;
-    
+    padding: 0 4px;
 }
+
 #memory,
-
-
 #temperature,
 #cpu,
 #custom-gpu_temp_usage {
-    padding-right: 0.5em;
+    padding-right: 8px;
 }
+
 #custom-expand-icon,
 #wireplumber,
 #battery,
@@ -89,6 +88,10 @@ window#waybar {
 #bluetooth,
 #tray,
 #clock {
-    padding-right: 9px 
+    padding-right: 9px;
 }
 
+#waybar *:hover {
+    background-image: none;
+    box-shadow: none;
+}

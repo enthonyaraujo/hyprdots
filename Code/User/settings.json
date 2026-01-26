@@ -1,0 +1,28 @@
+{
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.editorAssociations": {
+        "*.pdf": "pdf.preview"
+    },
+    "explorer.confirmDragAndDrop": false,
+    "git.openRepositoryInParentFolders": "never",
+    "terminal.integrated.inheritEnv": false,
+    "explorer.confirmDelete": false,
+    "editor.fontSize": 16,
+    "editor.fontFamily": "FiraCode Nerd Font Mono, monospace",
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontSize": 20,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "c": false
+    },
+    "workbench.iconTheme": "symbols",
+    "window.commandCenter": false,
+    "editor.language.brackets": [
+
+    ],
+    "files.autoSave": "afterDelay",
+    "python.defaultInterpreterPath": "/bin/python"
+}

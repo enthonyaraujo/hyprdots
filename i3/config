@@ -35,7 +35,7 @@ exec --no-startup-id nm-applet
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Wallpaper (requer feh)
-exec_always --no-startup-id feh --bg-fill ~/.config/wallpapers/wallpaper2.jpg
+exec_always --no-startup-id feh --bg-fill ~/.config/wallpapers/evening-sky.png
 
 # Teclado ABNT2 + US Intl (troca com Win+Space)
 exec_always --no-startup-id setxkbmap -layout br,us -variant abnt2,intl -option grp:win_space_toggle

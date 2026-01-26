@@ -24,8 +24,8 @@ def system_menu():
         "rofi",
         "-dmenu",
         "--prompt", "",
-        "-lines", str(len(keys)),  # define altura pela quantidade de opções
-        "-width", "30",            # largura relativa (30% da tela, ou pode ajustar)
+        "-lines", str(len(keys)),  
+        "-width", "30",            
     ],
     input=options,
     text=True,

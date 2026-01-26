@@ -64,7 +64,7 @@ default_floating_border pixel 2
 # --------------------------------------------------
 bindsym $mod+Return exec $term
 bindsym $mod+c kill
-bindsym $mod+d exec $menu
+bindsym $mod+d exec rofi -show drun -theme-str "window { width: 500px; height: 600px; }"
 bindsym $mod+f exec firefox
 bindsym $mod+e exec nautilus
 

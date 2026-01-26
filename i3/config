@@ -16,7 +16,9 @@ set $down j
 set $up k
 set $right l
 set $term kitty
-set $menu rofi -terminal '$term' -show drun
+set $file nemo
+set $menu "rofi -show drun -theme-str 'window { width: 500px; height: 600px; }'"
+
 
 # --------------------------------------------------
 # AUTOSTART / SISTEMA
@@ -64,9 +66,12 @@ default_floating_border pixel 2
 # --------------------------------------------------
 bindsym $mod+Return exec $term
 bindsym $mod+c kill
-bindsym $mod+d exec rofi -show drun -theme-str "window { width: 500px; height: 600px; }"
+bindsym $mod+d exec --no-startup-id $menu
 bindsym $mod+f exec firefox
-bindsym $mod+e exec nautilus
+bindsym $mod+e exec $file
+bindsym $mod+o exec code
+
+
 
 # Reload / Restart / Exit
 bindsym $mod+Shift+c reload

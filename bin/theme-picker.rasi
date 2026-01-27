@@ -1,0 +1,71 @@
+
+@import "~/.config/rofi/themes/theme.rasi"
+
+* {
+  font: "FiraCode Nerd Font 16";
+
+  background:            @base;
+  background-color:      transparent;
+  foreground:            @text;
+
+  normal-background:     @background;
+  normal-foreground:     @foreground;
+
+  selected-normal-background: @lavender;
+  selected-normal-foreground: @base;
+
+  border-color:          @blue;
+}
+
+configuration {
+  show-icons: true;
+  prompt: "";
+}
+
+window {
+  location: center;
+  anchor: center;
+
+  width: 500px; 
+  padding: 30px;
+
+  background-color: @background;
+  border-radius: 18px;
+}
+
+listview {
+
+  columns: 2;
+  lines: 1;
+  layout: vertical; /* No Rofi, para colunas funcionarem bem, usamos layout vertical com colunas */
+
+  spacing: 40px;
+  scrollbar: false;
+  fixed-columns: true;
+}
+
+element {
+
+  orientation: vertical;
+  padding: 20px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+element selected {
+  background-color: @selected-normal-background;
+}
+
+element-icon {
+  size: 160px;
+  border-radius: 10px;
+}
+
+element-text {
+  margin: 12px 0 0 0;
+  horizontal-align: 0.5;
+  text-color: inherit;
+}
+inputbar {
+  enabled: false;
+}
+

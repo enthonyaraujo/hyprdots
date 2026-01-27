@@ -1,4 +1,4 @@
-@import "catppuccin-mocha"
+@import "theme"
 
 * {
   font: "FiraCode Nerd Font 16";

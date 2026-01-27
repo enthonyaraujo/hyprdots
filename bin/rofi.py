@@ -83,6 +83,7 @@ def menu_main():
         "󰣇   Archlinux Wiki",
         "   Hyprland Wiki",
         "󰀻   Applications",
+        "   Switch theme",
         "   Settings",
         "   System Monitor",
         "   System",
@@ -93,7 +94,8 @@ def menu_main():
     actions = (
         "firefox --new-tab https://wiki.archlinux.org/title/Main_page",
         "firefox --new-tab https://wiki.hypr.land",
-        "rofi -show drun", 
+        "rofi -show drun",
+        "$HOME/.config/bin/switch-theme.sh", 
         config_menu,
         "sh -c 'TERMINAL=kitty kitty --start-as maximized --hold -e btop'",
         system_menu,
@@ -101,8 +103,7 @@ def menu_main():
         "sh -c 'TERMINAL=kitty kitty --hold -e fastfetch'",
         
     )
-     
-     
+    
     options = "\n".join(keys)
     result = subprocess.run(
         [

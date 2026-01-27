@@ -1,0 +1,176 @@
+{
+    "layer": "top",
+    "position": "top",
+   // "output": ["eDP-1","HDMI-A-2"],
+    "height": 15,
+    "spacing": 5,
+
+    "modules-left": ["custom/launcher",
+                    "hyprland/workspaces"
+                    ], 
+    
+    "modules-center": [
+                    "clock"
+                    ],
+    
+    "modules-right":  [ 
+                        "memory",
+                        "cpu",
+                        "tray",  
+                        "hyprland/language",
+                        "wireplumber",
+                        "battery",
+                        "custom/systemMenu"
+                        ],
+
+        
+                        
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-active": "<span color='#00ff00' size='larger'><b>{icon}</b></span>",
+        "on-click": "activate",
+        "sort-by-number": true,
+        "persistent-workspaces": {
+            "1": []
+        },
+        "format-icons": {
+            "1": "<span size='small'>1</span>",
+            "2": "<span size='small'>2</span>",
+            "3": "<span size='small'>3</span>",
+            "4": "<span size='small'>4</span>",
+            "5": "<span size='small'>5</span>",
+            "6": "<span size='small'>6</span>",
+            "7": "<span size='small'>7</span>",
+            "8": "<span size='small'>8</span>",
+            "9": "<span size='small'>9</span>",
+            "10": "<span size='small'>10</span>"
+        }
+    }, 
+
+    "clock": {
+    "locale": "en_US.UTF-8",
+    "format": "{:%b %d | %H:%M}",
+    //"format-alt": "{:L%d/%m/%Y}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
+    },
+
+    "wireplumber": {
+        "format": "{icon}{volume}%",
+        "format-muted":"󰝟",
+        "format-icons": "\udb81\udd7e ", 
+        "max-volume": 100,
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "tooltip-format": "{volume}%"
+    },
+
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾" , "󰁿", "󰂀", "󰂁", "󰂂",""],
+        "format-charging": "",
+        "interval": 3,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "tooltip": true,
+        "tooltip-format": "{capacity}%"
+    },
+
+    "backlight": {
+        "format": "\udb80\udce0", //   {percent}% copia com espaco
+        "tooltip-format": "{state} {percent}%"
+    },
+
+    "memory": {
+        "interval": 30,       
+        "format": "MEM: {used:0.1f}G",
+        "tooltip": false
+    }, 
+
+
+    "temperature": {
+        "format": "{temperatureC}°C" 
+    },
+
+    "cpu": {
+        "format": "CPU: {usage}% |"  //\uf4bc
+    },
+
+    "network": {
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "format-wifi": "{icon}  ↓{bandwidthDown} ↑{bandwidthUp}",
+        "format-ethernet": "󰈀  ↓{bandwidthDown} ↑{bandwidthUp}",
+        "format-disconnected": "󰤮",
+        "interval": 2
+    },
+
+    "bluetooth": {
+        "format": "\udb80\udcaf",
+        "format-disabled": "\udb80\udcb2",
+        "format-connected": "\udb80\udcb1",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click":"blueman-manager"
+    },
+
+    "hyprland/language": {
+        "format": "| {short}"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 16
+    },
+
+    "hyprland/window": {
+      "format": " {class}",
+      "max-length": 20,
+      "rewrite": {
+        "^(?!.*\\S).*": ""
+        }
+    },
+
+    "custom/launcher": {
+      "format": " 󰣇 ",
+      "on-click": " $HOME/.config/bin/rofi.py",
+      "tooltip": false
+    },
+
+    ////////////////////////////////
+    ///////////TRAY EXPAND /////////
+    /////////////////////////////////
+    "custom/expand-icon":{
+        "format": "",
+        "tooltip": false
+    },
+
+    "group/tray-expander":{
+        "orientation": "inherit",
+        "drawer":{
+            "transition-duration": 600,
+            "children-class": "tray-group-item"
+        },
+        "modules": ["custom/expand-icon", "tray"]
+    },
+
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 18,
+      "spacing": 4,
+      "on-click-middle": "close",
+      "tooltip-format": "{title}",
+      "ignore-list": [],
+      "on-click": "activate"
+    },
+
+    "custom/systemMenu": {
+      "format": "󰐥 ",
+      "on-click": " $HOME/.config/bin/menu_system.py",
+      "tooltip": false
+    }
+
+}
+
+

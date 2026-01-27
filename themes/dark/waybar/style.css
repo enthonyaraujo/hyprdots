@@ -1,0 +1,97 @@
+@import "mocha.css";
+
+* {
+    font-family: "FiraCode Nerd Font", monospace;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+/* =========================
+   Waybar
+   ========================= */
+window#waybar {
+    background-color: @base;
+    color: @text;
+    border: 2px solid alpha(@crust, 0.0);
+}
+
+/* =========================
+   Workspaces
+   ========================= */
+#workspaces button {
+    font-size: 16px;
+    color: @text;
+    background-color: transparent;
+    background-image: none;
+
+    padding: 2px 6px;
+    margin: 0 2px;
+
+    border-radius: 0;
+    min-width: 0;
+
+    box-shadow: none;
+    outline: none;
+    transition: none;
+}
+
+
+#workspaces button:hover,
+#workspaces button:focus,
+#workspaces button:active {
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    color: @text;
+}
+
+/* Workspace ativo */
+#workspaces button.active {
+    color: @base;
+    background-color: @lavender;
+    border-bottom: 1px solid @blue;
+}
+
+/* Workspace vazio */
+#workspaces button.empty:not(.active) {
+    color: alpha(@text, 0.5);
+}
+
+/* =========================
+   Módulos
+   ========================= */
+.modules-right {
+    font-size: 16px;
+}
+
+#custom-launcher,
+#hyprland-window {
+    padding: 0 4px;
+}
+
+#memory,
+#temperature,
+#cpu,
+#custom-gpu_temp_usage {
+    padding-right: 8px;
+}
+
+#custom-expand-icon,
+#wireplumber,
+#battery,
+#backlight,
+#language,
+#network,
+#bluetooth,
+#tray,
+#clock {
+    padding-right: 9px;
+}
+
+#waybar *:hover {
+    background-image: none;
+    box-shadow: none;
+}

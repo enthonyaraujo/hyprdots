@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 rsync -av dunst $HOME/.config/
 rsync -av gtk-3.0 $HOME/.config/
 rsync -av gtk-4.0 $HOME/.config/
@@ -18,5 +16,5 @@ echo '$wallpaper_hyprland = $HOME/.config/themes/light/Clearday.jpg' > $HOME/.co
 
 sed -i '2s/.*/   "workbench.colorTheme": "Catppuccin Latte",/' $HOME/.config/Code/User/settings.json
 
-killall waybar && waybar
+killall waybar && waybar -l trace
 killall hyprpaper && hyprpaper &

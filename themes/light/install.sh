@@ -16,5 +16,7 @@ echo '$wallpaper_hyprland = $HOME/.config/themes/light/Clearday.jpg' > $HOME/.co
 
 sed -i '2s/.*/   "workbench.colorTheme": "Catppuccin Latte",/' $HOME/.config/Code/User/settings.json
 
-killall waybar && waybar -l trace
+
 killall hyprpaper && hyprpaper &
+
+killall waybar && waybar -l trace

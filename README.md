@@ -8,6 +8,8 @@ Minhas dotfiles com Hyprland + ArchLinux
 * Hyprlock
 * Hypridle
 * Kitty
+* Obisidian
+* Latex
 
 
 Tema usado: [Catppuccin](https://github.com/catppuccin)

@@ -28,3 +28,7 @@ neovim
 papirus-icon-theme
 base-devel
 rsync
+obsidian
+wine
+texlive
+texstudio

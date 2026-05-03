@@ -63,9 +63,32 @@ rsync -av "$HOME/dotfiles_temp/.config/" "$HOME/.config/"
 rm -rf "$HOME/dotfiles_temp"
 
 echo "===== Configurando Shell ====="
-if [[ "$SHELL" != "/usr/bin/zsh" ]]; then
-    echo "Mudando shell padrão para ZSH..."
-    chsh -s /usr/bin/zsh
+echo "Qual shell você deseja definir como padrão?"
+echo "1) ZSH"
+echo "2) Fish"
+read -rp "Escolha uma opção (1 ou 2) [Padrão: 1]: " SHELL_CHOICE
+
+case "$SHELL_CHOICE" in
+    2)
+        CHOSEN_SHELL="/usr/bin/fish"
+        SHELL_NAME="Fish"
+        ;;
+    *)
+        CHOSEN_SHELL="/usr/bin/zsh"
+        SHELL_NAME="ZSH"
+        ;;
+esac
+
+if [[ "$SHELL" != "$CHOSEN_SHELL" ]]; then
+    if command -v "$CHOSEN_SHELL" >/dev/null; then
+        echo "Mudando shell padrão para $SHELL_NAME..."
+        chsh -s "$CHOSEN_SHELL"
+    else
+        echo "Aviso: O shell $SHELL_NAME ($CHOSEN_SHELL) não foi encontrado."
+        echo "Certifique-se de que ele foi instalado através da sua lista de pacotes."
+    fi
+else
+    echo "O $SHELL_NAME já é o seu shell padrão."
 fi
 
 echo

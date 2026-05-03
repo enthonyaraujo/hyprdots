@@ -9,7 +9,6 @@ WM_NAME="hyprland"
 echo "===== Iniciando Setup: $WM_NAME ====="
 echo
 
-# Verificação de arquivos de lista
 if [[ ! -f "$PACMAN_LIST" ]]; then
     echo "Erro: Arquivo $PACMAN_LIST não encontrado."
     exit 1
@@ -45,7 +44,6 @@ fi
 echo "===== Clonando e Aplicando Dotfiles ====="
 read -rp "Git/GitHub está configurado com chave SSH? [Y/n]: " RESPOSTA
 
-# Clona o repositório em uma pasta temporária
 case "${RESPOSTA,,}" in
     y|"")
         echo "Clonando via SSH..."
@@ -57,14 +55,11 @@ case "${RESPOSTA,,}" in
         ;;
 esac
 
-# Garante que a pasta ~/.config existe no seu sistema
 mkdir -p "$HOME/.config"
 
-# Copia o conteúdo da pasta .config do repositório para a sua ~/.config
 echo "Aplicando arquivos em $HOME/.config..."
 rsync -av "$HOME/dotfiles_temp/.config/" "$HOME/.config/"
 
-# Remove a pasta temporária após a cópia
 rm -rf "$HOME/dotfiles_temp"
 
 echo "===== Configurando Shell ====="

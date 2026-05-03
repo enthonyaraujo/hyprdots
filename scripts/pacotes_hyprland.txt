@@ -15,6 +15,7 @@ network-manager-applet
 blueman
 xdg-desktop-portal-hyprland
 nemo
+fish
 zsh
 fzf
 zsh-autosuggestions

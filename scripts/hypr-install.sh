@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-AUR_LIST="aur.txt"
+# Descobre o diretório do script e a raiz do repositório
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(dirname "$SCRIPT_DIR")"
+
+AUR_LIST="aur.txt" # Certifique-se de que esses arquivos estão no mesmo diretório em que o script é executado
 AUR_DIR="$HOME/aur"
 PACMAN_LIST="pacotes_hyprland.txt"
 WM_NAME="hyprland"
@@ -41,26 +45,18 @@ if [[ -f "$AUR_LIST" ]]; then
     done < "$AUR_LIST"
 fi
 
-echo "===== Clonando e Aplicando Dotfiles ====="
-read -rp "Git/GitHub está configurado com chave SSH? [Y/n]: " RESPOSTA
-
-case "${RESPOSTA,,}" in
-    y|"")
-        echo "Clonando via SSH..."
-        git clone git@github.com:enthonyaraujo/dotfiles.git "$HOME/dotfiles_temp"
-        ;;
-    *)
-        echo "Clonando via HTTPS..."
-        git clone https://github.com/enthonyaraujo/dotfiles.git "$HOME/dotfiles_temp"
-        ;;
-esac
-
+echo "===== Aplicando Dotfiles Locais ====="
 mkdir -p "$HOME/.config"
 
-echo "Aplicando arquivos em $HOME/.config..."
-rsync -av "$HOME/dotfiles_temp/.config/" "$HOME/.config/"
+echo "Sincronizando a pasta .config..."
+# Copia o conteúdo da pasta .config do repositório para ~/.config
+rsync -av "$REPO_DIR/.config/" "$HOME/.config/"
 
-rm -rf "$HOME/dotfiles_temp"
+# Copia o .zshrc que está na raiz do repositório (conforme a imagem)
+if [[ -f "$REPO_DIR/.zshrc" ]]; then
+    echo "Sincronizando o arquivo .zshrc..."
+    cp "$REPO_DIR/.zshrc" "$HOME/.zshrc"
+fi
 
 echo "===== Configurando Shell ====="
 echo "Qual shell você deseja definir como padrão?"

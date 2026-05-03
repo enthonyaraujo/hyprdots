@@ -111,7 +111,7 @@ def menu_main():
             "-dmenu",
             "-p", "",
             "-lines", "5",
-            "-theme-str", "window { width: 500px; height: 550; }"
+            "-theme-str", "window { width: 500px; height: 690; }"
         ],
         input=options,
         text=True,

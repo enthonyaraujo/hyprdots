@@ -6,7 +6,7 @@
   lightfg:                     @text;
   separatorcolor:              @foreground;
   urgent-foreground:           @red;
-  alternate-urgent-background: @lightbg;
+  alternate-urgent-background: @lavender;
   lightbg:                     @mantle;
   background-color:            transparent;
   border-color:                @foreground;
@@ -21,7 +21,7 @@
   background:                  @base;
   selected-active-background:  @blue;
   active-background:           @background;
-  selected-normal-background:  @lightfg;
+  selected-normal-background:  @lavender;
   alternate-normal-background: @lightbg;
   foreground:                  @text;
   selected-urgent-foreground:  @background;

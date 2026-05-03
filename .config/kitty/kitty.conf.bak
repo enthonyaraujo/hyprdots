@@ -3,9 +3,11 @@ background_opacity 0.8
 
 background_blur 32
 
+include current-theme.conf
+
 
 
 # BEGIN_KITTY_THEME
-# Catppuccin-Latte
+# Adwaita dark
 include current-theme.conf
 # END_KITTY_THEME

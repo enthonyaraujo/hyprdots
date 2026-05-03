@@ -1,0 +1,2 @@
+catppuccin-gtk-theme-mocha 
+catppuccin-gtk-theme-latte 

@@ -8,7 +8,7 @@ Minhas dotfiles com Hyprland + ArchLinux
 * Hyprlock
 * Hypridle
 * Kitty
-* Obisidian
+* Obsidian
 * Latex
 
 

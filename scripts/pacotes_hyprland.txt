@@ -32,3 +32,4 @@ obsidian
 wine
 texlive
 texstudio
+xournalpp

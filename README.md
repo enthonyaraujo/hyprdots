@@ -9,7 +9,7 @@ Minhas dotfiles com Hyprland + ArchLinux
 * Hypridle
 * Kitty
 
-Ferramenteas que utilizo: 
+Ferramentas que utilizo: 
 * Obsidian
 * Latex & Texstudio
 * Xournal++

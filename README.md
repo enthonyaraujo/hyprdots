@@ -8,8 +8,12 @@ Minhas dotfiles com Hyprland + ArchLinux
 * Hyprlock
 * Hypridle
 * Kitty
+
+Ferramenteas que utilizo: 
 * Obsidian
-* Latex
+* Latex & Texstudio
+* Xournal++
+
 
 
 Tema usado: [Catppuccin](https://github.com/catppuccin)

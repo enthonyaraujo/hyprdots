@@ -5,3 +5,11 @@
 
 vim.keymap.set("v", "<C-S-Right>", "e", { silent = true })
 vim.keymap.set("v", "<C-S-Left>", "b", { silent = true })
+
+vim.g.mapleader = " "
+
+vim.keymap.set("n", "<leader>t", function()
+  vim.cmd("belowright 12split")
+  vim.cmd("terminal")
+  vim.cmd("startinsert")
+end, { desc = "Abir terminal" })

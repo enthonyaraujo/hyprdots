@@ -14,15 +14,7 @@ Ferramentas que utilizo:
 * Latex & Texstudio
 * Xournal++
 
-![1](preview/preview1.png)
-![2](preview/preview2.png)
-![3](preview/preview3.png)
-![4](preview/preview4.png)
-![5](preview/preview5.png)
-
-
-Tema usado: [Catppuccin](https://github.com/catppuccin)
-
+![1](preview/preview.png)
 
 
 

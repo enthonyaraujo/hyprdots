@@ -13,6 +13,18 @@ WM_NAME="hyprland"
 echo "===== Iniciando Setup: $WM_NAME ====="
 echo
 
+echo "===== Ativando multilib em /etc/pacman.conf ====="
+echo
+
+sudo bash -c 'cat <<EOF >> /etc/pacman.conf
+
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+EOF'
+
+echo "===== Verificando lista de pacotes... ====="
+echo
+
 if [[ ! -f "$PACMAN_LIST" ]]; then
     echo "Erro: Arquivo $PACMAN_LIST não encontrado."
     exit 1
@@ -44,6 +56,20 @@ if [[ -f "$AUR_LIST" ]]; then
         yay -S --needed --noconfirm "$pacote"
     done < "$AUR_LIST"
 fi
+
+echo "===== Deseja instalar os drivers da Nvidia? ====="
+echo "1) Sim"
+echo "2) Não"
+read -rp "Escolha uma opção (1 ou 2) [Padrão: 1]: " NVIDIA
+case "$NVIDIA" in
+    2)
+        echo " "
+        ;;
+    *)
+        echo "Instalando drivers Nvidia..."
+        sudo pacman -S --needed --noconfirm linux-headers nvidia-open-dkms libva-nvidia-driver nvidia-settings nvidia-utils egl-wayland lib32-nvidia-utils
+        ;;
+esac
 
 echo "===== Aplicando Dotfiles Locais ====="
 mkdir -p "$HOME/.config"

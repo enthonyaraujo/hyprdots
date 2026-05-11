@@ -2,6 +2,7 @@
     "layer": "top",
     "position": "top",
    // "output": ["eDP-1","HDMI-A-2"],
+    "margin": 4,
     "height": 15,
     "spacing": 5,
 
@@ -49,7 +50,7 @@
     }, 
 
     "clock": {
-    "locale": "en_US.UTF-8",
+    "locale": "pt_BR.UTF-8",
     "format": "{:%b %d | %H:%M}",
     //"format-alt": "{:L%d/%m/%Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"

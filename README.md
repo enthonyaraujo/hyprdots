@@ -3,7 +3,6 @@ Minhas dotfiles com Hyprland + ArchLinux
 --- 
 * Waybar
 * Rofi
-* Nvim
 * Hyprpaper
 * Hyprlock
 * Hypridle
@@ -13,6 +12,7 @@ Ferramentas que utilizo:
 * Obsidian
 * Latex & Texstudio
 * Xournal++
+* Nvim
 
 ![1](preview/preview.png)
 

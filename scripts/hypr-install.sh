@@ -118,3 +118,6 @@ echo "===== Setup finalizado ====="
 echo "Ambiente: $WM_NAME"
 echo "As configurações foram aplicadas corretamente!"
 echo "Faça logout ou reinicie para efetivar as mudanças."
+
+
+

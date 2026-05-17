@@ -1,5 +1,3 @@
-
-Minhas dotfiles com Hyprland + ArchLinux
 --- 
 * Waybar
 * Rofi

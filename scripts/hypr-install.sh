@@ -5,7 +5,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
 
-AUR_LIST="aur.txt" # Certifique-se de que esses arquivos estão no mesmo diretório em que o script é executado
+AUR_LIST="aur.txt" 
 AUR_DIR="$HOME/aur"
 PACMAN_LIST="pacotes_hyprland.txt"
 WM_NAME="hyprland"

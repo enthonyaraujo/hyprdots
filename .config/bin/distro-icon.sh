@@ -1,0 +1,32 @@
+#!/bin/sh
+# Identifica a distribuição Linux e retorna o ícone correspondente (Nerd Font) para a Waybar
+
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+fi
+
+distro_id="${ID:-linux}"
+
+case "$distro_id" in
+    ubuntu)           icon="" ;;
+    arch)             icon="󰣇" ;;
+    fedora)           icon="" ;;
+    debian)           icon="" ;;
+    opensuse*|suse)   icon="" ;;
+    manjaro)          icon="" ;;
+    pop)              icon="" ;;
+    nixos)            icon="" ;;
+    void)             icon="" ;;
+    gentoo)           icon="" ;;
+    alpine)           icon="" ;;
+    linuxmint|mint)   icon="󰣭" ;;
+    rhel|redhat)      icon="󱄛" ;;
+    kali)             icon="" ;;
+    endeavouros)      icon="" ;;
+    *)                icon="" ;;
+esac
+
+name="${PRETTY_NAME:-$NAME}"
+[ -z "$name" ] && name="Linux"
+
+printf '{"text":"%s","tooltip":"%s"}\n' "$icon" "$name"

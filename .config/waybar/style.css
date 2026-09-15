@@ -25,12 +25,12 @@ window#waybar {
    Custom Launcher
    ========================= */
 #custom-launcher {
-    font-size: 14px;
+    font-size: 13px;
     color: @crust;
     background: linear-gradient(135deg, @sky, @blue);
-    border-radius: 7px;
-    padding: 1px 8px;
-    margin: 2px 3px;
+    border-radius: 6px;
+    padding: 1px 6px;
+    margin: 2px 2px;
     transition: all 0.2s ease;
 }
 
@@ -44,21 +44,21 @@ window#waybar {
    ========================= */
 #workspaces {
     background-color: @surface0;
-    border-radius: 7px;
-    margin: 2px 3px;
+    border-radius: 6px;
+    margin: 2px 2px;
     padding: 1px 2px;
     border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 #workspaces button {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
     color: @subtext0;
     background-color: transparent;
-    padding: 1px 6px;
+    padding: 1px 4px;
     margin: 1px 1px;
-    border-radius: 5px;
-    min-width: 0;
+    border-radius: 4px;
+    min-width: 14px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -71,8 +71,8 @@ window#waybar {
     color: @crust;
     background: linear-gradient(135deg, @sky, @blue);
     font-weight: bold;
-    border-radius: 5px;
-    box-shadow: 0 0 6px alpha(@sky, 0.4);
+    border-radius: 4px;
+    box-shadow: 0 0 5px alpha(@sky, 0.4);
 }
 
 #workspaces button.empty:not(.active) {

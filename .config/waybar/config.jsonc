@@ -57,26 +57,27 @@
     },
 
     "wireplumber": {
-        "format": "{icon}{volume}%",
-        "format-muted":"󰝟",
-        "format-icons": "\udb81\udd7e ", 
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 {volume}%",
+        "format-icons": ["󰕿", "󰖀", "󰕾"],
         "max-volume": 100,
         "scroll-step": 5,
         "on-click": "pavucontrol",
-        "tooltip-format": "{volume}%"
+        "tooltip-format": "Volume: {volume}%"
     },
 
     "battery": {
         "format": "{icon} {capacity}%",
-        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾" , "󰁿", "󰂀", "󰂁", "󰂂","󰁹"],
         "format-charging": "󰂄 {capacity}%",
-        "interval": 3,
+        "format-plugged": "󰚥 {capacity}%",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "interval": 5,
         "states": {
             "warning": 25,
             "critical": 10
         },
         "tooltip": true,
-        "on-click": "/$HOME/.config/bin/power-settings.sh",
+        "on-click": "$HOME/.config/bin/power-settings.sh",
         "tooltip-format": "{capacity}%"
     },
 
@@ -136,9 +137,12 @@
     },
 
     "custom/launcher": {
-      "format": "󰣇",
-      "on-click": " $HOME/.config/bin/rofi.py",
-      "tooltip": false
+      "exec": "~/.config/bin/distro-icon.sh",
+      "return-type": "json",
+      "format": "{}",
+      "interval": "once",
+      "on-click": "$HOME/.config/bin/rofi.py",
+      "tooltip": true
     },
     "custom/gpu": {
       "exec": "~/.config/bin/gpu-usage.sh",

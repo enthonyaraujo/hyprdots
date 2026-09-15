@@ -29,8 +29,10 @@ window#waybar {
     color: @crust;
     background: linear-gradient(135deg, @sky, @blue);
     border-radius: 6px;
-    padding: 1px 6px;
+    min-width: 24px;
+    padding: 2px 0;
     margin: 2px 2px;
+    text-align: center;
     transition: all 0.2s ease;
 }
 
@@ -123,16 +125,10 @@ window#waybar {
     border-color: alpha(@sky, 0.3);
 }
 
-#memory {
-    color: @teal;
-}
-
-#cpu {
-    color: @sky;
-}
-
+#memory,
+#cpu,
 #custom-gpu {
-    color: @sapphire;
+    color: @text;
 }
 
 #wireplumber {
@@ -168,9 +164,13 @@ window#waybar {
 }
 
 #custom-systemMenu {
-    color: @sky;
+    color: @text;
     background-color: @surface1;
-    margin-right: 3px;
+    min-width: 24px;
+    padding: 2px 0;
+    margin: 2px 2px;
+    border-radius: 6px;
+    text-align: center;
 }
 
 #custom-systemMenu:hover {

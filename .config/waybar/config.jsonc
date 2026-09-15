@@ -58,8 +58,8 @@
 
     "wireplumber": {
         "format": "{icon} {volume}%",
-        "format-muted": "󰝟 {volume}%",
-        "format-icons": ["󰕿", "󰖀", "󰕾"],
+        "format-muted": " {volume}%",
+        "format-icons": ["", "", ""],
         "max-volume": 100,
         "scroll-step": 5,
         "on-click": "pavucontrol",
@@ -68,9 +68,9 @@
 
     "battery": {
         "format": "{icon} {capacity}%",
-        "format-charging": "󰂄 {capacity}%",
-        "format-plugged": "󰚥 {capacity}%",
-        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": ["", "", "", "", ""],
         "interval": 5,
         "states": {
             "warning": 25,
@@ -180,7 +180,7 @@
     },
 
     "custom/systemMenu": {
-      "format": "󰐥 ",
+      "format": "󰐥",
       "on-click": " $HOME/.config/bin/menu_system.py",
       "tooltip": false
     }

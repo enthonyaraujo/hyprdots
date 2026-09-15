@@ -8,10 +8,10 @@ fi
 distro_id="${ID:-linux}"
 
 case "$distro_id" in
-    ubuntu)           icon="" ;;
+    ubuntu)           icon="󰕈" ;;
     arch)             icon="󰣇" ;;
-    fedora)           icon="" ;;
-    debian)           icon="" ;;
+    fedora)           icon="󰣛" ;;
+    debian)           icon="󰣚" ;;
     opensuse*|suse)   icon="" ;;
     manjaro)          icon="" ;;
     pop)              icon="" ;;

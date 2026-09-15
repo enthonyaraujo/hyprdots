@@ -103,8 +103,7 @@ window#waybar {
 #tray,
 #language,
 #wireplumber,
-#battery,
-#custom-systemMenu {
+#battery {
     color: @text;
     background-color: @surface0;
     border-radius: 7px;

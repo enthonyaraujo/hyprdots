@@ -2,11 +2,11 @@
     "layer": "top",
     "position": "top",
    // "output": ["eDP-1","HDMI-A-2"],
-    "margin-top": 6,
-    "margin-left": 10,
-    "margin-right": 10,
-    "height": 30,
-    "spacing": 4,
+    "margin-top": 4,
+    "margin-left": 8,
+    "margin-right": 8,
+    "height": 22,
+    "spacing": 3,
 
     "modules-left": [
         "custom/launcher",

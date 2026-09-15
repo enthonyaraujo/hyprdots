@@ -2,7 +2,7 @@
 
 * {
     font-family: "FiraCode Nerd Font", "JetBrains Mono Nerd Font", monospace;
-    font-size: 13px;
+    font-size: 12px;
     margin: 0;
     padding: 0;
     border: none;
@@ -11,32 +11,32 @@
 }
 
 /* =========================
-   Waybar Base Window
+   Waybar Base Window (Transparente)
    ========================= */
 window#waybar {
-    background-color: alpha(@base, 0.85);
+    background-color: transparent;
+    background: transparent;
     color: @text;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    border: none;
+    box-shadow: none;
 }
 
 /* =========================
    Custom Launcher
    ========================= */
 #custom-launcher {
-    font-size: 15px;
+    font-size: 14px;
     color: @crust;
     background: linear-gradient(135deg, @sky, @blue);
-    border-radius: 8px;
-    padding: 2px 10px;
-    margin: 3px 4px;
+    border-radius: 7px;
+    padding: 1px 8px;
+    margin: 2px 3px;
     transition: all 0.2s ease;
 }
 
 #custom-launcher:hover {
     background: @sky;
-    box-shadow: 0 0 10px alpha(@sky, 0.5);
+    box-shadow: 0 0 8px alpha(@sky, 0.5);
 }
 
 /* =========================
@@ -44,20 +44,20 @@ window#waybar {
    ========================= */
 #workspaces {
     background-color: @surface0;
-    border-radius: 8px;
-    margin: 3px 4px;
-    padding: 2px;
+    border-radius: 7px;
+    margin: 2px 3px;
+    padding: 1px 2px;
     border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 #workspaces button {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     color: @subtext0;
     background-color: transparent;
-    padding: 2px 8px;
-    margin: 1px 2px;
-    border-radius: 6px;
+    padding: 1px 6px;
+    margin: 1px 1px;
+    border-radius: 5px;
     min-width: 0;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -71,8 +71,8 @@ window#waybar {
     color: @crust;
     background: linear-gradient(135deg, @sky, @blue);
     font-weight: bold;
-    border-radius: 6px;
-    box-shadow: 0 0 8px alpha(@sky, 0.4);
+    border-radius: 5px;
+    box-shadow: 0 0 6px alpha(@sky, 0.4);
 }
 
 #workspaces button.empty:not(.active) {
@@ -84,12 +84,12 @@ window#waybar {
    ========================= */
 #clock {
     font-weight: 600;
-    font-size: 13px;
+    font-size: 12px;
     color: @text;
     background-color: @surface0;
-    border-radius: 8px;
-    padding: 3px 14px;
-    margin: 3px 0;
+    border-radius: 7px;
+    padding: 2px 10px;
+    margin: 2px 0;
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -106,9 +106,9 @@ window#waybar {
 #custom-systemMenu {
     color: @text;
     background-color: @surface0;
-    border-radius: 8px;
-    padding: 3px 10px;
-    margin: 3px 2px;
+    border-radius: 7px;
+    padding: 2px 8px;
+    margin: 2px 2px;
     border: 1px solid rgba(255, 255, 255, 0.04);
     transition: all 0.2s ease;
 }
@@ -170,7 +170,7 @@ window#waybar {
 #custom-systemMenu {
     color: @sky;
     background-color: @surface1;
-    margin-right: 4px;
+    margin-right: 3px;
 }
 
 #custom-systemMenu:hover {

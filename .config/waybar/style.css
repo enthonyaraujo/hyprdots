@@ -29,10 +29,9 @@ window#waybar {
     color: @crust;
     background: linear-gradient(135deg, @sky, @blue);
     border-radius: 6px;
-    min-width: 24px;
-    padding: 2px 0;
+    min-width: 20px;
+    padding: 2px 6px;
     margin: 2px 2px;
-    text-align: center;
     transition: all 0.2s ease;
 }
 
@@ -166,11 +165,10 @@ window#waybar {
 #custom-systemMenu {
     color: @text;
     background-color: @surface1;
-    min-width: 24px;
-    padding: 2px 0;
+    min-width: 20px;
+    padding: 2px 6px;
     margin: 2px 2px;
     border-radius: 6px;
-    text-align: center;
 }
 
 #custom-systemMenu:hover {

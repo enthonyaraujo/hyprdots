@@ -22,6 +22,8 @@
         "cpu",
         "custom/gpu",
         "tray",  
+        "network",
+        "bluetooth",
         "hyprland/language",
         "wireplumber",
         "battery",
@@ -177,6 +179,32 @@
       "tooltip-format": "{title}",
       "ignore-list": [],
       "on-click": "activate"
+    },
+
+    "network": {
+        "interval": 3,
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰈀",
+        "format-linked": "󰈀",
+        "format-disconnected": "󰖪",
+        "format-disabled": "󰤮",
+        "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\nIP: {ipaddr}",
+        "tooltip-format-ethernet": "Ethernet: {ipaddr}",
+        "tooltip-format-disconnected": "Wi-Fi Desconectado",
+        "on-click": "$HOME/.config/bin/wifi-menu.sh"
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-connected": "󰂱 {device_alias}",
+        "format-connected-battery": "󰂱 {device_alias} {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n{num_connections} conectado(s)",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n{num_connections} conectado(s)\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "$HOME/.config/bin/bluetooth-menu.sh"
     },
 
     "custom/systemMenu": {

@@ -101,6 +101,8 @@ window#waybar {
 #cpu,
 #custom-gpu,
 #tray,
+#network,
+#bluetooth,
 #language,
 #wireplumber,
 #battery {
@@ -116,11 +118,21 @@ window#waybar {
 #memory:hover,
 #cpu:hover,
 #custom-gpu:hover,
+#tray:hover,
+#network:hover,
+#bluetooth:hover,
 #language:hover,
 #wireplumber:hover,
 #battery:hover {
     background-color: @surface1;
     border-color: alpha(@sky, 0.3);
+}
+
+#network.disconnected,
+#network.disabled,
+#bluetooth.disabled,
+#bluetooth.off {
+    color: @overlay0;
 }
 
 #memory,

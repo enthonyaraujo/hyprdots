@@ -40,7 +40,7 @@ local fileManager = fileManager or "dolphin"
 local menu = menu or "rofi -show drun -theme-str 'window { width: 500px; height: 600px; }'"
 
 -- Binds personalizadas
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("python /$HOME/.config/bin/rofi.py"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("python3 /$HOME/.config/bin/menu_system.py"))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("code"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("flatpak run com.rtosta.zapzap"))

@@ -25,12 +25,12 @@ window#waybar {
    Custom Launcher
    ========================= */
 #custom-launcher {
-    font-size: 13px;
+    font-size: 15px;
     color: @crust;
     background: linear-gradient(135deg, @sky, @blue);
     border-radius: 6px;
-    min-width: 20px;
-    padding: 2px 6px;
+    min-width: 18px;
+    padding: 1px 6px;
     margin: 2px 2px;
     transition: all 0.2s ease;
 }

@@ -140,9 +140,9 @@
     },
 
     "custom/launcher": {
-      "exec": "~/.config/bin/distro-icon.sh",
-      "return-type": "json",
-      "format": "{}",
+     // "exec": "~/.config/bin/distro-icon.sh",
+    //"return-type": "json",
+      "format": "",
       "interval": "once",
       "on-click": "$HOME/.config/bin/rofi.py",
       "tooltip": true

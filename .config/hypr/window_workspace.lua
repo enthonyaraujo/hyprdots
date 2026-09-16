@@ -40,3 +40,11 @@
 --     workspace = 1,
 --     monitor   = "eDP-1",
 -- })
+
+-- Regras para o Applet de Volume GTK
+hl.window_rule({
+    name  = "audio-applet-rules",
+    match = { class = "^(audio-applet)$" },
+    float = true,
+    pin   = true,
+})

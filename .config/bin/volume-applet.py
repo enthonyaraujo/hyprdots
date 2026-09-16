@@ -7,8 +7,12 @@ Estilo translúcido Catppuccin/Breeze com bordas arredondadas e integração ao 
 import os
 import sys
 import re
+import json
 import subprocess
 import signal
+import warnings
+
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 # Single instance / Toggle behavior
 PID_FILE = "/tmp/hypr_audio_applet.pid"
@@ -18,20 +22,28 @@ if os.path.exists(PID_FILE):
             old_pid = int(f.read().strip())
         if old_pid != os.getpid():
             os.kill(old_pid, signal.SIGTERM)
-            os.remove(PID_FILE)
+            try:
+                os.remove(PID_FILE)
+            except Exception:
+                pass
             sys.exit(0)
+    except ProcessLookupError:
+        try:
+            os.remove(PID_FILE)
+        except Exception:
+            pass
     except Exception:
         pass
 
 with open(PID_FILE, "w") as f:
     f.write(str(os.getpid()))
 
-import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib
+
+GLib.set_prgname("volume-applet")
+GLib.set_application_name("volume-applet")
 
 CSS_DATA = """
 window.audio-window {
@@ -52,6 +64,21 @@ label.badge-vol {
     font-family: 'FiraCode Nerd Font';
     font-size: 12px;
     font-weight: 600;
+}
+
+button.btn-close {
+    background-color: transparent;
+    color: #7f8c8d;
+    border: none;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+button.btn-close:hover {
+    background-color: #ed1515;
+    color: #eff0f1;
 }
 
 scale trough {
@@ -133,10 +160,24 @@ def get_sinks():
                 sinks.append((sid, name, is_def))
     return sinks
 
+def align_to_top_right():
+    try:
+        monitors = json.loads(subprocess.check_output(["hyprctl", "monitors", "-j"]))
+        focused = next((m for m in monitors if m.get("focused")), monitors[0])
+        mon_x = focused["x"]
+        mon_y = focused["y"]
+        mon_w = int(focused["width"] / focused["scale"])
+        target_x = mon_x + mon_w - 380 - 20
+        target_y = mon_y + 46
+        subprocess.run(["hyprctl", "dispatch", "movewindowpixel", f"exact {target_x} {target_y}", ",class:^(volume-applet)$"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:
+        pass
+    return False
+
 class AudioApplet(Gtk.Window):
     def __init__(self):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
-        self.set_wmclass("audio-applet", "audio-applet")
+        self.set_role("volume-applet")
         self.set_title("Controle de Volume")
         self.set_decorated(False)
         self.set_resizable(False)
@@ -170,9 +211,18 @@ class AudioApplet(Gtk.Window):
         self.icon_label.get_style_context().add_class("header-title")
         header_box.pack_start(self.icon_label, False, False, 0)
 
+        # Fechar e badge
+        right_header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         self.badge_vol = Gtk.Label(label=f"{self.current_vol}%" if not self.is_muted else "Mudo")
         self.badge_vol.get_style_context().add_class("badge-vol")
-        header_box.pack_end(self.badge_vol, False, False, 0)
+        right_header.pack_start(self.badge_vol, False, False, 0)
+
+        btn_close = Gtk.Button(label="✕")
+        btn_close.get_style_context().add_class("btn-close")
+        btn_close.connect("clicked", lambda b: self.close_app())
+        right_header.pack_start(btn_close, False, False, 0)
+
+        header_box.pack_end(right_header, False, False, 0)
         main_box.pack_start(header_box, False, False, 0)
 
         # Barra Deslizante (Slider)
@@ -185,26 +235,28 @@ class AudioApplet(Gtk.Window):
         slider_box.pack_start(self.scale, True, True, 0)
         main_box.pack_start(slider_box, False, False, 4)
 
+        # Helper para criar botão alinhado à esquerda
+        def make_action_btn(label, callback):
+            btn = Gtk.Button()
+            btn.get_style_context().add_class("action-btn")
+            btn.set_halign(Gtk.Align.FILL)
+            lbl = Gtk.Label(label=label)
+            lbl.set_xalign(0.0)
+            btn.add(lbl)
+            btn.connect("clicked", callback)
+            return btn, lbl
+
         # Botão Silenciar (Mudo)
-        mute_label = "󰕾   Ativar Som (Desmutar)" if self.is_muted else "󰝟   Silenciar (Mudo)"
-        self.btn_mute = Gtk.Button(label=mute_label)
-        self.btn_mute.get_style_context().add_class("action-btn")
-        self.btn_mute.set_alignment(0.0, 0.5)
-        self.btn_mute.connect("clicked", self.on_mute_clicked)
+        mute_text = "󰕾   Ativar Som (Desmutar)" if self.is_muted else "󰝟   Silenciar (Mudo)"
+        self.btn_mute, self.lbl_mute = make_action_btn(mute_text, self.on_mute_clicked)
         main_box.pack_start(self.btn_mute, False, False, 0)
 
         # Botão Microfone Mudo
-        self.btn_mic = Gtk.Button(label="󰍬   Alternar Microfone Mudo")
-        self.btn_mic.get_style_context().add_class("action-btn")
-        self.btn_mic.set_alignment(0.0, 0.5)
-        self.btn_mic.connect("clicked", self.on_mic_clicked)
+        self.btn_mic, _ = make_action_btn("󰍬   Alternar Microfone Mudo", self.on_mic_clicked)
         main_box.pack_start(self.btn_mic, False, False, 0)
 
         # Botão Pavucontrol
-        self.btn_pavu = Gtk.Button(label="   Mixer Completo (Pavucontrol)")
-        self.btn_pavu.get_style_context().add_class("action-btn")
-        self.btn_pavu.set_alignment(0.0, 0.5)
-        self.btn_pavu.connect("clicked", self.on_pavu_clicked)
+        self.btn_pavu, _ = make_action_btn("   Mixer Completo (Pavucontrol)", self.on_pavu_clicked)
         main_box.pack_start(self.btn_pavu, False, False, 0)
 
         # Saídas de áudio
@@ -216,15 +268,11 @@ class AudioApplet(Gtk.Window):
 
             for sid, name, is_def in sinks:
                 tag = " ✓" if is_def else ""
-                sink_btn = Gtk.Button(label=f"󰋋   {name}{tag}")
-                sink_btn.get_style_context().add_class("action-btn")
-                sink_btn.set_alignment(0.0, 0.5)
-                sink_btn.connect("clicked", self.on_sink_clicked, sid)
+                sink_btn, _ = make_action_btn(f"󰋋   {name}{tag}", lambda b, s=sid: self.on_sink_clicked(s))
                 main_box.pack_start(sink_btn, False, False, 0)
 
-        # Eventos de fechamento
+        # Eventos de teclado e destruição
         self.connect("key-press-event", self.on_key_press)
-        self.connect("focus-out-event", self.on_focus_out)
         self.connect("destroy", self.cleanup)
 
     def on_slider_changed(self, scale):
@@ -240,7 +288,7 @@ class AudioApplet(Gtk.Window):
         vol, muted = get_volume_info()
         self.is_muted = muted
         self.badge_vol.set_text("Mudo" if muted else f"{vol}%")
-        self.btn_mute.set_label("󰕾   Ativar Som (Desmutar)" if muted else "󰝟   Silenciar (Mudo)")
+        self.lbl_mute.set_text("󰕾   Ativar Som (Desmutar)" if muted else "󰝟   Silenciar (Mudo)")
 
     def on_mic_clicked(self, btn):
         subprocess.run(["wpctl", "set-mute", "@DEFAULT_AUDIO_SOURCE@", "toggle"])
@@ -251,7 +299,7 @@ class AudioApplet(Gtk.Window):
         subprocess.Popen(["pavucontrol"])
         self.close_app()
 
-    def on_sink_clicked(self, btn, sid):
+    def on_sink_clicked(self, sid):
         subprocess.run(["wpctl", "set-default", sid])
         self.close_app()
 
@@ -259,10 +307,6 @@ class AudioApplet(Gtk.Window):
         if event.keyval in (Gdk.KEY_Escape, Gdk.KEY_q):
             self.close_app()
             return True
-        return False
-
-    def on_focus_out(self, widget, event):
-        self.close_app()
         return False
 
     def close_app(self):
@@ -287,6 +331,7 @@ def main():
 
     app = AudioApplet()
     app.show_all()
+    GLib.timeout_add(50, align_to_top_right)
     Gtk.main()
 
 if __name__ == "__main__":

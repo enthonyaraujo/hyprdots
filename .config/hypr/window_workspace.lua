@@ -44,7 +44,8 @@
 -- Regras para o Applet de Volume GTK
 hl.window_rule({
     name  = "audio-applet-rules",
-    match = { class = "^(audio-applet)$" },
+    match = { class = "^(volume-applet.*)$" },
     float = true,
     pin   = true,
+    move  = "100%-440 46",
 })

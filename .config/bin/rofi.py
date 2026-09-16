@@ -28,8 +28,8 @@ def config_menu():
             "rofi",
             "-dmenu",
             "-p", "",
-            "-lines", "5",
-            "-theme-str", "window { width: 500px; height: 500; }"
+            "-lines", str(len(app_keys)),
+            "-theme-str", "window { width: 450px; }"
         ],
         input=options,
         text=True,
@@ -67,8 +67,8 @@ def system_menu():
             "rofi",
             "-dmenu",
             "-p", "",
-            "-lines", "5",
-            "-theme-str", "window { width: 500px; height: 550; }"
+            "-lines", str(len(keys)),
+            "-theme-str", "window { width: 420px; }"
         ],
         input=options,
         text=True,
@@ -110,8 +110,8 @@ def menu_main():
             "rofi",
             "-dmenu",
             "-p", "",
-            "-lines", "5",
-            "-theme-str", "window { width: 500px; height: 690; }"
+            "-lines", str(len(keys)),
+            "-theme-str", "window { width: 450px; }"
         ],
         input=options,
         text=True,

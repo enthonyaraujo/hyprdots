@@ -47,5 +47,4 @@ hl.window_rule({
     match = { class = "^(volume-applet.*)$" },
     float = true,
     pin   = true,
-    move  = "100%-440 46",
 })

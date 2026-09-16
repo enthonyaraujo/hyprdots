@@ -160,14 +160,35 @@ def get_sinks():
                 sinks.append((sid, name, is_def))
     return sinks
 
-def align_to_top_right():
+def align_to_top_right(app_win=None):
     try:
         monitors = json.loads(subprocess.check_output(["hyprctl", "monitors", "-j"]))
         focused = next((m for m in monitors if m.get("focused")), monitors[0])
         mon_x = focused["x"]
         mon_y = focused["y"]
         mon_w = int(focused["width"] / focused["scale"])
-        target_x = mon_x + mon_w - 380 - 20
+
+        win_w = 430
+        if app_win:
+            try:
+                nat_w = app_win.get_preferred_size()[1].width
+                if nat_w > 0:
+                    win_w = nat_w
+            except Exception:
+                pass
+
+        try:
+            clients = json.loads(subprocess.check_output(["hyprctl", "clients", "-j"]))
+            for c in clients:
+                if c.get("class") == "volume-applet":
+                    win_w = c["size"][0]
+                    break
+        except Exception:
+            pass
+
+        # Margem de 12px da borda direita da tela para perfeito alinhamento visual
+        margin_right = 12
+        target_x = mon_x + mon_w - win_w - margin_right
         target_y = mon_y + 46
         subprocess.run(["hyprctl", "dispatch", "movewindowpixel", f"exact {target_x} {target_y}", ",class:^(volume-applet)$"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
@@ -331,7 +352,12 @@ def main():
 
     app = AudioApplet()
     app.show_all()
-    GLib.timeout_add(50, align_to_top_right)
+    GLib.idle_add(lambda: align_to_top_right(app))
+    GLib.timeout_add(50, lambda: align_to_top_right(app))
+    GLib.timeout_add(150, lambda: align_to_top_right(app))
+
+    GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGTERM, lambda: (app.cleanup(), Gtk.main_quit()))
+    GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, lambda: (app.cleanup(), Gtk.main_quit()))
     Gtk.main()
 
 if __name__ == "__main__":

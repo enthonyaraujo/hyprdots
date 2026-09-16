@@ -1,0 +1,37 @@
+# Ignorar tudo por padrão no diretório Home
+/*
+/.*
+
+# Arquivos e pastas do repositório no Home
+!/LICENSE
+!/README.md
+!/preview/
+!/scripts/
+!/.zshrc
+!/.gitignore
+!/.config/
+
+# Dentro de .config, ignorar todos os programas não versionados
+/.config/*
+
+# Apenas as configurações gerenciadas pelo hyprdots
+!/.config/bin/
+!/.config/dunst/
+!/.config/fish/
+!/.config/gtk-3.0/
+!/.config/gtk-4.0/
+!/.config/hypr/
+!/.config/kdedefaults/
+!/.config/kitty/
+!/.config/nvim/
+!/.config/nwg-look/
+!/.config/rofi/
+!/.config/wallpapers/
+!/.config/waybar/
+
+# Arquivos temporários e caches
+*.log
+*.tmp
+__pycache__/
+*.py[cod]
+.cache/

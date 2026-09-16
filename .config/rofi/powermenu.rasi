@@ -1,0 +1,73 @@
+@import "themes/theme"
+
+* {
+    background-color: transparent;
+    text-color:       @text;
+    font:             "FiraCode Nerd Font 13";
+}
+
+window {
+    transparency:        "real";
+    background-color:    rgba(35, 38, 41, 0.95);
+    border:              2px;
+    border-color:        @sky;
+    border-radius:       12px;
+    width:               400px;
+    location:            center;
+    anchor:              center;
+    padding:             16px;
+}
+
+mainbox {
+    spacing:             12px;
+    children:            [ inputbar, listview ];
+}
+
+inputbar {
+    enabled:             true;
+    padding:             8px 12px;
+    background-color:    @surface0;
+    border-radius:       8px;
+    children:            [ prompt ];
+}
+
+prompt {
+    font:                "FiraCode Nerd Font Bold 13";
+    text-color:          @sky;
+}
+
+listview {
+    enabled:             true;
+    columns:             1;
+    lines:               6;
+    cycle:               true;
+    dynamic:             true;
+    scrollbar:           false;
+    layout:              vertical;
+    spacing:             6px;
+}
+
+element {
+    enabled:             true;
+    padding:             10px 14px;
+    border-radius:       8px;
+    cursor:              pointer;
+    children:            [ element-text ];
+}
+
+element normal.normal {
+    background-color:    transparent;
+    text-color:          @text;
+}
+
+element selected.normal {
+    background-color:    @sky;
+    text-color:          @crust;
+}
+
+element-text {
+    background-color:    transparent;
+    text-color:          inherit;
+    cursor:              inherit;
+    vertical-align:      0.5;
+}

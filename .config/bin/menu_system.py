@@ -1,40 +1,43 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import os
 import subprocess
 
 def system_menu():
-    keys = (
-        "󰤄   Suspend",
-        "󰌾   Lock",
-        "󰜉   Restart",
-        "   UEFI Firmware",
-        "󰐥   Power Off",
-    )
-    actions = (
-        "systemctl suspend",
-        "hyprlock",
-        "systemctl reboot",
-        "systemctl reboot --firmware-setup",
-        "systemctl poweroff",
-    )
+    theme_path = os.path.expanduser("~/.config/rofi/powermenu.rasi")
 
+    menu_items = [
+        ("󰌾   Bloquear Tela", "hyprlock"),
+        ("󰤄   Suspender", "systemctl suspend"),
+        ("󰍃   Encerrar Sessão", "hyprctl dispatch exit"),
+        ("󰜉   Reiniciar", "systemctl reboot"),
+        ("   Firmware UEFI", "systemctl reboot --firmware-setup"),
+        ("󰐥   Desligar", "systemctl poweroff"),
+    ]
+
+    keys = [item[0] for item in menu_items]
+    actions = [item[1] for item in menu_items]
     options = "\n".join(keys)
 
-    result = subprocess.run(
-        [
-            "rofi",
-            "-dmenu",
-            "-p", "",
-            "-lines", "5",
-            "-theme-str", "window { width: 500px; height: 390; }"
-        ],
+    cmd = ["rofi", "-dmenu", "-p", "⏻  Menu de Energia"]
+    if os.path.exists(theme_path):
+        cmd.extend(["-theme", theme_path])
+
+    res = subprocess.run(
+        cmd,
         input=options,
         text=True,
         stdout=subprocess.PIPE
-    ).stdout.strip()
+    )
 
-    if result in keys:
-        subprocess.run(actions[keys.index(result)], shell=True)
+    choice = res.stdout.strip()
+    if choice in keys:
+        idx = keys.index(choice)
+        action = actions[idx]
+        if action.startswith("hyprctl"):
+            subprocess.run(action.split())
+        else:
+            subprocess.run(action, shell=True)
 
 if __name__ == "__main__":
     system_menu()

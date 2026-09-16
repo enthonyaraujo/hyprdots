@@ -95,13 +95,13 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 hl.bind("XF86AudioMute",    hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),   { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("pactl set-source-mute @DEFAULT_SOURCE@ toggle"), { locked = true, repeating = true })
 
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("~/.config/bin/volume.sh up"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("~/.config/bin/volume.sh down"))
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("~/.local/config/bin/volume.sh mute"))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("~/.config/bin/volume.sh up"),   { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("~/.config/bin/volume.sh down"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("~/.config/bin/volume.sh mute"), { locked = true, repeating = true })
 
 -- Brilho da tela
-hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("~/.config/bin/brightness.sh up"))
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("~/.config/bin/brightness.sh down"))
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("~/.config/bin/brightness.sh up"),   { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("~/.config/bin/brightness.sh down"), { locked = true, repeating = true })
 
 -- Controle de reprodução de mídia (playerctl)
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })

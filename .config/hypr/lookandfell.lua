@@ -4,14 +4,14 @@
 
 hl.config({
     general = {
-        gaps_in = 3,
-        gaps_out = 5,
+        gaps_in = 4,
+        gaps_out = 8,
 
         border_size = 2,
 
         col = {
-            active_border   = "rgba(3daee9ff)",
-            inactive_border = "rgba(595959aa)",
+            active_border   = { colors = {"rgba(3daee9ee)", "rgba(1d99f3ee)"}, angle = 45 },
+            inactive_border = "rgba(31363bcc)",
         },
 
         resize_on_border = true,
@@ -24,20 +24,21 @@ hl.config({
         rounding_power = 2,
 
         active_opacity   = 1.0,
-        inactive_opacity = 1.0,
+        inactive_opacity = 0.96,
 
         shadow = {
             enabled      = true,
-            range        = 4,
+            range        = 15,
             render_power = 3,
-            color        = "rgba(1a1a1aee)",
+            color        = "rgba(00000055)",
         },
 
         blur = {
-            enabled  = true,
-            size     = 3,
-            passes   = 1,
-            vibrancy = 0.1696,
+            enabled           = true,
+            size              = 6,
+            passes            = 2,
+            new_optimizations = true,
+            vibrancy          = 0.2,
         },
     },
 

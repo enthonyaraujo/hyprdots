@@ -1,0 +1,81 @@
+@import "themes/theme"
+
+* {
+    background-color: transparent;
+    text-color:       @text;
+    font:             "FiraCode Nerd Font 12";
+}
+
+window {
+    transparency:        "real";
+    background-color:    rgba(35, 38, 41, 0.95);
+    border:              2px;
+    border-color:        @sky;
+    border-radius:       12px;
+    width:               380px;
+    location:            north east;
+    anchor:              north east;
+    x-offset:            -12px;
+    y-offset:            46px;
+    padding:             14px;
+}
+
+mainbox {
+    spacing:             10px;
+    children:            [ inputbar, listview ];
+}
+
+inputbar {
+    enabled:             true;
+    padding:             8px 12px;
+    background-color:    @surface0;
+    border-radius:       8px;
+    children:            [ prompt, entry ];
+}
+
+prompt {
+    font:                "FiraCode Nerd Font Bold 12";
+    text-color:          @sky;
+}
+
+entry {
+    placeholder:         "Pesquisar...";
+    placeholder-color:   @subtext0;
+    text-color:          @text;
+}
+
+listview {
+    enabled:             true;
+    columns:             1;
+    lines:               8;
+    cycle:               true;
+    dynamic:             true;
+    scrollbar:           false;
+    layout:              vertical;
+    spacing:             4px;
+}
+
+element {
+    enabled:             true;
+    padding:             8px 12px;
+    border-radius:       6px;
+    cursor:              pointer;
+    children:            [ element-text ];
+}
+
+element normal.normal {
+    background-color:    transparent;
+    text-color:          @text;
+}
+
+element selected.normal {
+    background-color:    @sky;
+    text-color:          @crust;
+}
+
+element-text {
+    background-color:    transparent;
+    text-color:          inherit;
+    cursor:              inherit;
+    vertical-align:      0.5;
+}

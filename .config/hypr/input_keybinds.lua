@@ -47,7 +47,10 @@ hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("flatpak run com.rtosta.zapzap"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("kitty nvim"))
 
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("killall waybar && waybar"))
-hl.bind("Print", hl.dsp.exec_cmd('file=/home/enthony/Imagens/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png && grim -g "$(slurp)" "$file" && wl-copy < "$file"'))
+-- Captura de tela (Screenshots)
+hl.bind("Print", hl.dsp.exec_cmd("~/.config/bin/screenshot.sh area"))
+hl.bind("SHIFT, Print", hl.dsp.exec_cmd("~/.config/bin/screenshot.sh full"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("~/.config/bin/screenshot.sh edit"))
 
 -- Keybind para desativar/ativar monitor do notebook (WIN + P / WIN + SHIFT + P)
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd('hyprctl keyword monitor "eDP-1,disable"'))

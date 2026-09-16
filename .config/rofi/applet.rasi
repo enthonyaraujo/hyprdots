@@ -30,12 +30,14 @@ inputbar {
     padding:             8px 12px;
     background-color:    @surface0;
     border-radius:       8px;
+    spacing:             12px;
     children:            [ prompt, entry ];
 }
 
 prompt {
     font:                "FiraCode Nerd Font Bold 12";
     text-color:          @sky;
+    margin:              0 4px 0 0;
 }
 
 entry {

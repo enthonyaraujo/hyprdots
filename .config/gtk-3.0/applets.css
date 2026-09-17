@@ -16,9 +16,10 @@
    ------------------------------------------------------------ */
 window.applet-window,
 window.audio-window,
-window.calendar-window {
+window.calendar-window,
+window.wallpaper-window {
     background-color: alpha(@base, 0.95);
-    border-radius: 12px;
+    border-radius: 14px;
 }
 
 box.main-box {
@@ -470,4 +471,51 @@ label.notif-empty-label {
     font-weight: 600;
 }
 
+/* ------------------------------------------------------------
+   Seletor de Papéis de Parede (Wallpaper Switcher)
+   ------------------------------------------------------------ */
+box.wallpaper-card {
+    background-color: @surface0;
+    border-radius: 12px;
+    padding: 10px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
 
+box.wallpaper-card:hover {
+    border-color: @sky;
+    background-color: @surface1;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+box.wallpaper-card-active {
+    border-color: @sky;
+    background-color: alpha(@sky, 0.08);
+}
+
+image.wallpaper-thumb {
+    border-radius: 8px;
+}
+
+label.wallpaper-title {
+    font-family: 'FiraCode Nerd Font';
+    font-size: 12px;
+    font-weight: bold;
+    color: @text;
+}
+
+label.wallpaper-badge-current {
+    color: @sky;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 11px;
+    font-weight: bold;
+    background-color: alpha(@sky, 0.15);
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+label.wallpaper-hint {
+    color: @overlay1;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 11px;
+}

@@ -41,10 +41,10 @@
 --     monitor   = "eDP-1",
 -- })
 
--- Regras para os Applets GTK (Volume, Calendário, Wi-Fi, Bluetooth, Bateria, Sessão)
+-- Regras para os Applets GTK (Volume, Calendário, Wi-Fi, Bluetooth, Bateria, Sessão, Wallpaper)
 hl.window_rule({
     name    = "gtk-applets-rules",
-    match   = { class = "^(volume-applet|calendar-applet|wifi-applet|bluetooth-applet|power-applet|session-applet).*$" },
+    match   = { class = "^(volume-applet|calendar-applet|wifi-applet|bluetooth-applet|power-applet|session-applet|wallpaper-applet).*$" },
     float   = true,
     pin     = true,
 })

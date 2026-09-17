@@ -281,8 +281,10 @@ class BluetoothApplet(Gtk.Window):
             scrolled = Gtk.ScrolledWindow()
             scrolled.set_can_focus(False)
             scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-            scrolled.set_max_content_height(260)
-            scrolled.set_propagate_natural_height(True)
+            scrolled.set_propagate_natural_height(False)
+            scrolled.set_min_content_height(200)
+            scrolled.set_max_content_height(240)
+            scrolled.set_size_request(-1, 220)
 
             list_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
             for dev in devices:
@@ -315,6 +317,8 @@ class BluetoothApplet(Gtk.Window):
             self.main_box.pack_start(scrolled, True, True, 0)
 
         self.show_all()
+        GLib.idle_add(align_to_top_right)
+        GLib.timeout_add(50, align_to_top_right)
 
     def on_toggle_power(self, btn):
         currently_powered = is_powered()

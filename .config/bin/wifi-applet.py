@@ -327,8 +327,10 @@ class WifiApplet(Gtk.Window):
             scrolled = Gtk.ScrolledWindow()
             scrolled.set_can_focus(False)
             scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-            scrolled.set_max_content_height(260)
-            scrolled.set_propagate_natural_height(True)
+            scrolled.set_propagate_natural_height(False)
+            scrolled.set_min_content_height(220)
+            scrolled.set_max_content_height(250)
+            scrolled.set_size_request(-1, 240)
 
             list_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
             for net in networks:
@@ -366,6 +368,8 @@ class WifiApplet(Gtk.Window):
             self.main_box.pack_start(scrolled, True, True, 0)
 
         self.show_all()
+        GLib.idle_add(align_to_top_right)
+        GLib.timeout_add(50, align_to_top_right)
 
     def show_password_prompt(self, net):
         self.password_mode = True
@@ -435,6 +439,8 @@ class WifiApplet(Gtk.Window):
 
         self.main_box.pack_start(btn_box, False, False, 4)
         self.show_all()
+        GLib.idle_add(align_to_top_right)
+        GLib.timeout_add(50, align_to_top_right)
         entry.grab_focus()
 
     def make_network_handler(self, net, saved_conns):

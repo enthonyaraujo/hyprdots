@@ -3,8 +3,9 @@
     separator_color = frame
     highlight = "#1d99f3"
 
-    origin = top-right
-    geometry = "300x60-0-0"
+    origin = top-center
+    offset = (0, 46)
+    width = (0, 320)
     corner_radius = 16
 
     frame_width = 1

@@ -40,27 +40,32 @@ with open(PID_FILE, "w") as f:
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib, Pango
 
 GLib.set_prgname("volume-applet")
 GLib.set_application_name("volume-applet")
 
 CSS_DATA = """
 window.audio-window {
-    background-color: #2a2e32;
+    background-color: rgba(35, 38, 41, 0.95);
     border: 2px solid #3daee9;
     border-radius: 12px;
 }
 
 box.main-box {
+    background-color: transparent;
+}
+
+box.header-box {
     background-color: #2a2e32;
-    border-radius: 10px;
+    border-radius: 8px;
+    padding: 8px 12px;
 }
 
 label.header-title {
     color: #3daee9;
     font-family: 'FiraCode Nerd Font';
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
 }
 
@@ -87,7 +92,7 @@ button.btn-close:hover {
 }
 
 scale trough {
-    background-color: #1b1e20;
+    background-color: #2a2e32;
     border-radius: 6px;
     min-height: 8px;
     border: none;
@@ -102,9 +107,9 @@ scale highlight {
 scale slider {
     background-color: #eff0f1;
     border-radius: 50%;
-    min-width: 18px;
-    min-height: 18px;
-    margin: -5px 0;
+    min-width: 16px;
+    min-height: 16px;
+    margin: -4px 0;
     box-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 
@@ -113,10 +118,13 @@ scale slider:hover {
 }
 
 button.action-btn {
-    background-color: #31363b;
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
     color: #eff0f1;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 8px 12px;
     font-family: 'FiraCode Nerd Font';
     font-size: 12px;
@@ -126,11 +134,12 @@ button.action-btn {
 
 button.action-btn:hover {
     background-color: #3daee9;
+    background-image: none;
     color: #141618;
 }
 
 label.section-sep {
-    color: #9ea4a9;
+    color: #7f8c8d;
     font-family: 'FiraCode Nerd Font';
     font-size: 11px;
     margin-top: 4px;
@@ -173,25 +182,8 @@ def align_to_top_right(app_win=None):
         mon_y = focused["y"]
         mon_w = int(focused["width"] / focused["scale"])
 
-        win_w = 430
-        if app_win:
-            try:
-                nat_w = app_win.get_preferred_size()[1].width
-                if nat_w > 0:
-                    win_w = nat_w
-            except Exception:
-                pass
-
-        try:
-            clients = json.loads(subprocess.check_output(["hyprctl", "clients", "-j"]))
-            for c in clients:
-                if c.get("class") == "volume-applet":
-                    win_w = c["size"][0]
-                    break
-        except Exception:
-            pass
-
-        # Margem de 12px da borda direita da tela para perfeito alinhamento visual
+        # Largura padronizada de 380px identica ao applet.rasi
+        win_w = 380
         margin_right = 12
         target_x = mon_x + mon_w - win_w - margin_right
         target_y = mon_y + 46
@@ -207,7 +199,8 @@ class AudioApplet(Gtk.Window):
         self.set_title("Controle de Volume")
         self.set_decorated(False)
         self.set_resizable(False)
-        self.set_default_size(360, -1)
+        self.set_default_size(380, -1)
+        self.set_size_request(380, -1)
         self.set_skip_taskbar_hint(True)
         self.set_skip_pager_hint(True)
 
@@ -231,8 +224,9 @@ class AudioApplet(Gtk.Window):
         main_box.set_margin_end(14)
         self.add(main_box)
 
-        # Cabeçalho
+        # Cabeçalho no estilo inputbar do Rofi
         header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        header_box.get_style_context().add_class("header-box")
         self.icon_label = Gtk.Label(label="󰕾  Áudio")
         self.icon_label.get_style_context().add_class("header-title")
         header_box.pack_start(self.icon_label, False, False, 0)
@@ -268,6 +262,9 @@ class AudioApplet(Gtk.Window):
             btn.set_halign(Gtk.Align.FILL)
             lbl = Gtk.Label(label=label)
             lbl.set_xalign(0.0)
+            lbl.set_ellipsize(Pango.EllipsizeMode.END)
+            lbl.set_max_width_chars(28)
+            lbl.set_hexpand(True)
             btn.add(lbl)
             btn.connect("clicked", callback)
             return btn, lbl

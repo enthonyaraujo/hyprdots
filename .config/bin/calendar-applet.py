@@ -225,9 +225,11 @@ class NotificationCalendarApplet(Gtk.Window):
         weekday_str = dias[now.weekday()]
         fulldate_str = f"{meses[now.month - 1]} {now.day} {now.year}"
 
+        right_header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        right_header.set_margin_bottom(4)
+
         date_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
         date_box.set_margin_start(8)
-        date_box.set_margin_bottom(4)
 
         lbl_weekday = Gtk.Label(label=weekday_str)
         lbl_weekday.set_xalign(0.0)
@@ -238,7 +240,16 @@ class NotificationCalendarApplet(Gtk.Window):
         lbl_fulldate.set_xalign(0.0)
         lbl_fulldate.get_style_context().add_class("cal-fulldate")
         date_box.pack_start(lbl_fulldate, False, False, 0)
-        cal_col.pack_start(date_box, False, False, 0)
+        right_header.pack_start(date_box, True, True, 0)
+
+        btn_close = Gtk.Button(label="✕")
+        btn_close.set_can_focus(False)
+        btn_close.set_valign(Gtk.Align.START)
+        btn_close.get_style_context().add_class("btn-close")
+        btn_close.connect("clicked", lambda b: self.close_app())
+        right_header.pack_end(btn_close, False, False, 0)
+
+        cal_col.pack_start(right_header, False, False, 0)
 
         # Widget do Calendário GTK
         self.calendar = Gtk.Calendar()

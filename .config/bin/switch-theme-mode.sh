@@ -109,6 +109,16 @@ EOF
         sed -i 's/^color_theme = .*/color_theme = "whiteout"/' "$HOME/.config/btop/btop.conf"
     fi
 
+    # --------------------------------------------------------------------------
+    # 8. DASH TO DOCK
+    # --------------------------------------------------------------------------
+    if [[ -f "$HOME/.config/dock/style-light.css" ]]; then
+        cp "$HOME/.config/dock/style-light.css" "$HOME/.config/dock/style.css"
+        if [[ -f /tmp/hypr_dock.pid ]]; then
+            kill -SIGUSR2 "$(cat /tmp/hypr_dock.pid)" 2>/dev/null || true
+        fi
+    fi
+
     notify-send -a "Theme Switcher" -i "weather-clear" "White Theme Activated" "The system has been configured to light mode." 2>/dev/null || true
 
 else
@@ -174,6 +184,16 @@ EOF
     # --------------------------------------------------------------------------
     if [[ -f "$HOME/.config/btop/btop.conf" ]]; then
         sed -i 's/^color_theme = .*/color_theme = "Default"/' "$HOME/.config/btop/btop.conf"
+    fi
+
+    # --------------------------------------------------------------------------
+    # 8. DASH TO DOCK
+    # --------------------------------------------------------------------------
+    if [[ -f "$HOME/.config/dock/style-dark.css" ]]; then
+        cp "$HOME/.config/dock/style-dark.css" "$HOME/.config/dock/style.css"
+        if [[ -f /tmp/hypr_dock.pid ]]; then
+            kill -SIGUSR2 "$(cat /tmp/hypr_dock.pid)" 2>/dev/null || true
+        fi
     fi
 
     notify-send -a "Theme Switcher" -i "weather-clear-night" "Dark Theme Activated" "The system has been configured to dark mode." 2>/dev/null || true

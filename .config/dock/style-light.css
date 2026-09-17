@@ -1,0 +1,114 @@
+/* =============================================================================
+   Hyprland Custom Dash-to-Dock — Light Theme
+   Palette: Waybar Light Theme
+   ============================================================================= */
+
+window {
+    background: transparent;
+}
+
+.dock-container {
+    background: transparent;
+}
+
+.dock-pill {
+    background-color: rgba(245, 246, 248, 0.95);
+    border: 1px solid rgba(2, 132, 199, 0.35);
+    border-radius: 24px;
+    padding: 5px 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.dock-trigger {
+    background: transparent;
+}
+
+.app-btn {
+    background: transparent;
+    border: none;
+    border-radius: 14px;
+    padding: 5px 6px;
+    margin: 0 2px;
+    transition: all 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.app-btn:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.app-btn:active {
+    background-color: rgba(2, 132, 199, 0.2);
+}
+
+.launcher-btn {
+    background: rgba(0, 0, 0, 0.06);
+    border: none;
+    border-radius: 14px;
+    padding: 5px 8px;
+    margin-left: 4px;
+    transition: all 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.launcher-btn:hover {
+    background-color: rgba(2, 132, 199, 0.25);
+}
+
+.dock-sep {
+    background-color: rgba(0, 0, 0, 0.12);
+    min-width: 1px;
+    margin: 8px 4px;
+}
+
+.dot-indicator {
+    background-color: #0284c7;
+    border-radius: 3px;
+    min-height: 4px;
+    min-width: 6px;
+    margin-top: 2px;
+    transition: all 150ms ease;
+}
+
+.dot-focused {
+    background-color: #0369a1;
+    border-radius: 3px;
+    min-height: 4px;
+    min-width: 14px;
+    margin-top: 2px;
+    box-shadow: 0 0 6px #0284c7;
+    transition: all 150ms ease;
+}
+
+.dot-empty {
+    min-height: 4px;
+    min-width: 6px;
+    margin-top: 2px;
+}
+
+/* Context Menu Popover */
+popover.dock-menu contents {
+    background-color: #ffffff;
+    border: 1px solid rgba(2, 132, 199, 0.3);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.menu-btn {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: #1e2329;
+    transition: all 120ms ease;
+}
+
+.menu-btn:hover {
+    background-color: rgba(2, 132, 199, 0.15);
+    color: #0284c7;
+}
+
+.menu-btn.destructive:hover {
+    background-color: rgba(220, 38, 38, 0.12);
+    color: #dc2626;
+}

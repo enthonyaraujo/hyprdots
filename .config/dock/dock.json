@@ -1,0 +1,13 @@
+{
+  "pinned": [
+    "firefox",
+    "org.gnome.Nautilus",
+    "kitty",
+    "code",
+    "obsidian"
+  ],
+  "icon_size": 44,
+  "autohide": true,
+  "show_running": true,
+  "show_launcher": true
+}

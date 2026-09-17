@@ -16,6 +16,7 @@
 
 # Only managed hyprdots configurations
 !/.config/bin/
+!/.config/dock/
 !/.config/dunst/
 !/.config/fish/
 !/.config/gtk-3.0/

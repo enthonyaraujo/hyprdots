@@ -43,8 +43,9 @@
 
 -- Regras para o Applet de Volume GTK
 hl.window_rule({
-    name  = "audio-applet-rules",
-    match = { class = "^(volume-applet.*)$" },
-    float = true,
-    pin   = true,
+    name    = "audio-applet-rules",
+    match   = { class = "^(volume-applet.*)$" },
+    float   = true,
+    pin     = true,
+    opacity = "1.0 override 1.0 override",
 })

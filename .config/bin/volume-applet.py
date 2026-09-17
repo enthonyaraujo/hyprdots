@@ -47,9 +47,14 @@ GLib.set_application_name("volume-applet")
 
 CSS_DATA = """
 window.audio-window {
-    background-color: rgba(35, 38, 41, 0.96);
+    background-color: #2a2e32;
     border: 2px solid #3daee9;
     border-radius: 12px;
+}
+
+box.main-box {
+    background-color: #2a2e32;
+    border-radius: 10px;
 }
 
 label.header-title {
@@ -82,7 +87,7 @@ button.btn-close:hover {
 }
 
 scale trough {
-    background-color: #2a2e32;
+    background-color: #1b1e20;
     border-radius: 6px;
     min-height: 8px;
     border: none;
@@ -108,7 +113,7 @@ scale slider:hover {
 }
 
 button.action-btn {
-    background-color: transparent;
+    background-color: #31363b;
     color: #eff0f1;
     border: none;
     border-radius: 8px;
@@ -125,7 +130,7 @@ button.action-btn:hover {
 }
 
 label.section-sep {
-    color: #7f8c8d;
+    color: #9ea4a9;
     font-family: 'FiraCode Nerd Font';
     font-size: 11px;
     margin-top: 4px;
@@ -210,7 +215,6 @@ class AudioApplet(Gtk.Window):
         visual = screen.get_rgba_visual()
         if visual:
             self.set_visual(visual)
-        self.set_app_paintable(True)
         self.get_style_context().add_class("audio-window")
 
         self.updating_slider = False
@@ -220,6 +224,7 @@ class AudioApplet(Gtk.Window):
 
         # Layout principal
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        main_box.get_style_context().add_class("main-box")
         main_box.set_margin_top(14)
         main_box.set_margin_bottom(14)
         main_box.set_margin_start(14)

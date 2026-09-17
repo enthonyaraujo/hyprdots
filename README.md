@@ -1,11 +1,8 @@
 <h1 align="center">
   <img src="https://img.shields.io/badge/Hyprland-58E1FF?style=for-the-badge&logo=hyprland&logoColor=white" alt="Hyprland"/>
-  <img src="https://img.shields.io/badge/Waybar-00897B?style=for-the-badge&logo=linux&logoColor=white" alt="Waybar"/>
-  <img src="https://img.shields.io/badge/Rofi-1E88E5?style=for-the-badge&logo=linux&logoColor=white" alt="Rofi"/>
-  <img src="https://img.shields.io/badge/Kitty-76B900?style=for-the-badge&logo=gnometerminal&logoColor=white" alt="Kitty"/>
 </h1>
 
-<h3 align="center">Hyprland Dotfiles</h3>
+<h3 align="center">Dotfiles</h3>
 
 <p align="center">
   A clean and minimal Hyprland desktop environment on Ubuntu with custom Waybar, Rofi menus, GTK applets, and a unified dark/light theme switcher.
@@ -13,7 +10,7 @@
 
 ---
 
-## 🖥️ Desktop
+## Desktop
 
 ![Desktop](preview/desktop.png)
 

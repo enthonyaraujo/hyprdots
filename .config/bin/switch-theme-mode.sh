@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # switch-theme-mode.sh
-# Motor unificado de alternancia entre temas White (Claro) e Dark (Escuro).
-# Aplica sincronizadamente em:
-# - Waybar (barra superior)
-# - Todos os applets GTK 3 (Calendario, Wifi, Bluetooth, Volume, Wallpaper, etc.)
-# - Configuracoes GTK 3 / GTK 4 (settings.ini e gsettings)
-# - Rofi (todos os menus e dialogos)
-# - Terminal Kitty
-# - Notificacoes Dunst
-# - Bordas do Hyprland
-# - Monitor de Sistema Btop
+# Unified theme switcher between White (Light) and Dark modes.
+# Synchronously updates:
+# - Waybar (top panel)
+# - All GTK 3 applets (Calendar, Wifi, Bluetooth, Volume, Wallpaper, etc.)
+# - GTK 3 / GTK 4 settings (settings.ini and gsettings)
+# - Rofi (all menus and dialogs)
+# - Kitty Terminal
+# - Dunst Notifications
+# - Hyprland Window Borders
+# - Btop System Monitor
 # ==============================================================================
 set -euo pipefail
 
@@ -37,7 +37,7 @@ case "$TARGET" in
         NEW_MODE="dark"
         ;;
     *)
-        echo "Uso: $0 [white|dark|toggle]"
+        echo "Usage: $0 [white|dark|toggle]"
         exit 1
         ;;
 esac
@@ -108,7 +108,7 @@ EOF
         sed -i 's/^color_theme = .*/color_theme = "whiteout"/' "$HOME/.config/btop/btop.conf"
     fi
 
-    notify-send -a "Theme Switcher" -i "weather-clear" "Tema White Ativado" "O sistema foi configurado para o modo claro." 2>/dev/null || true
+    notify-send -a "Theme Switcher" -i "weather-clear" "White Theme Activated" "The system has been configured to light mode." 2>/dev/null || true
 
 else
     # --------------------------------------------------------------------------
@@ -174,7 +174,7 @@ EOF
         sed -i 's/^color_theme = .*/color_theme = "Default"/' "$HOME/.config/btop/btop.conf"
     fi
 
-    notify-send -a "Theme Switcher" -i "weather-clear-night" "Tema Dark Ativado" "O sistema foi configurado para o modo escuro." 2>/dev/null || true
+    notify-send -a "Theme Switcher" -i "weather-clear-night" "Dark Theme Activated" "The system has been configured to dark mode." 2>/dev/null || true
 
 fi
 

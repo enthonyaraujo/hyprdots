@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Applet moderno de Bateria e Perfis de Energia em GTK3 para Hyprland.
-Estilo translúcido Breeze/Catppuccin alinhado no canto superior direito.
+Modern GTK3 Battery and Power Profiles applet for Hyprland.
+Translucent Breeze/Catppuccin styling aligned in top-right corner.
 """
 import os
 import sys
@@ -24,7 +24,7 @@ ALL_PID_FILES = [
     "/tmp/hypr_session_applet.pid",
 ]
 
-# Toggle behavior & fechar outros applets concorrentes
+# Toggle behavior & close competing applets
 if os.path.exists(PID_FILE):
     try:
         with open(PID_FILE, "r") as f:
@@ -144,18 +144,18 @@ def get_battery_info():
         if m_state:
             raw_state = m_state.group(1).lower()
             if "charging" in raw_state and "dis" not in raw_state:
-                state = "Carregando"
+                state = "Charging"
                 icon = "󰂄"
             elif "discharging" in raw_state:
-                state = "Descarregando"
+                state = "Discharging"
             elif "fully" in raw_state:
-                state = "Completa"
+                state = "Full"
             else:
                 state = raw_state
 
         m_cap = re.search(r"capacity:\s*([\d,\.]+)%", out)
         if m_cap:
-            health = f"Saúde: {m_cap.group(1)}%"
+            health = f"Health: {m_cap.group(1)}%"
 
     return pct, state, health, icon
 
@@ -167,7 +167,7 @@ class PowerApplet(Gtk.Window):
     def __init__(self):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
         self.set_role("power-applet")
-        self.set_title("Gerenciamento de Energia")
+        self.set_title("Power Management")
         self.set_decorated(False)
         self.set_resizable(False)
         self.set_default_size(380, -1)
@@ -184,7 +184,7 @@ class PowerApplet(Gtk.Window):
         pct, state, health, icon = get_battery_info()
         self.cur_profile = get_current_profile()
 
-        # Layout principal
+        # Main layout
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         main_box.get_style_context().add_class("main-box")
         main_box.set_margin_top(14)
@@ -193,11 +193,11 @@ class PowerApplet(Gtk.Window):
         main_box.set_margin_end(14)
         self.add(main_box)
 
-        # Cabeçalho no estilo inputbar do Rofi
+        # Header
         header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         header_box.get_style_context().add_class("header-box")
 
-        self.icon_label = Gtk.Label(label=f"{icon}  Bateria")
+        self.icon_label = Gtk.Label(label=f"{icon}  Battery")
         self.icon_label.get_style_context().add_class("header-title")
         header_box.pack_start(self.icon_label, False, False, 0)
 
@@ -215,24 +215,24 @@ class PowerApplet(Gtk.Window):
         header_box.pack_end(right_header, False, False, 0)
         main_box.pack_start(header_box, False, False, 0)
 
-        # Se houver informação de saúde
+        # Health info
         if health:
-            health_lbl = Gtk.Label(label=f"󰋊  Capacidade máxima da bateria: {health}")
+            health_lbl = Gtk.Label(label=f"󰋊  Maximum battery capacity: {health}")
             health_lbl.set_xalign(0.0)
             health_lbl.get_style_context().add_class("section-sep")
             health_lbl.set_margin_start(4)
             main_box.pack_start(health_lbl, False, False, 2)
 
-        sep_label = Gtk.Label(label="─── Perfis de Desempenho ───")
+        sep_label = Gtk.Label(label="─── Power Profiles ───")
         sep_label.get_style_context().add_class("section-sep")
         main_box.pack_start(sep_label, False, False, 2)
 
-        # Perfis de energia
+        # Power profiles
         self.profile_buttons = {}
         profiles = [
-            ("performance", "⚡   Perfil: Desempenho"),
-            ("balanced", "🔋   Perfil: Equilibrado"),
-            ("power-saver", "🌱   Perfil: Economia de Energia"),
+            ("performance", "⚡   Profile: Performance"),
+            ("balanced", "🔋   Profile: Balanced"),
+            ("power-saver", "🌱   Profile: Power Saver"),
         ]
 
         for p_code, p_title in profiles:
@@ -255,14 +255,14 @@ class PowerApplet(Gtk.Window):
             main_box.pack_start(btn, False, False, 0)
             self.profile_buttons[p_code] = (btn, lbl, p_title)
 
-        # Eventos de teclado e destruição
+        # Keyboard & Destroy events
         self.connect("key-press-event", self.on_key_press)
         self.connect("destroy", self.cleanup)
 
     def make_profile_handler(self, p_code, p_title):
         def handler(widget):
             subprocess.run(["powerprofilesctl", "set", p_code])
-            subprocess.run(["notify-send", "-a", "Energia", "Perfil de Energia", f"Modo '{p_code.capitalize()}' ativado."])
+            subprocess.run(["notify-send", "-a", "Power", "Power Profile", f"Mode '{p_code.capitalize()}' activated."])
             self.cur_profile = p_code
             for code, (btn, lbl, title) in self.profile_buttons.items():
                 if code == p_code:

@@ -76,73 +76,72 @@ def device_submenu(dev):
     
     actions = []
     if connected:
-        actions.append(f"󰂲   Desconectar de '{name}'")
+        actions.append(f"󰂲   Disconnect from '{name}'")
     else:
-        actions.append(f"󰂱   Conectar a '{name}'")
+        actions.append(f"󰂱   Connect to '{name}'")
     
-    actions.append(f"󰌾   Confiar / Emparelhar")
-    actions.append(f"󰆴   Remover dispositivo")
-    actions.append("󰌑   Voltar")
+    actions.append(f"󰌾   Trust / Pair")
+    actions.append(f"󰆴   Remove device")
+    actions.append("󰌑   Back")
 
     choice = run_rofi(name, actions)
     if not choice:
         return
 
-    if "Desconectar" in choice:
-        notify("Bluetooth", f"Desconectando de {name}...")
+    if "Disconnect" in choice:
+        notify("Bluetooth", f"Disconnecting from {name}...")
         res = subprocess.run(["bluetoothctl", "disconnect", mac], capture_output=True, text=True)
         if res.returncode == 0:
-            notify("Bluetooth", f"Desconectado de {name}.")
+            notify("Bluetooth", f"Disconnected from {name}.")
         else:
-            notify("Bluetooth", f"Erro ao desconectar: {res.stderr.strip()}", urgency="critical")
+            notify("Bluetooth", f"Error disconnecting: {res.stderr.strip()}", urgency="critical")
 
-    elif "Conectar" in choice:
-        notify("Bluetooth", f"Conectando a {name}...")
+    elif "Connect" in choice:
+        notify("Bluetooth", f"Connecting to {name}...")
         res = subprocess.run(["bluetoothctl", "connect", mac], capture_output=True, text=True)
         if "Connection successful" in res.stdout or res.returncode == 0:
-            notify("Bluetooth", f"Conectado com sucesso a {name}!")
+            notify("Bluetooth", f"Successfully connected to {name}!")
         else:
-            notify("Bluetooth", f"Falha ao conectar a {name}.", urgency="critical")
+            notify("Bluetooth", f"Failed to connect to {name}.", urgency="critical")
 
-    elif "Confiar" in choice:
+    elif "Trust" in choice:
         subprocess.run(["bluetoothctl", "trust", mac])
         subprocess.run(["bluetoothctl", "pair", mac])
-        notify("Bluetooth", f"Dispositivo {name} pareado e confiado.")
+        notify("Bluetooth", f"Device {name} paired and trusted.")
 
-    elif "Remover" in choice:
+    elif "Remove" in choice:
         subprocess.run(["bluetoothctl", "remove", mac])
-        notify("Bluetooth", f"Dispositivo {name} removido.")
+        notify("Bluetooth", f"Device {name} removed.")
 
 def scan_devices():
-    notify("Bluetooth", "Escaneando novos dispositivos por 8 segundos...")
-    # Executa bluetoothctl scan on por 8 segundos em background
+    notify("Bluetooth", "Scanning for new devices for 8 seconds...")
     try:
         proc = subprocess.Popen(["bluetoothctl", "scan", "on"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         time.sleep(8)
         proc.terminate()
         subprocess.run(["bluetoothctl", "scan", "off"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        notify("Bluetooth", "Escaneamento concluído.")
+        notify("Bluetooth", "Scan completed.")
     except Exception as e:
         pass
 
 def main():
     if not is_powered():
-        choice = run_rofi("Bluetooth Desligado", ["󰂯   Ligar Bluetooth"])
-        if "Ligar" in choice:
+        choice = run_rofi("Bluetooth Off", ["󰂯   Turn on Bluetooth"])
+        if "Turn on" in choice:
             toggle_power(True)
         return
 
     devices = get_devices()
 
     menu_options = [
-        "󰂲   Desligar Bluetooth",
-        "󰑓   Buscar novos dispositivos",
-        "   Abrir mais configurações de Bluetooth",
+        "󰂲   Turn off Bluetooth",
+        "󰑓   Scan for new devices",
+        "   More Bluetooth Settings",
     ]
 
     dev_map = {}
     for dev in devices:
-        status = " (Conectado)" if dev["connected"] else ""
+        status = " (Connected)" if dev["connected"] else ""
         label = f"{dev['icon']}   {dev['name']}{status}"
         menu_options.append(label)
         dev_map[label] = dev
@@ -151,12 +150,12 @@ def main():
     if not choice:
         return
 
-    if "Desligar Bluetooth" in choice:
+    if "Turn off Bluetooth" in choice:
         toggle_power(False)
-    elif "Buscar novos dispositivos" in choice:
+    elif "Scan for new devices" in choice:
         scan_devices()
         main()
-    elif "Abrir mais configurações" in choice:
+    elif "More Bluetooth Settings" in choice:
         subprocess.Popen(["blueman-manager"])
     elif choice in dev_map:
         device_submenu(dev_map[choice])

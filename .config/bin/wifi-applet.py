@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Applet moderno de Wi-Fi em GTK3 para Hyprland.
-Estilo translúcido Breeze/Catppuccin alinhado no canto superior direito.
+Modern GTK3 Wi-Fi applet for Hyprland.
+Translucent Breeze/Catppuccin styling aligned in top-right corner.
 """
 import os
 import sys
@@ -176,7 +176,7 @@ def scan_networks(rescan=False):
             "security": security
         })
 
-    # Rede conectada sempre em primeiro lugar
+    # Connected network always first
     networks.sort(key=lambda x: (not x["in_use"]))
     return current_ssid, networks
 
@@ -198,7 +198,7 @@ class WifiApplet(Gtk.Window):
             self.set_visual(visual)
         self.get_style_context().add_class("applet-window")
 
-        # Container principal
+        # Main container
         self.main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         self.main_box.get_style_context().add_class("main-box")
         self.main_box.set_margin_top(14)
@@ -210,7 +210,7 @@ class WifiApplet(Gtk.Window):
         self.password_mode = False
         self.rebuild_ui()
 
-        # Teclado e destruição
+        # Keyboard and destruction
         self.connect("key-press-event", self.on_key_press)
         self.connect("destroy", self.cleanup)
 
@@ -223,7 +223,7 @@ class WifiApplet(Gtk.Window):
         current_ssid, networks = scan_networks(rescan=rescan) if wifi_enabled else (None, [])
         saved_conns = get_saved_connections() if wifi_enabled else set()
 
-        # Cabeçalho
+        # Header
         header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         header_box.get_style_context().add_class("header-box")
 
@@ -233,11 +233,11 @@ class WifiApplet(Gtk.Window):
 
         right_header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         if not wifi_enabled:
-            badge_text = "Desativado"
+            badge_text = "Disabled"
         elif current_ssid:
             badge_text = current_ssid
         else:
-            badge_text = "Desconectado"
+            badge_text = "Disconnected"
 
         badge = Gtk.Label(label=badge_text)
         badge.set_ellipsize(Pango.EllipsizeMode.END)
@@ -258,7 +258,7 @@ class WifiApplet(Gtk.Window):
             btn_on = Gtk.Button()
             btn_on.set_can_focus(False)
             btn_on.get_style_context().add_class("action-btn")
-            lbl_on = Gtk.Label(label="󰤨   Ativar Wi-Fi")
+            lbl_on = Gtk.Label(label="󰤨   Enable Wi-Fi")
             lbl_on.set_xalign(0.0)
             btn_on.add(lbl_on)
             btn_on.connect("clicked", self.on_toggle_wifi)
@@ -267,7 +267,7 @@ class WifiApplet(Gtk.Window):
             btn_settings = Gtk.Button()
             btn_settings.set_can_focus(False)
             btn_settings.get_style_context().add_class("action-btn")
-            lbl_s = Gtk.Label(label="   Configurações de Rede")
+            lbl_s = Gtk.Label(label="   Network Settings")
             lbl_s.set_xalign(0.0)
             btn_settings.add(lbl_s)
             btn_settings.connect("clicked", self.on_open_settings)
@@ -275,12 +275,12 @@ class WifiApplet(Gtk.Window):
             self.show_all()
             return
 
-        # Ações do Wi-Fi Ligado
+        # Wi-Fi Enabled Actions
         if current_ssid:
             btn_disc = Gtk.Button()
             btn_disc.set_can_focus(False)
             btn_disc.get_style_context().add_class("action-btn")
-            lbl_d = Gtk.Label(label=f"󰖪   Desconectar de '{current_ssid}'")
+            lbl_d = Gtk.Label(label=f"󰖪   Disconnect from '{current_ssid}'")
             lbl_d.set_xalign(0.0)
             lbl_d.set_ellipsize(Pango.EllipsizeMode.END)
             lbl_d.set_max_width_chars(28)
@@ -291,7 +291,7 @@ class WifiApplet(Gtk.Window):
         btn_off = Gtk.Button()
         btn_off.set_can_focus(False)
         btn_off.get_style_context().add_class("action-btn")
-        lbl_off = Gtk.Label(label="󰤮   Desativar Wi-Fi")
+        lbl_off = Gtk.Label(label="󰤮   Disable Wi-Fi")
         lbl_off.set_xalign(0.0)
         btn_off.add(lbl_off)
         btn_off.connect("clicked", self.on_toggle_wifi)
@@ -300,7 +300,7 @@ class WifiApplet(Gtk.Window):
         btn_rescan = Gtk.Button()
         btn_rescan.set_can_focus(False)
         btn_rescan.get_style_context().add_class("action-btn")
-        self.lbl_rescan = Gtk.Label(label="󰑓   Escanear novamente")
+        self.lbl_rescan = Gtk.Label(label="󰑓   Scan again")
         self.lbl_rescan.set_xalign(0.0)
         btn_rescan.add(self.lbl_rescan)
         btn_rescan.connect("clicked", self.on_rescan_clicked)
@@ -309,18 +309,18 @@ class WifiApplet(Gtk.Window):
         btn_settings = Gtk.Button()
         btn_settings.set_can_focus(False)
         btn_settings.get_style_context().add_class("action-btn")
-        lbl_s = Gtk.Label(label="   Configurações de Rede")
+        lbl_s = Gtk.Label(label="   Network Settings")
         lbl_s.set_xalign(0.0)
         btn_settings.add(lbl_s)
         btn_settings.connect("clicked", self.on_open_settings)
         self.main_box.pack_start(btn_settings, False, False, 0)
 
-        sep_label = Gtk.Label(label="─── Redes Disponíveis ───")
+        sep_label = Gtk.Label(label="─── Available Networks ───")
         sep_label.get_style_context().add_class("section-sep")
         self.main_box.pack_start(sep_label, False, False, 2)
 
         if not networks:
-            no_net_lbl = Gtk.Label(label="Nenhuma rede encontrada")
+            no_net_lbl = Gtk.Label(label="No networks found")
             no_net_lbl.get_style_context().add_class("section-sep")
             self.main_box.pack_start(no_net_lbl, False, False, 4)
         else:
@@ -352,11 +352,11 @@ class WifiApplet(Gtk.Window):
                 row_box.pack_start(name_lbl, True, True, 0)
 
                 if net["in_use"]:
-                    status_lbl = Gtk.Label(label="Conectado ✓")
+                    status_lbl = Gtk.Label(label="Connected ✓")
                     status_lbl.get_style_context().add_class("section-sep")
                     row_box.pack_end(status_lbl, False, False, 0)
                 elif net["ssid"] in saved_conns:
-                    status_lbl = Gtk.Label(label="Salva")
+                    status_lbl = Gtk.Label(label="Saved")
                     status_lbl.get_style_context().add_class("section-sep")
                     row_box.pack_end(status_lbl, False, False, 0)
 
@@ -379,7 +379,7 @@ class WifiApplet(Gtk.Window):
         header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         header_box.get_style_context().add_class("header-box")
 
-        icon_label = Gtk.Label(label="  Conectar ao Wi-Fi")
+        icon_label = Gtk.Label(label="  Connect to Wi-Fi")
         icon_label.get_style_context().add_class("header-title")
         header_box.pack_start(icon_label, False, False, 0)
 
@@ -390,27 +390,27 @@ class WifiApplet(Gtk.Window):
         header_box.pack_end(btn_close, False, False, 0)
         self.main_box.pack_start(header_box, False, False, 4)
 
-        ssid_lbl = Gtk.Label(label=f"Rede: {net['ssid']}")
+        ssid_lbl = Gtk.Label(label=f"Network: {net['ssid']}")
         ssid_lbl.set_xalign(0.0)
         ssid_lbl.get_style_context().add_class("section-sep")
         self.main_box.pack_start(ssid_lbl, False, False, 2)
 
         entry = Gtk.Entry()
         entry.set_visibility(False)
-        entry.set_placeholder_text("Digite a senha da rede...")
+        entry.set_placeholder_text("Enter network password...")
         entry.get_style_context().add_class("applet-entry")
         self.main_box.pack_start(entry, False, False, 4)
 
         btn_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         btn_box.set_halign(Gtk.Align.FILL)
 
-        btn_cancel = Gtk.Button(label="Cancelar")
+        btn_cancel = Gtk.Button(label="Cancel")
         btn_cancel.set_can_focus(False)
         btn_cancel.get_style_context().add_class("action-btn")
         btn_cancel.connect("clicked", lambda b: self.rebuild_ui())
         btn_box.pack_start(btn_cancel, True, True, 0)
 
-        btn_connect = Gtk.Button(label="Conectar")
+        btn_connect = Gtk.Button(label="Connect")
         btn_connect.set_can_focus(False)
         btn_connect.get_style_context().add_class("action-btn")
         btn_connect.get_style_context().add_class("active")
@@ -419,7 +419,7 @@ class WifiApplet(Gtk.Window):
             pwd = entry.get_text().strip()
             if not pwd:
                 return
-            subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Conectando a '{net['ssid']}'..."])
+            subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Connecting to '{net['ssid']}'..."])
             def connect_worker():
                 res = subprocess.run(
                     ["nmcli", "device", "wifi", "connect", net["ssid"], "password", pwd],
@@ -427,9 +427,9 @@ class WifiApplet(Gtk.Window):
                     text=True
                 )
                 if res.returncode == 0:
-                    subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Conectado com sucesso a '{net['ssid']}'."])
+                    subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Successfully connected to '{net['ssid']}'."])
                 else:
-                    subprocess.run(["notify-send", "-u", "critical", "-a", "Wi-Fi", "Wi-Fi", f"Falha ao conectar: {res.stderr.strip()}"])
+                    subprocess.run(["notify-send", "-u", "critical", "-a", "Wi-Fi", "Wi-Fi", f"Connection failed: {res.stderr.strip()}"])
                 GLib.idle_add(self.rebuild_ui)
             threading.Thread(target=connect_worker, daemon=True).start()
 
@@ -449,25 +449,25 @@ class WifiApplet(Gtk.Window):
                 return
             ssid = net["ssid"]
             if ssid in saved_conns:
-                subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Conectando a '{ssid}'..."])
+                subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Connecting to '{ssid}'..."])
                 def connect_saved():
                     res = subprocess.run(["nmcli", "connection", "up", "id", ssid], capture_output=True, text=True)
                     if res.returncode == 0:
-                        subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Conectado com sucesso a '{ssid}'."])
+                        subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Successfully connected to '{ssid}'."])
                     else:
-                        subprocess.run(["notify-send", "-u", "critical", "-a", "Wi-Fi", "Wi-Fi", f"Erro ao conectar: {res.stderr.strip()}"])
+                        subprocess.run(["notify-send", "-u", "critical", "-a", "Wi-Fi", "Wi-Fi", f"Connection error: {res.stderr.strip()}"])
                     GLib.idle_add(self.rebuild_ui)
                 threading.Thread(target=connect_saved, daemon=True).start()
             elif net["secured"]:
                 self.show_password_prompt(net)
             else:
-                subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Conectando à rede aberta '{ssid}'..."])
+                subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Connecting to open network '{ssid}'..."])
                 def connect_open():
                     res = subprocess.run(["nmcli", "device", "wifi", "connect", ssid], capture_output=True, text=True)
                     if res.returncode == 0:
-                        subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Conectado com sucesso a '{ssid}'."])
+                        subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Successfully connected to '{ssid}'."])
                     else:
-                        subprocess.run(["notify-send", "-u", "critical", "-a", "Wi-Fi", "Wi-Fi", f"Erro: {res.stderr.strip()}"])
+                        subprocess.run(["notify-send", "-u", "critical", "-a", "Wi-Fi", "Wi-Fi", f"Error: {res.stderr.strip()}"])
                     GLib.idle_add(self.rebuild_ui)
                 threading.Thread(target=connect_open, daemon=True).start()
         return handler
@@ -475,7 +475,7 @@ class WifiApplet(Gtk.Window):
     def on_disconnect(self, ssid):
         subprocess.run(["nmcli", "connection", "down", "id", ssid], stderr=subprocess.DEVNULL)
         subprocess.run(["nmcli", "device", "disconnect", "wlan0"], stderr=subprocess.DEVNULL)
-        subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Desconectado de '{ssid}'."])
+        subprocess.run(["notify-send", "-a", "Wi-Fi", "Wi-Fi", f"Disconnected from '{ssid}'."])
         GLib.timeout_add(500, self.rebuild_ui)
 
     def on_toggle_wifi(self, btn):
@@ -484,7 +484,7 @@ class WifiApplet(Gtk.Window):
         GLib.timeout_add(500, self.rebuild_ui)
 
     def on_rescan_clicked(self, btn):
-        self.lbl_rescan.set_text("󰑓   Escaneando...")
+        self.lbl_rescan.set_text("󰑓   Scanning...")
         def rescan_worker():
             subprocess.run(["nmcli", "device", "wifi", "rescan"], stderr=subprocess.DEVNULL)
             import time

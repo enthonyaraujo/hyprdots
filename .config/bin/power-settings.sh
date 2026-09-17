@@ -8,7 +8,7 @@ import sys
 THEME_PATH = os.path.expanduser("~/.config/rofi/applet.rasi")
 
 def notify(summary, body, urgency="normal"):
-    subprocess.run(["notify-send", "-u", urgency, "-a", "Energia", summary, body])
+    subprocess.run(["notify-send", "-u", urgency, "-a", "Power", summary, body])
 
 def run_rofi(prompt, options_list):
     cmd = ["rofi", "-dmenu", "-p", prompt]
@@ -31,7 +31,7 @@ def get_battery_info():
             break
     
     pct = "100"
-    state = "Carregada"
+    state = "Full"
     health = ""
     
     if bat_path:
@@ -44,17 +44,17 @@ def get_battery_info():
         if m_state:
             raw_state = m_state.group(1).lower()
             if "charging" in raw_state and "dis" not in raw_state:
-                state = "Carregando"
+                state = "Charging"
             elif "discharging" in raw_state:
-                state = "Descarregando"
+                state = "Discharging"
             elif "fully" in raw_state:
-                state = "Completa"
+                state = "Full"
             else:
-                state = raw_state
+                state = raw_state.capitalize()
 
         m_cap = re.search(r"capacity:\s*([\d,\.]+)%", out)
         if m_cap:
-            health = f"Saúde: {m_cap.group(1)}%"
+            health = f"Health: {m_cap.group(1)}%"
 
     return pct, state, health
 
@@ -66,35 +66,35 @@ def main():
     pct, state, health = get_battery_info()
     cur_profile = get_current_profile()
     
-    perf_tag = " (Ativo)" if cur_profile == "performance" else ""
-    bal_tag = " (Ativo)" if cur_profile == "balanced" else ""
-    saver_tag = " (Ativo)" if cur_profile == "power-saver" else ""
+    perf_tag = " (Active)" if cur_profile == "performance" else ""
+    bal_tag = " (Active)" if cur_profile == "balanced" else ""
+    saver_tag = " (Active)" if cur_profile == "power-saver" else ""
 
-    info_str = f"󰁹   Bateria: {pct}% [{state}]"
+    info_str = f"󰁹   Battery: {pct}% [{state}]"
     if health:
         info_str += f" | {health}"
 
     menu_options = [
-        f"⚡   Perfil: Desempenho{perf_tag}",
-        f"🔋   Perfil: Equilibrado{bal_tag}",
-        f"🌱   Perfil: Economia de Energia{saver_tag}",
+        f"⚡   Profile: Performance{perf_tag}",
+        f"🔋   Profile: Balanced{bal_tag}",
+        f"🌱   Profile: Power Saver{saver_tag}",
     ]
 
     choice = run_rofi(f"󰁹  {pct}%", menu_options)
     if not choice:
         return
 
-    if "Desempenho" in choice:
+    if "Performance" in choice:
         subprocess.run(["powerprofilesctl", "set", "performance"])
-        notify("Perfil de Energia", "Modo Desempenho ativado.")
+        notify("Power Profile", "Performance mode activated.")
 
-    elif "Equilibrado" in choice:
+    elif "Balanced" in choice:
         subprocess.run(["powerprofilesctl", "set", "balanced"])
-        notify("Perfil de Energia", "Modo Equilibrado ativado.")
+        notify("Power Profile", "Balanced mode activated.")
 
-    elif "Economia de Energia" in choice:
+    elif "Power Saver" in choice:
         subprocess.run(["powerprofilesctl", "set", "power-saver"])
-        notify("Perfil de Energia", "Modo Economia de Energia ativado.")
+        notify("Power Profile", "Power Saver mode activated.")
 
 if __name__ == "__main__":
     main()

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Seletor moderno de papéis de parede nativo em Python 3 + GTK 3 para Hyprland.
-Substitui o Rofi com miniaturas 16:9 widescreen, realce Catppuccin/Breeze e integração ao hyprpaper.
+Modern native wallpaper chooser in Python 3 + GTK 3 for Hyprland.
+Replaces Rofi with 16:9 widescreen thumbnails, Catppuccin/Breeze styling, and hyprpaper integration.
 """
 import os
 import sys
@@ -26,7 +26,7 @@ ALL_PID_FILES = [
     "/tmp/hypr_wallpaper_applet.pid",
 ]
 
-# Toggle behavior & fechar outros applets concorrentes
+# Toggle behavior & close competing applets
 if os.path.exists(PID_FILE):
     try:
         with open(PID_FILE, "r") as f:
@@ -137,7 +137,7 @@ class WallpaperApplet(Gtk.Window):
     def __init__(self):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
         self.set_role("wallpaper-applet")
-        self.set_title("Escolher Papel de Parede")
+        self.set_title("Wallpaper Chooser")
         self.set_decorated(False)
         self.set_resizable(False)
         self.set_skip_taskbar_hint(True)
@@ -160,7 +160,7 @@ class WallpaperApplet(Gtk.Window):
                 self.selected_index = i
                 break
 
-        # Container Principal
+        # Main Container
         self.main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=14)
         self.main_box.set_margin_top(16)
         self.main_box.set_margin_bottom(16)
@@ -177,11 +177,11 @@ class WallpaperApplet(Gtk.Window):
         icon_lbl.get_style_context().add_class("header-icon")
         title_box.pack_start(icon_lbl, False, False, 0)
 
-        title_lbl = Gtk.Label(label="Papéis de Parede")
+        title_lbl = Gtk.Label(label="Wallpapers")
         title_lbl.get_style_context().add_class("header-title")
         title_box.pack_start(title_lbl, False, False, 0)
 
-        count_str = f"{len(self.wallpapers)} disponíveis"
+        count_str = f"{len(self.wallpapers)} available"
         badge_lbl = Gtk.Label(label=count_str)
         badge_lbl.get_style_context().add_class("badge-active")
         title_box.pack_start(badge_lbl, False, False, 0)
@@ -230,11 +230,11 @@ class WallpaperApplet(Gtk.Window):
             info_row.pack_start(name_lbl, True, True, 0)
 
             if is_active:
-                badge = Gtk.Label(label="󰄬 Atual")
+                badge = Gtk.Label(label="󰄬 Current")
                 badge.get_style_context().add_class("wallpaper-badge-current")
                 info_row.pack_end(badge, False, False, 0)
             else:
-                hint = Gtk.Label(label="Aplicar")
+                hint = Gtk.Label(label="Apply")
                 hint.get_style_context().add_class("wallpaper-hint")
                 info_row.pack_end(hint, False, False, 0)
 
@@ -323,33 +323,29 @@ class WallpaperApplet(Gtk.Window):
         self.apply_wallpaper(path)
 
     def apply_wallpaper(self, path):
-        # 1. Atualizar arquivo wallpaper.conf do Hyprland
+        # 1. Update Hyprland wallpaper.conf file
         try:
-            if os.path.exists(CONFIG_FILE):
-                with open(CONFIG_FILE, "r") as f:
-                    content = f.read()
-                new_content = re.sub(r"^(\$wallpaper_hyprland\s*=).*", f"\1 {path}", content, flags=re.MULTILINE)
-                with open(CONFIG_FILE, "w") as f:
-                    f.write(new_content)
+            with open(CONFIG_FILE, "w") as f:
+                f.write(f"$wallpaper_hyprland = {path}\n")
         except Exception as e:
-            print("Erro ao atualizar config:", e)
+            print("Error updating config:", e)
 
-        # 2. Atualizar hyprpaper live
+        # 2. Update hyprpaper live
         try:
             subprocess.run(["hyprctl", "hyprpaper", "preload", path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             subprocess.run(["hyprctl", "hyprpaper", "wallpaper", f",{path}"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         except Exception:
             pass
 
-        # Forçar reinício silencioso do hyprpaper para garantir recarregamento de todos os monitores
+        # Silently restart hyprpaper to ensure reloading across all monitors
         subprocess.run(["killall", "hyprpaper"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.Popen(["hyprpaper"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-        # 3. Notificação
+        # 3. Notification
         name = format_name(os.path.basename(path))
-        subprocess.run(["notify-send", "-i", path, "Papel de Parede", f"Alterado para {name}"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["notify-send", "-i", path, "Wallpaper", f"Changed to {name}"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-        # 4. Fechar applet
+        # 4. Close applet
         self.close_app()
 
     def close_app(self):
@@ -369,7 +365,7 @@ def main():
     app = WallpaperApplet()
     app.show_all()
 
-    # Centralizar suavemente
+    # Smoothly center window
     GLib.idle_add(lambda: align_to_center())
     GLib.timeout_add(50, lambda: align_to_center())
     GLib.timeout_add(150, lambda: align_to_center())

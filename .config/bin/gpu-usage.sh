@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Extrai apenas o número do uso da GPU da NVIDIA
+# Extract only the NVIDIA GPU usage number
 usage=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits)
 
-# Se o nvidia-smi falhar ou retornar vazio, define como 0
+# If nvidia-smi fails or returns empty, set to 0
 if [ -z "$usage" ]; then
   usage="0"
 fi
 
-# Formata a saída em JSON para o Waybar
-echo "{\"text\": \"$usage%\", \"tooltip\": \"Uso da GPU: $usage%\", \"class\": \"gpu\"}"
+# Format output in JSON for Waybar
+echo "{\"text\": \"$usage%\", \"tooltip\": \"GPU Usage: $usage%\", \"class\": \"gpu\"}"

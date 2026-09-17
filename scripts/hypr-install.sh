@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Descobre o diretório do script e a raiz do repositório
+# Discover script directory and repository root
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
 
@@ -10,10 +10,10 @@ AUR_DIR="$HOME/aur"
 PACMAN_LIST="pacotes_hyprland.txt"
 WM_NAME="hyprland"
 
-echo "===== Iniciando Setup: $WM_NAME ====="
+echo "===== Starting Setup: $WM_NAME ====="
 echo
 
-echo "===== Ativando multilib em /etc/pacman.conf ====="
+echo "===== Enabling multilib in /etc/pacman.conf ====="
 echo
 
 sudo bash -c 'cat <<EOF >> /etc/pacman.conf
@@ -22,24 +22,24 @@ sudo bash -c 'cat <<EOF >> /etc/pacman.conf
 Include = /etc/pacman.d/mirrorlist
 EOF'
 
-echo "===== Verificando lista de pacotes... ====="
+echo "===== Checking package list... ====="
 echo
 
 if [[ ! -f "$PACMAN_LIST" ]]; then
-    echo "Erro: Arquivo $PACMAN_LIST não encontrado."
+    echo "Error: File $PACMAN_LIST not found."
     exit 1
 fi
 
-echo "===== Atualizando sistema ====="
+echo "===== Updating system ====="
 sudo pacman -Syu --noconfirm
 
-echo "===== Instalando pacotes do pacman ($WM_NAME) ====="
+echo "===== Installing pacman packages ($WM_NAME) ====="
 while read -r pacote; do
     [[ -z "$pacote" || "$pacote" =~ ^# ]] && continue
     sudo pacman -S --needed --noconfirm "$pacote"
 done < "$PACMAN_LIST"
 
-echo "===== Instalando yay (AUR Helper) ====="
+echo "===== Installing yay (AUR Helper) ====="
 if ! command -v yay >/dev/null; then
     sudo pacman -S --needed --noconfirm base-devel git
     mkdir -p "$AUR_DIR"
@@ -49,7 +49,7 @@ if ! command -v yay >/dev/null; then
     cd "$HOME"
 fi
 
-echo "===== Instalando pacotes AUR ====="
+echo "===== Installing AUR packages ====="
 if [[ -f "$AUR_LIST" ]]; then
     while read -r pacote; do
         [[ -z "$pacote" || "$pacote" =~ ^# ]] && continue
@@ -57,38 +57,38 @@ if [[ -f "$AUR_LIST" ]]; then
     done < "$AUR_LIST"
 fi
 
-echo "===== Deseja instalar os drivers da Nvidia? ====="
-echo "1) Sim"
-echo "2) Não"
-read -rp "Escolha uma opção (1 ou 2) [Padrão: 1]: " NVIDIA
+echo "===== Do you want to install Nvidia drivers? ====="
+echo "1) Yes"
+echo "2) No"
+read -rp "Choose an option (1 or 2) [Default: 1]: " NVIDIA
 case "$NVIDIA" in
     2)
         echo " "
         ;;
     *)
-        echo "Instalando drivers Nvidia..."
+        echo "Installing Nvidia drivers..."
         sudo pacman -S --needed --noconfirm linux-headers nvidia-open-dkms libva-nvidia-driver nvidia-settings nvidia-utils egl-wayland lib32-nvidia-utils
         ;;
 esac
 
-echo "===== Aplicando Dotfiles Locais ====="
+echo "===== Applying Local Dotfiles ====="
 mkdir -p "$HOME/.config"
 
-echo "Sincronizando a pasta .config..."
-# Copia o conteúdo da pasta .config do repositório para ~/.config
+echo "Synchronizing .config folder..."
+# Copy contents of repo's .config folder to ~/.config
 rsync -av "$REPO_DIR/.config/" "$HOME/.config/"
 
-# Copia o .zshrc que está na raiz do repositório (conforme a imagem)
+# Copy .zshrc from repo root
 if [[ -f "$REPO_DIR/.zshrc" ]]; then
-    echo "Sincronizando o arquivo .zshrc..."
+    echo "Synchronizing .zshrc file..."
     cp "$REPO_DIR/.zshrc" "$HOME/.zshrc"
 fi
 
-echo "===== Configurando Shell ====="
-echo "Qual shell você deseja definir como padrão?"
+echo "===== Configuring Shell ====="
+echo "Which shell do you want to set as default?"
 echo "1) ZSH"
 echo "2) Fish"
-read -rp "Escolha uma opção (1 ou 2) [Padrão: 1]: " SHELL_CHOICE
+read -rp "Choose an option (1 or 2) [Default: 1]: " SHELL_CHOICE
 
 case "$SHELL_CHOICE" in
     2)
@@ -103,18 +103,18 @@ esac
 
 if [[ "$SHELL" != "$CHOSEN_SHELL" ]]; then
     if command -v "$CHOSEN_SHELL" >/dev/null; then
-        echo "Mudando shell padrão para $SHELL_NAME..."
+        echo "Changing default shell to $SHELL_NAME..."
         chsh -s "$CHOSEN_SHELL"
     else
-        echo "Aviso: O shell $SHELL_NAME ($CHOSEN_SHELL) não foi encontrado."
-        echo "Certifique-se de que ele foi instalado através da sua lista de pacotes."
+        echo "Warning: Shell $SHELL_NAME ($CHOSEN_SHELL) was not found."
+        echo "Make sure it was installed through your package list."
     fi
 else
-    echo "O $SHELL_NAME já é o seu shell padrão."
+    echo "$SHELL_NAME is already your default shell."
 fi
 
 echo
-echo "===== Setup finalizado ====="
-echo "Ambiente: $WM_NAME"
-echo "As configurações foram aplicadas corretamente!"
-echo "Faça logout ou reinicie para efetivar as mudanças."
+echo "===== Setup completed ====="
+echo "Environment: $WM_NAME"
+echo "Configurations were applied successfully!"
+echo "Log out or reboot to apply all changes."

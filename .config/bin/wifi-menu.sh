@@ -36,7 +36,7 @@ def get_wifi_status():
 def toggle_wifi(enable):
     state = "on" if enable else "off"
     subprocess.run(["nmcli", "radio", "wifi", state])
-    notify("Wi-Fi", f"Wi-Fi {'ativado' if enable else 'desativado'}.")
+    notify("Wi-Fi", f"Wi-Fi {'enabled' if enable else 'disabled'}.")
 
 def get_saved_connections():
     res = subprocess.run(
@@ -64,12 +64,12 @@ def get_signal_icon(bars):
 def main():
     wifi_enabled = get_wifi_status()
     if not wifi_enabled:
-        choice = run_rofi("Wi-Fi Desativado", ["󰤨   Ativar Wi-Fi"])
-        if "Ativar" in choice:
+        choice = run_rofi("Wi-Fi Disabled", ["󰤨   Enable Wi-Fi"])
+        if "Enable" in choice:
             toggle_wifi(True)
         return
 
-    # Escanear redes
+    # Scan networks
     scan_res = subprocess.run(
         ["nmcli", "-t", "-f", "IN-USE,SSID,BARS,SECURITY", "device", "wifi", "list"],
         text=True,
@@ -100,7 +100,7 @@ def main():
 
         icon = get_signal_icon(bars)
         sec_icon = " " if security and security != "--" else "  "
-        status_tag = " (Conectado)" if in_use else ""
+        status_tag = " (Connected)" if in_use else ""
         label = f"{icon}  {sec_icon}{ssid}{status_tag}"
         networks.append((label, ssid, in_use, security))
 
@@ -108,15 +108,15 @@ def main():
     actions = {}
 
     if current_ssid:
-        disconnect_opt = f"󰖪   Desconectar de '{current_ssid}'"
+        disconnect_opt = f"󰖪   Disconnect from '{current_ssid}'"
         menu_options.append(disconnect_opt)
         actions[disconnect_opt] = ("disconnect", current_ssid)
 
-    toggle_opt = "󰤮   Desativar Wi-Fi"
+    toggle_opt = "󰤮   Disable Wi-Fi"
     menu_options.append(toggle_opt)
     actions[toggle_opt] = ("toggle_off", None)
 
-    rescan_opt = "󰑓   Escanear novamente"
+    rescan_opt = "󰑓   Scan again"
     menu_options.append(rescan_opt)
     actions[rescan_opt] = ("rescan", None)
 
@@ -133,7 +133,7 @@ def main():
     if action_type == "disconnect":
         subprocess.run(["nmcli", "device", "disconnect", "wlan0"], stderr=subprocess.PIPE)
         subprocess.run(["nmcli", "connection", "down", "id", data], stderr=subprocess.PIPE)
-        notify("Wi-Fi", f"Desconectado de '{data}'.")
+        notify("Wi-Fi", f"Disconnected from '{data}'.")
 
     elif action_type == "toggle_off":
         toggle_wifi(False)
@@ -145,48 +145,48 @@ def main():
     elif action_type == "connect":
         ssid, in_use, security = data
         if in_use:
-            notify("Wi-Fi", f"Você já está conectado a '{ssid}'.")
+            notify("Wi-Fi", f"Already connected to '{ssid}'.")
             return
 
         saved_conns = get_saved_connections()
         if ssid in saved_conns:
-            notify("Wi-Fi", f"Conectando a '{ssid}'...")
+            notify("Wi-Fi", f"Connecting to '{ssid}'...")
             res = subprocess.run(
                 ["nmcli", "connection", "up", "id", ssid],
                 capture_output=True,
                 text=True
             )
             if res.returncode == 0:
-                notify("Wi-Fi", f"Conectado com sucesso a '{ssid}'.")
+                notify("Wi-Fi", f"Successfully connected to '{ssid}'.")
             else:
-                notify("Wi-Fi", f"Falha ao conectar: {res.stderr.strip()}", urgency="critical")
+                notify("Wi-Fi", f"Failed to connect: {res.stderr.strip()}", urgency="critical")
         else:
-            # Requer senha?
+            # Requires password?
             if security and security != "--":
-                password = run_rofi(f"Senha para '{ssid}'", [], password=True)
+                password = run_rofi(f"Password for '{ssid}'", [], password=True)
                 if not password:
                     return
-                notify("Wi-Fi", f"Conectando a '{ssid}'...")
+                notify("Wi-Fi", f"Connecting to '{ssid}'...")
                 res = subprocess.run(
                     ["nmcli", "device", "wifi", "connect", ssid, "password", password],
                     capture_output=True,
                     text=True
                 )
                 if res.returncode == 0:
-                    notify("Wi-Fi", f"Conectado com sucesso a '{ssid}'.")
+                    notify("Wi-Fi", f"Successfully connected to '{ssid}'.")
                 else:
-                    notify("Wi-Fi", f"Falha ao conectar: {res.stderr.strip()}", urgency="critical")
+                    notify("Wi-Fi", f"Failed to connect: {res.stderr.strip()}", urgency="critical")
             else:
-                notify("Wi-Fi", f"Conectando à rede aberta '{ssid}'...")
+                notify("Wi-Fi", f"Connecting to open network '{ssid}'...")
                 res = subprocess.run(
                     ["nmcli", "device", "wifi", "connect", ssid],
                     capture_output=True,
                     text=True
                 )
                 if res.returncode == 0:
-                    notify("Wi-Fi", f"Conectado com sucesso a '{ssid}'.")
+                    notify("Wi-Fi", f"Successfully connected to '{ssid}'.")
                 else:
-                    notify("Wi-Fi", f"Falha ao conectar: {res.stderr.strip()}", urgency="critical")
+                    notify("Wi-Fi", f"Failed to connect: {res.stderr.strip()}", urgency="critical")
 
 if __name__ == "__main__":
     main()

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Applet moderno de Sessão e Energia em GTK3 para Hyprland.
-Estilo translúcido Breeze/Catppuccin alinhado no canto superior direito.
+Modern GTK3 Session and Power applet for Hyprland.
+Translucent Breeze/Catppuccin styling aligned in top-right corner.
 """
 import os
 import sys
@@ -115,7 +115,7 @@ class SessionApplet(Gtk.Window):
     def __init__(self):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
         self.set_role("session-applet")
-        self.set_title("Menu de Sessão")
+        self.set_title("Power Menu")
         self.set_decorated(False)
         self.set_resizable(False)
         self.set_default_size(380, -1)
@@ -129,7 +129,7 @@ class SessionApplet(Gtk.Window):
             self.set_visual(visual)
         self.get_style_context().add_class("applet-window")
 
-        # Layout principal
+        # Main layout
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         main_box.get_style_context().add_class("main-box")
         main_box.set_margin_top(14)
@@ -138,18 +138,18 @@ class SessionApplet(Gtk.Window):
         main_box.set_margin_end(14)
         self.add(main_box)
 
-        # Cabeçalho no estilo inputbar do Rofi
+        # Header
         header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         header_box.get_style_context().add_class("header-box")
 
-        icon_label = Gtk.Label(label="⏻  Menu de Energia")
+        icon_label = Gtk.Label(label="⏻  Power Menu")
         icon_label.get_style_context().add_class("header-title")
         header_box.pack_start(icon_label, False, False, 0)
 
         right_header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         uptime_str = get_uptime_short()
         if uptime_str:
-            badge_up = Gtk.Label(label=f"Ativo: {uptime_str}")
+            badge_up = Gtk.Label(label=f"Uptime: {uptime_str}")
             badge_up.get_style_context().add_class("header-badge")
             right_header.pack_start(badge_up, False, False, 0)
 
@@ -162,14 +162,14 @@ class SessionApplet(Gtk.Window):
         header_box.pack_end(right_header, False, False, 0)
         main_box.pack_start(header_box, False, False, 0)
 
-        # Opções do menu de sessão
+        # Session actions
         actions = [
-            ("󰌾   Bloquear Tela", "hyprlock", False),
-            ("󰤄   Suspender Sistema", "systemctl suspend", False),
-            ("󰍃   Encerrar Sessão (Logout)", "hyprctl dispatch exit", False),
-            ("󰜉   Reiniciar Computador", "systemctl reboot", False),
-            ("   Reiniciar no Firmware UEFI", "systemctl reboot --firmware-setup", False),
-            ("󰐥   Desligar Computador", "systemctl poweroff", True),
+            ("󰌾   Lock Screen", "hyprlock", False),
+            ("󰤄   Suspend System", "systemctl suspend", False),
+            ("󰍃   Log Out", "hyprctl dispatch exit", False),
+            ("󰜉   Restart", "systemctl reboot", False),
+            ("   Reboot to UEFI Firmware", "systemctl reboot --firmware-setup", False),
+            ("󰐥   Power Off", "systemctl poweroff", True),
         ]
 
         for label_text, cmd, is_danger in actions:
@@ -188,7 +188,7 @@ class SessionApplet(Gtk.Window):
             btn.connect("clicked", self.make_action_handler(cmd))
             main_box.pack_start(btn, False, False, 0)
 
-        # Eventos de teclado e destruição
+        # Keyboard and destruction events
         self.connect("key-press-event", self.on_key_press)
         self.connect("destroy", self.cleanup)
 

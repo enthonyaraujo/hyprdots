@@ -37,7 +37,7 @@ listview {
 
   columns: 2;
   lines: 1;
-  layout: vertical; /* No Rofi, para colunas funcionarem bem, usamos layout vertical com colunas */
+  layout: vertical; /* In Rofi, for columns to work well, use vertical layout with columns */
 
   spacing: 40px;
   scrollbar: false;

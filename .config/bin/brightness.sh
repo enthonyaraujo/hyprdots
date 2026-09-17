@@ -10,7 +10,7 @@ case "$1" in
         brightnessctl set ${step}%-
         ;;
     *)
-        echo "Uso: $0 {up|down}"
+        echo "Usage: $0 {up|down}"
         exit 1
         ;;
 esac
@@ -29,7 +29,7 @@ else
     icon="󰃠"    
 fi
 
-dunstify -a "Brilho" \
+dunstify -a "Brightness" \
          -u low \
          -r 9999 \
          -h int:value:"$percent" \

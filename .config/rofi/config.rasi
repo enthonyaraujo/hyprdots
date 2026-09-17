@@ -48,7 +48,7 @@ prompt {
 }
 
 entry {
-    placeholder:       "Pesquisar...";
+    placeholder:       "Search...";
     placeholder-color: @subtext0;
     text-color:        @text;
     cursor:            text;

@@ -16,7 +16,7 @@ case "$1" in
         wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
         ;;
     *)
-        echo "Uso: $0 {up|down|mute}"
+        echo "Usage: $0 {up|down|mute}"
         exit 1
         ;;
 esac
@@ -29,7 +29,7 @@ mute=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -o '\[MUTED\]')
 
 if [ -n "$mute" ]; then
     icon="󰝟"
-    msg="Mudo"
+    msg="Muted"
     level=0
 else
     if [ "$volume" -eq 0 ]; then

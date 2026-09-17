@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Script de captura de tela para Hyprland (Wayland)
-# Suporta captura de área, tela cheia e modo interativo com anotações
+# Screenshot script for Hyprland (Wayland)
+# Supports region selection, fullscreen, and interactive edit mode
 
 DIR="$HOME/Pictures/Screenshots"
 mkdir -p "$DIR"
@@ -8,24 +8,24 @@ FILE="$DIR/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
 
 mode="${1:-area}"
 
-# Verifica se os utilitários essenciais estão instalados
+# Verify required utilities are installed
 if ! command -v grim &>/dev/null || ! command -v slurp &>/dev/null || ! command -v wl-copy &>/dev/null; then
-    notify-send -u critical -a "Captura de Tela" "Ferramentas ausentes" "Por favor, instale: sudo apt install grim slurp wl-clipboard swappy"
+    notify-send -u critical -a "Screenshot" "Missing Tools" "Please install: sudo apt install grim slurp wl-clipboard swappy"
     exit 1
 fi
 
 case "$mode" in
     area|region)
-        # Seleciona uma área com o mouse, salva e copia para a área de transferência
+        # Select region with mouse, save and copy to clipboard
         geom=$(slurp)
         if [ -n "$geom" ]; then
             grim -g "$geom" "$FILE"
             wl-copy --type image/png < "$FILE"
-            notify-send -a "Captura de Tela" -i "$FILE" "Captura salva e copiada!" "Arquivo: $(basename "$FILE")"
+            notify-send -a "Screenshot" -i "$FILE" "Screenshot saved and copied!" "File: $(basename "$FILE")"
         fi
         ;;
     edit|swappy)
-        # Seleciona uma área e abre o Swappy para anotações/edição (estilo GNOME/Flameshot)
+        # Select region and open Swappy for annotations/editing
         geom=$(slurp)
         if [ -n "$geom" ]; then
             if command -v swappy &>/dev/null; then
@@ -33,18 +33,18 @@ case "$mode" in
             else
                 grim -g "$geom" "$FILE"
                 wl-copy --type image/png < "$FILE"
-                notify-send -a "Captura de Tela" -i "$FILE" "Captura salva e copiada!" "Arquivo: $(basename "$FILE")\n(Instale swappy para editor gráfico)"
+                notify-send -a "Screenshot" -i "$FILE" "Screenshot saved and copied!" "File: $(basename "$FILE")\n(Install swappy for graphic editor)"
             fi
         fi
         ;;
     full|screen)
-        # Captura tela inteira
+        # Capture full screen
         grim "$FILE"
         wl-copy --type image/png < "$FILE"
-        notify-send -a "Captura de Tela" -i "$FILE" "Tela cheia capturada!" "Arquivo: $(basename "$FILE")"
+        notify-send -a "Screenshot" -i "$FILE" "Full screen captured!" "File: $(basename "$FILE")"
         ;;
     *)
-        echo "Uso: $0 {area|edit|full}"
+        echo "Usage: $0 {area|edit|full}"
         exit 1
         ;;
 esac

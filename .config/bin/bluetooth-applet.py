@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Applet moderno de Bluetooth em GTK3 para Hyprland.
-Estilo translúcido Breeze/Catppuccin alinhado no canto superior direito.
+Modern GTK3 Bluetooth applet for Hyprland.
+Translucent Breeze/Catppuccin styling aligned in top-right corner.
 """
 import os
 import sys
@@ -24,7 +24,7 @@ ALL_PID_FILES = [
     "/tmp/hypr_session_applet.pid",
 ]
 
-# Toggle behavior & fechar outros applets concorrentes
+# Toggle behavior & close competing applets
 if os.path.exists(PID_FILE):
     try:
         with open(PID_FILE, "r") as f:
@@ -166,7 +166,7 @@ class BluetoothApplet(Gtk.Window):
             self.set_visual(visual)
         self.get_style_context().add_class("applet-window")
 
-        # Container principal
+        # Main container
         self.main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         self.main_box.get_style_context().add_class("main-box")
         self.main_box.set_margin_top(14)
@@ -177,12 +177,12 @@ class BluetoothApplet(Gtk.Window):
 
         self.rebuild_ui()
 
-        # Teclado e destruição
+        # Keyboard and destruction events
         self.connect("key-press-event", self.on_key_press)
         self.connect("destroy", self.cleanup)
 
     def rebuild_ui(self):
-        # Limpar widgets anteriores
+        # Clear previous widgets
         for child in self.main_box.get_children():
             self.main_box.remove(child)
 
@@ -190,7 +190,7 @@ class BluetoothApplet(Gtk.Window):
         devices = get_devices() if powered else []
         connected_count = sum(1 for d in devices if d["connected"])
 
-        # Cabeçalho
+        # Header
         header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         header_box.get_style_context().add_class("header-box")
 
@@ -200,11 +200,11 @@ class BluetoothApplet(Gtk.Window):
 
         right_header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         if not powered:
-            badge_text = "Desligado"
+            badge_text = "Off"
         elif connected_count > 0:
-            badge_text = f"{connected_count} conectado(s)"
+            badge_text = f"{connected_count} connected"
         else:
-            badge_text = "Ativo"
+            badge_text = "On"
 
         badge = Gtk.Label(label=badge_text)
         badge.get_style_context().add_class("header-badge")
@@ -223,7 +223,7 @@ class BluetoothApplet(Gtk.Window):
             btn_turn_on = Gtk.Button()
             btn_turn_on.set_can_focus(False)
             btn_turn_on.get_style_context().add_class("action-btn")
-            lbl = Gtk.Label(label="󰂯   Ligar Bluetooth")
+            lbl = Gtk.Label(label="󰂯   Turn on Bluetooth")
             lbl.set_xalign(0.0)
             btn_turn_on.add(lbl)
             btn_turn_on.connect("clicked", self.on_toggle_power)
@@ -232,7 +232,7 @@ class BluetoothApplet(Gtk.Window):
             btn_blueman = Gtk.Button()
             btn_blueman.set_can_focus(False)
             btn_blueman.get_style_context().add_class("action-btn")
-            lbl_b = Gtk.Label(label="   Abrir mais configurações de Bluetooth")
+            lbl_b = Gtk.Label(label="   More Bluetooth Settings")
             lbl_b.set_xalign(0.0)
             btn_blueman.add(lbl_b)
             btn_blueman.connect("clicked", self.on_open_blueman)
@@ -240,11 +240,11 @@ class BluetoothApplet(Gtk.Window):
             self.show_all()
             return
 
-        # Ações Rápidas quando Ligado
+        # Quick Actions when Powered On
         btn_turn_off = Gtk.Button()
         btn_turn_off.set_can_focus(False)
         btn_turn_off.get_style_context().add_class("action-btn")
-        lbl_off = Gtk.Label(label="󰂲   Desligar Bluetooth")
+        lbl_off = Gtk.Label(label="󰂲   Turn off Bluetooth")
         lbl_off.set_xalign(0.0)
         btn_turn_off.add(lbl_off)
         btn_turn_off.connect("clicked", self.on_toggle_power)
@@ -253,7 +253,7 @@ class BluetoothApplet(Gtk.Window):
         btn_scan = Gtk.Button()
         btn_scan.set_can_focus(False)
         btn_scan.get_style_context().add_class("action-btn")
-        self.lbl_scan = Gtk.Label(label="󰑓   Buscar novos dispositivos")
+        self.lbl_scan = Gtk.Label(label="󰑓   Scan for new devices")
         self.lbl_scan.set_xalign(0.0)
         btn_scan.add(self.lbl_scan)
         btn_scan.connect("clicked", self.on_scan_clicked)
@@ -262,19 +262,19 @@ class BluetoothApplet(Gtk.Window):
         btn_blueman = Gtk.Button()
         btn_blueman.set_can_focus(False)
         btn_blueman.get_style_context().add_class("action-btn")
-        lbl_b = Gtk.Label(label="   Abrir mais configurações de Bluetooth")
+        lbl_b = Gtk.Label(label="   More Bluetooth Settings")
         lbl_b.set_xalign(0.0)
         btn_blueman.add(lbl_b)
         btn_blueman.connect("clicked", self.on_open_blueman)
         self.main_box.pack_start(btn_blueman, False, False, 0)
 
-        # Separador e lista de dispositivos
-        sep_label = Gtk.Label(label="─── Dispositivos Pareados / Próximos ───")
+        # Separator and device list
+        sep_label = Gtk.Label(label="─── Paired / Nearby Devices ───")
         sep_label.get_style_context().add_class("section-sep")
         self.main_box.pack_start(sep_label, False, False, 2)
 
         if not devices:
-            no_dev_lbl = Gtk.Label(label="Nenhum dispositivo encontrado")
+            no_dev_lbl = Gtk.Label(label="No devices found")
             no_dev_lbl.get_style_context().add_class("section-sep")
             self.main_box.pack_start(no_dev_lbl, False, False, 4)
         else:
@@ -298,14 +298,14 @@ class BluetoothApplet(Gtk.Window):
                 dev_icon = Gtk.Label(label=dev["icon"])
                 row_box.pack_start(dev_icon, False, False, 0)
 
-                status_suffix = "  (Conectado)" if dev["connected"] else ""
+                status_suffix = "  (Connected)" if dev["connected"] else ""
                 name_lbl = Gtk.Label(label=f"{dev['name']}{status_suffix}")
                 name_lbl.set_xalign(0.0)
                 name_lbl.set_ellipsize(Pango.EllipsizeMode.END)
                 name_lbl.set_max_width_chars(25)
                 row_box.pack_start(name_lbl, True, True, 0)
 
-                action_hint = Gtk.Label(label="Desconectar" if dev["connected"] else "Conectar")
+                action_hint = Gtk.Label(label="Disconnect" if dev["connected"] else "Connect")
                 action_hint.get_style_context().add_class("section-sep")
                 row_box.pack_end(action_hint, False, False, 0)
 
@@ -330,8 +330,8 @@ class BluetoothApplet(Gtk.Window):
         self.close_app()
 
     def on_scan_clicked(self, btn):
-        self.lbl_scan.set_text("󰑓   Buscando... (8s)")
-        subprocess.run(["notify-send", "-a", "Bluetooth", "Bluetooth", "Buscando novos dispositivos..."])
+        self.lbl_scan.set_text("󰑓   Scanning... (8s)")
+        subprocess.run(["notify-send", "-a", "Bluetooth", "Bluetooth", "Scanning for new devices..."])
         def scan_worker():
             try:
                 proc = subprocess.Popen(["bluetoothctl", "scan", "on"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -339,7 +339,7 @@ class BluetoothApplet(Gtk.Window):
                 time.sleep(8)
                 proc.terminate()
                 subprocess.run(["bluetoothctl", "scan", "off"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                subprocess.run(["notify-send", "-a", "Bluetooth", "Bluetooth", "Busca finalizada."])
+                subprocess.run(["notify-send", "-a", "Bluetooth", "Bluetooth", "Scan finished."])
             except Exception:
                 pass
             GLib.idle_add(self.rebuild_ui)
@@ -351,10 +351,10 @@ class BluetoothApplet(Gtk.Window):
             name = dev["name"]
             connected = dev["connected"]
             if connected:
-                subprocess.run(["notify-send", "-a", "Bluetooth", "Bluetooth", f"Desconectando de '{name}'..."])
+                subprocess.run(["notify-send", "-a", "Bluetooth", "Bluetooth", f"Disconnecting from '{name}'..."])
                 subprocess.run(["bluetoothctl", "disconnect", mac])
             else:
-                subprocess.run(["notify-send", "-a", "Bluetooth", "Bluetooth", f"Conectando a '{name}'..."])
+                subprocess.run(["notify-send", "-a", "Bluetooth", "Bluetooth", f"Connecting to '{name}'..."])
                 subprocess.run(["bluetoothctl", "connect", mac])
             GLib.timeout_add(1000, self.rebuild_ui)
         return handler

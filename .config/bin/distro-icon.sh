@@ -1,5 +1,5 @@
 #!/bin/sh
-# Identifica a distribuição Linux e retorna o ícone correspondente (Nerd Font) para a Waybar
+# Identify Linux distribution and return the corresponding Nerd Font icon for Waybar
 
 if [ -f /etc/os-release ]; then
     . /etc/os-release

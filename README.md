@@ -7,7 +7,7 @@
 * Hypridle
 * Kitty
 
-Ferramentas que utilizo: 
+Tools that I use: 
 * Obsidian
 * Latex & Texstudio
 * Xournal++

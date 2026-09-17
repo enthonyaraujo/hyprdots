@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "===== Configurando Git ====="
+echo "===== Configuring Git ====="
 
-read -rp "Digite seu nome para o Git: " GIT_NAME
+read -rp "Enter your name for Git: " GIT_NAME
 while [[ -z "$GIT_NAME" ]]; do
-    read -rp "Nome não pode ser vazio. Digite novamente: " GIT_NAME
+    read -rp "Name cannot be empty. Please enter again: " GIT_NAME
 done
 
-read -rp "Digite seu email para o Git/GitHub: " GIT_EMAIL
+read -rp "Enter your email for Git/GitHub: " GIT_EMAIL
 while [[ -z "$GIT_EMAIL" ]]; do
-    read -rp "Email não pode ser vazio. Digite novamente: " GIT_EMAIL
+    read -rp "Email cannot be empty. Please enter again: " GIT_EMAIL
 done
 
 git config --global user.name "$GIT_NAME"
@@ -18,11 +18,11 @@ git config --global user.email "$GIT_EMAIL"
 git config --global init.defaultBranch main
 
 echo
-echo "Git configurado:"
+echo "Git configured:"
 git config --global --list | grep -E "user.name|user.email|init.defaultBranch"
 
 echo
-echo "===== Configurando SSH ====="
+echo "===== Configuring SSH ====="
 
 mkdir -p "$HOME/.ssh"
 chmod 700 "$HOME/.ssh"
@@ -30,33 +30,33 @@ chmod 700 "$HOME/.ssh"
 KEY_PATH="$HOME/.ssh/id_ed25519"
 
 if [[ ! -f "$KEY_PATH" ]]; then
-    echo "Gerando chave SSH..."
+    echo "Generating SSH key..."
     ssh-keygen -t ed25519 -C "$GIT_EMAIL" -f "$KEY_PATH"
 else
-    echo "Chave SSH já existe em: $KEY_PATH"
+    echo "SSH key already exists at: $KEY_PATH"
 fi
 
 echo
-echo "Iniciando ssh-agent..."
+echo "Starting ssh-agent..."
 eval "$(ssh-agent -s)"
 
-echo "Adicionando chave SSH ao agente..."
+echo "Adding SSH key to agent..."
 ssh-add "$KEY_PATH"
 
 echo
-echo "COPIE A CHAVE ABAIXO E ADICIONE NO GITHUB:"
+echo "COPY THE KEY BELOW AND ADD TO GITHUB:"
 echo "GitHub > Settings > SSH and GPG keys > New SSH key"
 echo "----------------------------------------"
 cat "$KEY_PATH.pub"
 echo "----------------------------------------"
 echo
 
-read -rp "Digite 'y' após adicionar a chave no GitHub: " OK
+read -rp "Enter 'y' after adding the key to GitHub: " OK
 [[ "${OK,,}" == "y" ]] || exit 1
 
 echo
-echo "Testando conexão com o GitHub..."
+echo "Testing connection to GitHub..."
 ssh -T git@github.com || true
 
 echo
-echo "Configuração finalizada."
+echo "Configuration complete."

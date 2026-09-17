@@ -92,8 +92,8 @@ def theme_menu():
     is_white = current_mode in ("white", "light")
 
     keys = (
-        "󰖨   White Theme" + ("  (Ativo)" if is_white else ""),
-        "󰃭   Dark Theme" + ("  (Ativo)" if not is_white else ""),
+        "󰖨   White Theme" + ("  (Active)" if is_white else ""),
+        "󰃭   Dark Theme" + ("  (Active)" if not is_white else ""),
     )
     actions = (
         "~/.config/bin/switch-theme-mode.sh white",

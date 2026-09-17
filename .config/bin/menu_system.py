@@ -7,19 +7,19 @@ def system_menu():
     theme_path = os.path.expanduser("~/.config/rofi/powermenu.rasi")
 
     menu_items = [
-        ("󰌾   Bloquear Tela", "hyprlock"),
-        ("󰤄   Suspender", "systemctl suspend"),
-        ("󰍃   Encerrar Sessão", "hyprctl dispatch exit"),
-        ("󰜉   Reiniciar", "systemctl reboot"),
-        ("   Firmware UEFI", "systemctl reboot --firmware-setup"),
-        ("󰐥   Desligar", "systemctl poweroff"),
+        ("󰌾   Lock Screen", "hyprlock"),
+        ("󰤄   Suspend", "systemctl suspend"),
+        ("󰍃   Log Out", "hyprctl dispatch exit"),
+        ("󰜉   Restart", "systemctl reboot"),
+        ("   UEFI Firmware", "systemctl reboot --firmware-setup"),
+        ("󰐥   Power Off", "systemctl poweroff"),
     ]
 
     keys = [item[0] for item in menu_items]
     actions = [item[1] for item in menu_items]
     options = "\n".join(keys)
 
-    cmd = ["rofi", "-dmenu", "-p", "⏻  Menu de Energia"]
+    cmd = ["rofi", "-dmenu", "-p", "⏻  Power Menu"]
     if os.path.exists(theme_path):
         cmd.extend(["-theme", theme_path])
 

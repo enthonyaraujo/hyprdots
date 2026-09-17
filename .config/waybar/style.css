@@ -11,7 +11,7 @@
 }
 
 /* ============================================================
-   Waybar Base Window (Retângulo Direto e Contínuo)
+   Waybar Base Window (Direct Continuous Rectangle)
    ============================================================ */
 window#waybar {
     background-color: @base;
@@ -100,9 +100,9 @@ window#waybar {
 }
 
 /* =========================
-   Módulos da Direita (Integrados à barra contínua)
+   Right Modules (Integrated into continuous bar)
    ========================= */
-/* Aplicando diretamente nos módulos da direita */
+/* Applied directly to right modules */
 .modules-right,
 .modules-right * {
     font-size: 13px;

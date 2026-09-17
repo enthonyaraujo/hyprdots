@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Applet moderno de áudio com controle deslizante (slider) nativo em GTK3 para Hyprland.
-Estilo translúcido Catppuccin/Breeze com bordas arredondadas e integração ao PipeWire (WirePlumber).
+Modern GTK3 audio applet with native slider for Hyprland.
+Translucent Catppuccin/Breeze styling with rounded corners and PipeWire (WirePlumber) integration.
 """
 import os
 import sys
@@ -115,7 +115,7 @@ def align_to_top_right(app_win=None):
         mon_y = focused["y"]
         mon_w = int(focused["width"] / focused["scale"])
 
-        # Largura padronizada de 380px identica ao applet.rasi
+        # Standardized 380px width matching applet.rasi
         win_w = 380
         margin_right = 12
         target_x = mon_x + mon_w - win_w - margin_right
@@ -129,7 +129,7 @@ class AudioApplet(Gtk.Window):
     def __init__(self):
         super().__init__(type=Gtk.WindowType.TOPLEVEL)
         self.set_role("volume-applet")
-        self.set_title("Controle de Volume")
+        self.set_title("Volume Control")
         self.set_decorated(False)
         self.set_resizable(False)
         self.set_default_size(380, -1)
@@ -148,7 +148,7 @@ class AudioApplet(Gtk.Window):
         self.current_vol = vol
         self.is_muted = muted
 
-        # Layout principal
+        # Main layout
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         main_box.get_style_context().add_class("main-box")
         main_box.set_margin_top(14)
@@ -157,16 +157,16 @@ class AudioApplet(Gtk.Window):
         main_box.set_margin_end(14)
         self.add(main_box)
 
-        # Cabeçalho no estilo inputbar do Rofi
+        # Header
         header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         header_box.get_style_context().add_class("header-box")
-        self.icon_label = Gtk.Label(label="󰕾  Áudio")
+        self.icon_label = Gtk.Label(label="󰕾  Audio")
         self.icon_label.get_style_context().add_class("header-title")
         header_box.pack_start(self.icon_label, False, False, 0)
 
-        # Fechar e badge
+        # Close and badge
         right_header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        self.badge_vol = Gtk.Label(label=f"{self.current_vol}%" if not self.is_muted else "Mudo")
+        self.badge_vol = Gtk.Label(label=f"{self.current_vol}%" if not self.is_muted else "Muted")
         self.badge_vol.get_style_context().add_class("badge-vol")
         right_header.pack_start(self.badge_vol, False, False, 0)
 
@@ -179,7 +179,7 @@ class AudioApplet(Gtk.Window):
         header_box.pack_end(right_header, False, False, 0)
         main_box.pack_start(header_box, False, False, 0)
 
-        # Barra Deslizante (Slider)
+        # Slider
         slider_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         self.adj = Gtk.Adjustment(value=self.current_vol, lower=0, upper=100, step_increment=1, page_increment=5)
         self.scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=self.adj)
@@ -190,7 +190,7 @@ class AudioApplet(Gtk.Window):
         slider_box.pack_start(self.scale, True, True, 0)
         main_box.pack_start(slider_box, False, False, 4)
 
-        # Helper para criar botão alinhado à esquerda
+        # Helper
         def make_action_btn(label, callback):
             btn = Gtk.Button()
             btn.set_can_focus(False)
@@ -205,23 +205,23 @@ class AudioApplet(Gtk.Window):
             btn.connect("clicked", callback)
             return btn, lbl
 
-        # Botão Silenciar (Mudo)
-        mute_text = "󰕾   Ativar Som (Desmutar)" if self.is_muted else "󰝟   Silenciar (Mudo)"
+        # Mute button
+        mute_text = "󰕾   Unmute Audio" if self.is_muted else "󰝟   Mute Audio"
         self.btn_mute, self.lbl_mute = make_action_btn(mute_text, self.on_mute_clicked)
         main_box.pack_start(self.btn_mute, False, False, 0)
 
-        # Botão Microfone Mudo
-        self.btn_mic, _ = make_action_btn("󰍬   Alternar Microfone Mudo", self.on_mic_clicked)
+        # Microphone Mute button
+        self.btn_mic, _ = make_action_btn("󰍬   Toggle Microphone Mute", self.on_mic_clicked)
         main_box.pack_start(self.btn_mic, False, False, 0)
 
-        # Botão Pavucontrol
-        self.btn_pavu, _ = make_action_btn("   Mixer Completo (Pavucontrol)", self.on_pavu_clicked)
+        # Pavucontrol button
+        self.btn_pavu, _ = make_action_btn("   Full Audio Mixer (Pavucontrol)", self.on_pavu_clicked)
         main_box.pack_start(self.btn_pavu, False, False, 0)
 
-        # Saídas de áudio
+        # Audio Sinks
         sinks = get_sinks()
         if len(sinks) > 1:
-            sep_label = Gtk.Label(label="─── Saídas de Áudio ───")
+            sep_label = Gtk.Label(label="─── Audio Outputs ───")
             sep_label.get_style_context().add_class("section-sep")
             main_box.pack_start(sep_label, False, False, 4)
 
@@ -230,7 +230,7 @@ class AudioApplet(Gtk.Window):
                 sink_btn, _ = make_action_btn(f"󰋋   {name}{tag}", lambda b, s=sid: self.on_sink_clicked(s))
                 main_box.pack_start(sink_btn, False, False, 0)
 
-        # Eventos de teclado e destruição
+        # Keyboard & Destroy events
         self.connect("key-press-event", self.on_key_press)
         self.connect("destroy", self.cleanup)
 
@@ -239,19 +239,19 @@ class AudioApplet(Gtk.Window):
             return
         vol = int(scale.get_value())
         self.current_vol = vol
-        self.badge_vol.set_text(f"{vol}%" if not self.is_muted else "Mudo")
+        self.badge_vol.set_text(f"{vol}%" if not self.is_muted else "Muted")
         subprocess.run(["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", f"{vol/100.0:.2f}"])
 
     def on_mute_clicked(self, btn):
         subprocess.run(["wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle"])
         vol, muted = get_volume_info()
         self.is_muted = muted
-        self.badge_vol.set_text("Mudo" if muted else f"{vol}%")
-        self.lbl_mute.set_text("󰕾   Ativar Som (Desmutar)" if muted else "󰝟   Silenciar (Mudo)")
+        self.badge_vol.set_text("Muted" if muted else f"{vol}%")
+        self.lbl_mute.set_text("󰕾   Unmute Audio" if muted else "󰝟   Mute Audio")
 
     def on_mic_clicked(self, btn):
         subprocess.run(["wpctl", "set-mute", "@DEFAULT_AUDIO_SOURCE@", "toggle"])
-        subprocess.run(["notify-send", "-a", "Áudio", "Microfone", "Estado do microfone alternado."])
+        subprocess.run(["notify-send", "-a", "Audio", "Microphone", "Microphone state toggled."])
         self.close_app()
 
     def on_pavu_clicked(self, btn):

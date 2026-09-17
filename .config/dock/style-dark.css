@@ -1,7 +1,4 @@
-/* =============================================================================
-   Hyprland Custom Dash-to-Dock — Dark Theme
-   Palette: KDE Breeze Dark / Catppuccin
-   ============================================================================= */
+
 
 window {
     background: transparent;
@@ -46,11 +43,23 @@ window {
     border-radius: 14px;
     padding: 5px 8px;
     margin-left: 4px;
+    color: #ffffff;
     transition: all 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.launcher-btn image,
+.launcher-icon {
+    color: #ffffff;
+    -gtk-icon-palette: default;
 }
 
 .launcher-btn:hover {
     background-color: rgba(61, 174, 233, 0.35);
+}
+
+.launcher-btn:hover image,
+.launcher-btn:hover .launcher-icon {
+    color: #ffffff;
 }
 
 .dock-sep {

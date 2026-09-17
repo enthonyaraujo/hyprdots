@@ -1,12 +1,23 @@
 {
   "pinned": [
     "firefox",
+    "brave-origin",
     "org.gnome.Nautilus",
     "kitty",
+    "spotify",
+    "discord",
+    "obs",
     "code",
-    "obsidian"
+    "android-studio",
+    "obsidian",
+    "unityhub",
+    "github-desktop",
+    "steam",
+    "antigravity",
+    "chatgpt",
+    "blender"
   ],
-  "icon_size": 44,
+  "icon_size": 34,
   "autohide": true,
   "show_running": true,
   "show_launcher": true

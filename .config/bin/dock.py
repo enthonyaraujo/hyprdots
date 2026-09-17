@@ -499,6 +499,7 @@ class CustomDock(Gtk.ApplicationWindow):
             launcher_btn.add_css_class("launcher-btn")
             launcher_btn.set_tooltip_text("Applications")
             l_img = Gtk.Image.new_from_icon_name("view-app-grid-symbolic")
+            l_img.add_css_class("launcher-icon")
             l_img.set_pixel_size(int(icon_size * 0.72))
             launcher_btn.set_child(l_img)
             launcher_btn.connect("clicked", self.on_launcher_clicked)

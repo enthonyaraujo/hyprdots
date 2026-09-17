@@ -7,7 +7,7 @@ Hyprland Dash to Dock — Native GTK4 Layer Shell Dock
 Features:
 - Native Wayland Layer Shell (anchored to bottom, floating island pill)
 - GNOME Dash to Dock visual style with Kora icon integration
-- Intellihide / Auto-hide:
+- Smooth animated Intellihide / Auto-hide:
   * Stays visible when active workspace has NO open windows
   * Hides automatically when windows are present on the workspace
   * Instant reveal when mouse cursor touches the bottom screen edge
@@ -205,7 +205,10 @@ class CustomDock(Gtk.ApplicationWindow):
         self.app_index = DesktopAppsIndex()
 
         self.mouse_over = False
-        self.is_expanded = True
+        self.visible_margin = 10.0
+        self.current_margin = 10.0
+        self.target_margin = 10.0
+        self.anim_id = None
         self.collapse_timer_id = None
         self.update_timer_id = None
         self.last_state_signature = None
@@ -221,7 +224,7 @@ class CustomDock(Gtk.ApplicationWindow):
         Gtk4LayerShell.init_for_window(self)
         Gtk4LayerShell.set_layer(self, Gtk4LayerShell.Layer.TOP)
         Gtk4LayerShell.set_anchor(self, Gtk4LayerShell.Edge.BOTTOM, True)
-        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.BOTTOM, 0)
+        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.BOTTOM, int(self.visible_margin))
         Gtk4LayerShell.set_exclusive_zone(self, 0)
         Gtk4LayerShell.set_keyboard_mode(self, Gtk4LayerShell.KeyboardMode.NONE)
 
@@ -234,20 +237,20 @@ class CustomDock(Gtk.ApplicationWindow):
         # Dock pill container
         self.dock_pill = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=2)
         self.dock_pill.add_css_class("dock-pill")
-        self.dock_pill.set_margin_bottom(10)
+        self.dock_pill.set_margin_bottom(4)
         self.dock_pill.set_margin_start(10)
         self.dock_pill.set_margin_end(10)
         self.root_box.append(self.dock_pill)
 
-        # Bottom 4px invisible trigger strip for mouse hover detection when hidden
+        # Bottom trigger strip (6px height, 800px wide for easy mouse edge trigger)
         self.trigger_strip = Gtk.Box()
         self.trigger_strip.add_css_class("dock-trigger")
-        self.trigger_strip.set_size_request(600, 4)
+        self.trigger_strip.set_size_request(800, 6)
         self.root_box.append(self.trigger_strip)
 
         self.set_child(self.root_box)
 
-        # Hover motion detection across the whole dock window
+        # Hover motion detection across the dock window
         motion_ctrl = Gtk.EventControllerMotion.new()
         motion_ctrl.connect("enter", self.on_mouse_enter)
         motion_ctrl.connect("leave", self.on_mouse_leave)
@@ -259,8 +262,11 @@ class CustomDock(Gtk.ApplicationWindow):
         # Connect Hyprland Socket2 for real-time events
         self.setup_hyprland_socket()
 
-        # Periodic refresh (every 600ms) to ensure state stays in sync
-        GLib.timeout_add(600, self.on_periodic_sync)
+        # Initial check for autohide
+        GLib.timeout_add(200, self.check_autohide_state)
+
+        # Periodic refresh (every 500ms) to ensure state stays in sync
+        GLib.timeout_add(500, self.on_periodic_sync)
 
     def load_styles(self):
         if CSS_FILE.exists():
@@ -325,7 +331,7 @@ class CustomDock(Gtk.ApplicationWindow):
     def schedule_update(self):
         if self.update_timer_id is not None:
             return
-        self.update_timer_id = GLib.timeout_add(60, self._do_update)
+        self.update_timer_id = GLib.timeout_add(50, self._do_update)
 
     def _do_update(self):
         self.update_timer_id = None
@@ -341,41 +347,60 @@ class CustomDock(Gtk.ApplicationWindow):
         self.check_autohide_state()
         return True
 
+    def animate_margin(self, target):
+        self.target_margin = float(target)
+        if self.anim_id is None:
+            self.anim_id = GLib.timeout_add(16, self._step_anim)
+
+    def _step_anim(self):
+        diff = self.target_margin - self.current_margin
+        if abs(diff) <= 1.5:
+            self.current_margin = self.target_margin
+            Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.BOTTOM, int(self.current_margin))
+            self.anim_id = None
+            return False
+        # Smooth ease-out interpolation
+        self.current_margin += diff * 0.35
+        Gtk4LayerShell.set_margin(self, Gtk4LayerShell.Edge.BOTTOM, int(self.current_margin))
+        return True
+
+    def get_hidden_margin(self):
+        h = self.get_height()
+        if h < 40:
+            h = 80
+        # Leave 4px on screen at the bottom edge for mouse hover detection
+        return -(h - 4)
+
     def check_autohide_state(self):
         if not self.config.get("autohide", True):
-            if not self.is_expanded:
-                self.dock_pill.set_visible(True)
-                self.is_expanded = True
-            return
+            self.animate_margin(self.visible_margin)
+            return True
 
+        # Count open windows on current active workspace
+        clients = HyprlandState.get_clients()
         active_ws = HyprlandState.get_active_workspace()
-        num_windows = active_ws.get("windows", 0)
+        current_ws_id = active_ws.get("id", 1)
+        ws_clients = [c for c in clients if c.get("workspace", {}).get("id") == current_ws_id and not c.get("hidden", False)]
+        num_windows = len(ws_clients)
 
         if self.mouse_over:
-            # Keep visible when mouse is hovering
-            if not self.is_expanded:
-                self.dock_pill.set_visible(True)
-                self.is_expanded = True
+            # Mouse hovering -> keep visible
+            self.animate_margin(self.visible_margin)
         else:
-            # If no windows are on current workspace -> stay visible!
+            # No windows on current workspace -> stay visible
             if num_windows == 0:
-                if not self.is_expanded:
-                    self.dock_pill.set_visible(True)
-                    self.is_expanded = True
+                self.animate_margin(self.visible_margin)
             else:
-                # Windows exist on workspace -> collapse down to trigger strip
-                if self.is_expanded:
-                    self.dock_pill.set_visible(False)
-                    self.is_expanded = False
+                # Windows exist -> slide down to hidden margin
+                self.animate_margin(self.get_hidden_margin())
+        return True
 
     def on_mouse_enter(self, controller, x, y):
         self.mouse_over = True
         if self.collapse_timer_id:
             GLib.source_remove(self.collapse_timer_id)
             self.collapse_timer_id = None
-        if not self.is_expanded:
-            self.dock_pill.set_visible(True)
-            self.is_expanded = True
+        self.animate_margin(self.visible_margin)
 
     def on_mouse_leave(self, controller):
         self.mouse_over = False
@@ -385,17 +410,14 @@ class CustomDock(Gtk.ApplicationWindow):
         if self.collapse_timer_id:
             GLib.source_remove(self.collapse_timer_id)
 
-        # Debounce collapse by 350ms to prevent accidental flickers
+        # Debounce collapse by 280ms to prevent accidental flickers
         def delayed_collapse():
             self.collapse_timer_id = None
             if not self.mouse_over:
-                active_ws = HyprlandState.get_active_workspace()
-                if active_ws.get("windows", 0) > 0:
-                    self.dock_pill.set_visible(False)
-                    self.is_expanded = False
+                self.check_autohide_state()
             return False
 
-        self.collapse_timer_id = GLib.timeout_add(350, delayed_collapse)
+        self.collapse_timer_id = GLib.timeout_add(280, delayed_collapse)
 
     def get_app_icon_widget(self, app_info, fallback_name, icon_size=44):
         theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())

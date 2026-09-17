@@ -1,4 +1,4 @@
-@import url("/home/enthony/.config/waybar/dark.css");
+@import url("/home/enthony/.config/waybar/current-theme.css");
 
 * {
     outline: none;
@@ -348,7 +348,7 @@ box.notif-card {
 
 box.notif-card:hover {
     border-color: @sky;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: @surface1;
 }
 
 label.notif-icon {
@@ -390,7 +390,7 @@ label.notif-body {
 /* Botão de Fechar Notificação Individual (Circular estilo Ubuntu) */
 button.btn-close-notif {
     background: none;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: @surface1;
     color: @text;
     border: none;
     border-radius: 50%;
@@ -412,7 +412,7 @@ button.btn-close-notif:hover {
 /* Botão de Limpar Notificações (Pílula estilo Ubuntu no canto inferior) */
 button.btn-clear-ubuntu {
     background: none;
-    background-color: rgba(255, 255, 255, 0.09);
+    background-color: @surface1;
     color: @text;
     border-radius: 16px;
     padding: 6px 20px;
@@ -426,8 +426,8 @@ button.btn-clear-ubuntu {
 }
 
 button.btn-clear-ubuntu:hover {
-    background-color: rgba(255, 255, 255, 0.18);
-    color: #ffffff;
+    background-color: @surface2;
+    color: @text;
 }
 
 button.btn-clear-ubuntu:active {

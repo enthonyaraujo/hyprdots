@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import os
 import subprocess
 
 def config_menu():
@@ -78,12 +79,53 @@ def system_menu():
     if result in keys:
         subprocess.run(actions[keys.index(result)], shell=True)
 
+def theme_menu():
+    theme_file = os.path.expanduser("~/.config/theme.mode")
+    current_mode = "dark"
+    if os.path.exists(theme_file):
+        try:
+            with open(theme_file, "r") as f:
+                current_mode = f.read().strip()
+        except Exception:
+            pass
+
+    is_white = current_mode in ("white", "light")
+
+    keys = (
+        "󰖨   White Theme" + ("  (Ativo)" if is_white else ""),
+        "󰃭   Dark Theme" + ("  (Ativo)" if not is_white else ""),
+    )
+    actions = (
+        "~/.config/bin/switch-theme-mode.sh white",
+        "~/.config/bin/switch-theme-mode.sh dark",
+    )
+
+    options = "\n".join(keys)
+    result = subprocess.run(
+        [
+            "rofi",
+            "-dmenu",
+            "-p", "",
+            "-lines", str(len(keys)),
+            "-theme-str", "window { width: 380px; }"
+        ],
+        input=options,
+        text=True,
+        stdout=subprocess.PIPE
+    ).stdout.strip()
+
+    if result in keys:
+        idx = keys.index(result)
+        cmd = os.path.expanduser(actions[idx])
+        subprocess.run(cmd, shell=True)
+
 def menu_main():
     keys = (
         "󰣇   Archlinux Wiki",
         "   Hyprland Wiki",
         "󰀻   Applications",
         "   Switch Wallpaper",
+        "󰔎   Switch Theme",
         "   Settings",
         "   System Monitor",
         "   System",
@@ -96,12 +138,12 @@ def menu_main():
         "firefox --new-tab https://wiki.hypr.land",
         "rofi -show drun",
         "$HOME/.config/bin/switch-theme.sh", 
+        theme_menu,
         config_menu,
         "sh -c 'TERMINAL=kitty kitty --start-as maximized --hold -e btop'",
         system_menu,
         "sh -c 'TERMINAL=kitty kitty --hold -e sudo pacman -Syu'",
         "sh -c 'TERMINAL=kitty kitty --hold -e fastfetch'",
-        
     )
     
     options = "\n".join(keys)

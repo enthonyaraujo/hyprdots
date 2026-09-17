@@ -1,0 +1,45 @@
+[global]
+    frame_color = "#0284c7"
+    separator_color = frame
+    highlight = "#0284c7"
+
+    origin = top-center
+    offset = (0, 2)
+    width = (0, 320)
+    corner_radius = 16
+
+    frame_width = 1
+    padding = 16
+    horizontal_padding = 16
+
+    background = "#ffffff"
+    foreground = "#232629"
+
+    font = "FiraCode Nerd Font 12"
+    alignment = center
+
+    progress_bar = true
+    progress_bar_height = 12
+    progress_bar_corner_radius = 8
+    progress_bar_frame_width = 0
+    progress_bar_min_width = 260
+    progress_bar_max_width = 260
+    progress_bar_color = "#0284c7"
+
+
+[urgency_low]
+    background = "#ffffff"
+    foreground = "#232629"
+    frame_color = "#d3d7dc"
+
+
+[urgency_normal]
+    background = "#ffffff"
+    foreground = "#232629"
+    frame_color = "#0284c7"
+
+
+[urgency_critical]
+    background = "#ffffff"
+    foreground = "#232629"
+    frame_color = "#dc2626"

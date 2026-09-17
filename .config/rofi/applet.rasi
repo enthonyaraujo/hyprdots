@@ -31,7 +31,7 @@ inputbar {
     background-color:    @surface0;
     border-radius:       8px;
     spacing:             12px;
-    children:            [ prompt, entry ];
+    children:            [ prompt, entry, button-close ];
 }
 
 prompt {
@@ -44,6 +44,18 @@ entry {
     placeholder:         "Pesquisar...";
     placeholder-color:   @subtext0;
     text-color:          @text;
+}
+
+button-close {
+    expand:              false;
+    content:             "✕";
+    action:              "kb-cancel";
+    cursor:              pointer;
+    font:                "FiraCode Nerd Font Bold 12";
+    text-color:          @overlay1;
+    vertical-align:      0.5;
+    padding:             0 4px;
+    border-radius:       4px;
 }
 
 listview {

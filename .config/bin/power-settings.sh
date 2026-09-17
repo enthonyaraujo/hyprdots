@@ -78,10 +78,6 @@ def main():
         f"⚡   Perfil: Desempenho{perf_tag}",
         f"🔋   Perfil: Equilibrado{bal_tag}",
         f"🌱   Perfil: Economia de Energia{saver_tag}",
-        "󰃠   Brilho da Tela: 100%",
-        "󰃟   Brilho da Tela: 75%",
-        "󰃞   Brilho da Tela: 50%",
-        "󰃝   Brilho da Tela: 25%",
     ]
 
     choice = run_rofi(f"󰁹  {pct}%", menu_options)
@@ -99,22 +95,6 @@ def main():
     elif "Economia de Energia" in choice:
         subprocess.run(["powerprofilesctl", "set", "power-saver"])
         notify("Perfil de Energia", "Modo Economia de Energia ativado.")
-
-    elif "100%" in choice:
-        subprocess.run(["brightnessctl", "set", "100%"])
-        notify("Brilho", "Brilho ajustado para 100%.")
-
-    elif "75%" in choice:
-        subprocess.run(["brightnessctl", "set", "75%"])
-        notify("Brilho", "Brilho ajustado para 75%.")
-
-    elif "50%" in choice:
-        subprocess.run(["brightnessctl", "set", "50%"])
-        notify("Brilho", "Brilho ajustado para 50%.")
-
-    elif "25%" in choice:
-        subprocess.run(["brightnessctl", "set", "25%"])
-        notify("Brilho", "Brilho ajustado para 25%.")
 
 if __name__ == "__main__":
     main()

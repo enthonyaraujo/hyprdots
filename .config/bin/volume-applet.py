@@ -16,6 +16,15 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 # Single instance / Toggle behavior
 PID_FILE = "/tmp/hypr_audio_applet.pid"
+ALL_PID_FILES = [
+    "/tmp/hypr_audio_applet.pid",
+    "/tmp/hypr_calendar_applet.pid",
+    "/tmp/hypr_wifi_applet.pid",
+    "/tmp/hypr_bluetooth_applet.pid",
+    "/tmp/hypr_power_applet.pid",
+    "/tmp/hypr_session_applet.pid",
+]
+
 if os.path.exists(PID_FILE):
     try:
         with open(PID_FILE, "r") as f:
@@ -34,6 +43,19 @@ if os.path.exists(PID_FILE):
             pass
     except Exception:
         pass
+
+for pid_f in ALL_PID_FILES:
+    if pid_f != PID_FILE and os.path.exists(pid_f):
+        try:
+            with open(pid_f, "r") as f:
+                p = int(f.read().strip())
+            os.kill(p, signal.SIGTERM)
+        except Exception:
+            pass
+        try:
+            os.remove(pid_f)
+        except Exception:
+            pass
 
 with open(PID_FILE, "w") as f:
     f.write(str(os.getpid()))
@@ -149,6 +171,7 @@ class AudioApplet(Gtk.Window):
         right_header.pack_start(self.badge_vol, False, False, 0)
 
         btn_close = Gtk.Button(label="✕")
+        btn_close.set_can_focus(False)
         btn_close.get_style_context().add_class("btn-close")
         btn_close.connect("clicked", lambda b: self.close_app())
         right_header.pack_start(btn_close, False, False, 0)
@@ -160,6 +183,7 @@ class AudioApplet(Gtk.Window):
         slider_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         self.adj = Gtk.Adjustment(value=self.current_vol, lower=0, upper=100, step_increment=1, page_increment=5)
         self.scale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=self.adj)
+        self.scale.set_can_focus(False)
         self.scale.set_draw_value(False)
         self.scale.set_hexpand(True)
         self.scale.connect("value-changed", self.on_slider_changed)
@@ -169,6 +193,7 @@ class AudioApplet(Gtk.Window):
         # Helper para criar botão alinhado à esquerda
         def make_action_btn(label, callback):
             btn = Gtk.Button()
+            btn.set_can_focus(False)
             btn.get_style_context().add_class("action-btn")
             btn.set_halign(Gtk.Align.FILL)
             lbl = Gtk.Label(label=label)

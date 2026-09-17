@@ -81,7 +81,7 @@
             "critical": 10
         },
         "tooltip": true,
-        "on-click": "$HOME/.config/bin/power-settings.sh",
+        "on-click": "$HOME/.config/bin/power-applet.py",
         "tooltip-format": "{capacity}%"
     },
 
@@ -194,7 +194,7 @@
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\nIP: {ipaddr}",
         "tooltip-format-ethernet": "Ethernet: {ipaddr}",
         "tooltip-format-disconnected": "Wi-Fi Desconectado",
-        "on-click": "$HOME/.config/bin/wifi-menu.sh"
+        "on-click": "$HOME/.config/bin/wifi-applet.py"
     },
 
     "bluetooth": {
@@ -206,12 +206,12 @@
         "tooltip-format": "{controller_alias}\t{controller_address}\n{num_connections} conectado(s)",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n{num_connections} conectado(s)\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "$HOME/.config/bin/bluetooth-menu.sh"
+        "on-click": "$HOME/.config/bin/bluetooth-applet.py"
     },
 
     "custom/systemMenu": {
       "format": "󰐥",
-      "on-click": " $HOME/.config/bin/menu_system.py",
+      "on-click": "$HOME/.config/bin/session-applet.py",
       "tooltip": false
     }
 

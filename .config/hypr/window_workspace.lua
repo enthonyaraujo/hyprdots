@@ -41,18 +41,10 @@
 --     monitor   = "eDP-1",
 -- })
 
--- Regras para o Applet de Volume GTK
+-- Regras para os Applets GTK (Volume, Calendário, Wi-Fi, Bluetooth, Bateria, Sessão)
 hl.window_rule({
-    name    = "audio-applet-rules",
-    match   = { class = "^(volume-applet.*)$" },
-    float   = true,
-    pin     = true,
-})
-
--- Regras para o Applet de Calendário GTK
-hl.window_rule({
-    name    = "calendar-applet-rules",
-    match   = { class = "^(calendar-applet.*)$" },
+    name    = "gtk-applets-rules",
+    match   = { class = "^(volume-applet|calendar-applet|wifi-applet|bluetooth-applet|power-applet|session-applet).*$" },
     float   = true,
     pin     = true,
 })

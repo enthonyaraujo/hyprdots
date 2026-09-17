@@ -1,11 +1,28 @@
 @import url("/home/enthony/.config/waybar/dark.css");
 
 /* ============================================================
-   Estilos Padronizados para Applets GTK (Volume, Calendário, etc.)
-   Paleta sincronizada com ~/.config/waybar/dark.css e Rofi applet.rasi
+   Estilos Padronizados para Applets GTK (Volume, Calendário, Wi-Fi, etc.)
+   Paleta sincronizada com ~/.config/waybar/dark.css
    ============================================================ */
 
-/* Janela base translúcida com borda ciano e cantos arredondados */
+/* ------------------------------------------------------------
+   REMOÇÃO GLOBAL DE FOCO (Focus Ring / Outline)
+   ------------------------------------------------------------ */
+* {
+    outline: none;
+    outline-width: 0px;
+}
+
+*:focus {
+    outline: none;
+    outline-width: 0px;
+    box-shadow: none;
+}
+
+/* ------------------------------------------------------------
+   Janela Base Translúcida (Todos os Applets)
+   ------------------------------------------------------------ */
+window.applet-window,
 window.audio-window,
 window.calendar-window {
     background-color: alpha(@base, 0.95);
@@ -17,7 +34,9 @@ box.main-box {
     background-color: transparent;
 }
 
-/* Cabeçalho estilo pílula (igual ao inputbar do Rofi) */
+/* ------------------------------------------------------------
+   Cabeçalho Estilo Pílula
+   ------------------------------------------------------------ */
 box.header-box {
     background-color: @surface0;
     border-radius: 8px;
@@ -31,6 +50,7 @@ label.header-title {
     font-weight: bold;
 }
 
+label.header-badge,
 label.header-date,
 label.badge-vol {
     color: @text;
@@ -39,12 +59,15 @@ label.badge-vol {
     font-weight: 600;
 }
 
-/* Botão Fechar */
+/* ------------------------------------------------------------
+   Botão Fechar (✕)
+   ------------------------------------------------------------ */
 button.btn-close {
     background: none;
     background-color: transparent;
     background-image: none;
     box-shadow: none;
+    outline: none;
     color: @overlay1;
     border: none;
     border-radius: 6px;
@@ -59,9 +82,132 @@ button.btn-close:hover {
     color: @text;
 }
 
-/* ============================================================
-   Applet de Volume (Slider e Lista de Ações)
-   ============================================================ */
+/* ------------------------------------------------------------
+   Botões de Ação Padronizados (Flat com hover Ciano)
+   ------------------------------------------------------------ */
+button.action-btn {
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    outline: none;
+    color: @text;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 12px;
+    transition: all 0.15s ease;
+}
+
+button.action-btn:hover {
+    background-color: @sky;
+    background-image: none;
+    color: @crust;
+}
+
+button.action-btn.active {
+    background-color: alpha(@surface1, 0.85);
+    color: @sky;
+    font-weight: bold;
+}
+
+button.action-btn.active:hover {
+    background-color: @sky;
+    color: @crust;
+}
+
+button.action-btn.danger:hover {
+    background-color: @red;
+    background-image: none;
+    color: @text;
+}
+
+/* Botão pequeno de utilidade/ação rápida */
+button.small-btn {
+    background-color: @surface0;
+    color: @text;
+    border: 1px solid @surface1;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 11px;
+    outline: none;
+    box-shadow: none;
+}
+
+button.small-btn:hover {
+    background-color: @sky;
+    border-color: @sky;
+    color: @crust;
+}
+
+label.section-sep {
+    color: @overlay1;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 11px;
+    margin-top: 4px;
+    margin-bottom: 2px;
+}
+
+/* ------------------------------------------------------------
+   Campos de Texto (Entry para Senha de Wi-Fi, etc.)
+   ------------------------------------------------------------ */
+entry.applet-entry {
+    background-color: @surface0;
+    color: @text;
+    border: 1px solid @surface2;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 12px;
+    outline: none;
+    box-shadow: none;
+}
+
+entry.applet-entry:focus {
+    border-color: @sky;
+    outline: none;
+    box-shadow: none;
+}
+
+/* ------------------------------------------------------------
+   Barras de Rolagem (ScrolledWindow)
+   ------------------------------------------------------------ */
+scrolledwindow {
+    border: none;
+    background-color: transparent;
+}
+
+scrolledwindow viewport {
+    background-color: transparent;
+}
+
+scrollbar {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar trough {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar slider {
+    min-width: 4px;
+    min-height: 4px;
+    border-radius: 4px;
+    background-color: @surface2;
+    border: none;
+}
+
+scrollbar slider:hover {
+    background-color: @sky;
+}
+
+/* ------------------------------------------------------------
+   Applet de Volume (Slider)
+   ------------------------------------------------------------ */
 scale trough {
     background-color: @surface0;
     border-radius: 6px;
@@ -82,43 +228,22 @@ scale slider {
     min-height: 16px;
     margin: -4px 0;
     box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    outline: none;
 }
 
 scale slider:hover {
     background-color: @sky;
 }
 
-button.action-btn {
-    background: none;
-    background-color: transparent;
-    background-image: none;
-    box-shadow: none;
-    color: @text;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-family: 'FiraCode Nerd Font';
-    font-size: 12px;
+scale:focus,
+scale slider:focus {
     outline: none;
-    transition: all 0.15s ease;
+    box-shadow: none;
 }
 
-button.action-btn:hover {
-    background-color: @sky;
-    background-image: none;
-    color: @crust;
-}
-
-label.section-sep {
-    color: @overlay1;
-    font-family: 'FiraCode Nerd Font';
-    font-size: 11px;
-    margin-top: 4px;
-}
-
-/* ============================================================
+/* ------------------------------------------------------------
    Applet de Calendário (Gtk.Calendar)
-   ============================================================ */
+   ------------------------------------------------------------ */
 calendar {
     background-color: transparent;
     color: @text;
@@ -126,6 +251,15 @@ calendar {
     font-size: 12px;
     border: none;
     padding: 4px;
+    outline: none;
+}
+
+calendar:focus,
+calendar view:focus,
+calendar:selected:focus {
+    outline: none;
+    outline-width: 0;
+    box-shadow: none;
 }
 
 calendar:selected {
@@ -146,6 +280,8 @@ calendar.button {
     background: none;
     background-color: transparent;
     border-radius: 4px;
+    outline: none;
+    box-shadow: none;
 }
 
 calendar.button:hover {

@@ -49,6 +49,7 @@ from gi.repository import Gtk, Gdk, Gio, GLib, Gtk4LayerShell
 CONFIG_DIR = Path(os.path.expanduser("~/.config/dock"))
 CONFIG_FILE = CONFIG_DIR / "dock.json"
 CSS_FILE = CONFIG_DIR / "style.css"
+THEME_MODE_FILE = Path(os.path.expanduser("~/.config/theme.mode"))
 PID_FILE = "/tmp/hypr_dock.pid"
 
 DEFAULT_CONFIG = {
@@ -257,16 +258,48 @@ class CustomDock(Gtk.ApplicationWindow):
         GLib.timeout_add(500, self.on_periodic_sync)
 
     def load_styles(self):
-        if CSS_FILE.exists():
+        if hasattr(self, "css_provider") and self.css_provider:
             try:
-                self.css_provider.load_from_path(str(CSS_FILE))
+                Gtk.StyleContext.remove_provider_for_display(
+                    Gdk.Display.get_default(),
+                    self.css_provider
+                )
+            except Exception:
+                pass
+
+        self.css_provider = Gtk.CssProvider()
+
+        # Determine theme from theme.mode or style.css
+        css_path = CSS_FILE
+        if THEME_MODE_FILE.exists():
+            try:
+                mode = THEME_MODE_FILE.read_text().strip().lower()
+                if mode in ("white", "light"):
+                    css_path = CONFIG_DIR / "style-light.css"
+                else:
+                    css_path = CONFIG_DIR / "style-dark.css"
+            except Exception:
+                pass
+
+        if not css_path.exists() and CSS_FILE.exists():
+            css_path = CSS_FILE
+
+        if css_path.exists():
+            try:
+                self.css_provider.load_from_path(str(css_path))
             except Exception as e:
-                print(f"[Dock] Error loading CSS: {e}")
+                print(f"[Dock] Error loading CSS from {css_path}: {e}")
+
         Gtk.StyleContext.add_provider_for_display(
             Gdk.Display.get_default(),
             self.css_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
+
+    def on_theme_changed(self):
+        self.load_styles()
+        self.last_state_signature = None
+        self.schedule_rebuild()
 
     def setup_file_monitors(self):
         try:
@@ -276,7 +309,11 @@ class CustomDock(Gtk.ApplicationWindow):
 
             css_file_obj = Gio.File.new_for_path(str(CSS_FILE))
             self.css_monitor = css_file_obj.monitor_file(Gio.FileMonitorFlags.NONE, None)
-            self.css_monitor.connect("changed", lambda *_: self.load_styles())
+            self.css_monitor.connect("changed", lambda *_: self.on_theme_changed())
+
+            theme_mode_obj = Gio.File.new_for_path(str(THEME_MODE_FILE))
+            self.theme_monitor = theme_mode_obj.monitor_file(Gio.FileMonitorFlags.NONE, None)
+            self.theme_monitor.connect("changed", lambda *_: self.on_theme_changed())
         except Exception as e:
             print(f"[Dock] File monitor error: {e}")
 
@@ -663,7 +700,7 @@ def main():
     # SIGUSR2: reload styles immediately
     def on_sigusr2(sig, frame):
         if hasattr(app, "win"):
-            GLib.idle_add(lambda: (app.win.load_styles(), app.win.schedule_rebuild()))
+            GLib.idle_add(app.win.on_theme_changed)
 
     signal.signal(signal.SIGUSR2, on_sigusr2)
 

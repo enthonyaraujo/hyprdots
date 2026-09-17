@@ -90,7 +90,7 @@ def align_to_top_right():
         win_w = 380
         margin_right = 12
         target_x = mon_x + mon_w - win_w - margin_right
-        target_y = mon_y + 46
+        target_y = mon_y + 32
         subprocess.run(
             ["hyprctl", "dispatch", "movewindowpixel", f"exact {target_x} {target_y}", ",class:^(wifi-applet)$"],
             stdout=subprocess.DEVNULL,

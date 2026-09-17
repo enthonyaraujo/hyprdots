@@ -10,14 +10,15 @@
     outline: none;
 }
 
-/* =========================
-   Waybar Base Window (Transparente)
-   ========================= */
+/* ============================================================
+   Waybar Base Window (Retângulo Direto e Contínuo)
+   ============================================================ */
 window#waybar {
-    background-color: transparent;
-    background: transparent;
+    background-color: @base;
     color: @text;
     border: none;
+    border-bottom: 1px solid alpha(@surface1, 0.7);
+    border-radius: 0px;
     box-shadow: none;
 }
 
@@ -25,46 +26,44 @@ window#waybar {
    Custom Launcher
    ========================= */
 #custom-launcher {
-    font-size: 15px;
-    color: @crust;
-    background: linear-gradient(135deg, @sky, @blue);
-    border-radius: 6px;
-    min-width: 18px;
-    padding: 1px 6px;
-    margin: 2px 2px;
+    font-size: 14px;
+    color: @sky;
+    background: transparent;
+    padding: 0 8px;
+    margin: 0 2px;
     transition: all 0.2s ease;
 }
 
 #custom-launcher:hover {
-    background: @sky;
-    box-shadow: 0 0 8px alpha(@sky, 0.5);
+    color: @blue;
+    background-color: @surface0;
+    border-radius: 4px;
 }
 
 /* =========================
    Workspaces
    ========================= */
 #workspaces {
-    background-color: @surface0;
-    border-radius: 6px;
-    margin: 2px 2px;
-    padding: 1px 2px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    background-color: transparent;
+    margin: 0 4px;
+    padding: 0;
+    border: none;
 }
 
 #workspaces button {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     color: @subtext0;
     background-color: transparent;
-    padding: 1px 4px;
-    margin: 1px 1px;
+    padding: 1px 6px;
+    margin: 2px 1px;
     border-radius: 4px;
-    min-width: 14px;
+    min-width: 16px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #workspaces button:hover {
-    background-color: @surface1;
+    background-color: @surface0;
     color: @text;
 }
 
@@ -87,15 +86,21 @@ window#waybar {
     font-weight: 600;
     font-size: 12px;
     color: @text;
+    background-color: transparent;
+    border-radius: 4px;
+    padding: 0 12px;
+    margin: 0;
+    border: none;
+    transition: all 0.15s ease;
+}
+
+#clock:hover {
     background-color: @surface0;
-    border-radius: 7px;
-    padding: 2px 10px;
-    margin: 2px 0;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: @sky;
 }
 
 /* =========================
-   Módulos da Direita (Pills)
+   Módulos da Direita (Integrados à barra contínua)
    ========================= */
 #memory,
 #cpu,
@@ -107,11 +112,11 @@ window#waybar {
 #wireplumber,
 #battery {
     color: @text;
-    background-color: @surface0;
-    border-radius: 7px;
-    padding: 2px 8px;
-    margin: 2px 2px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    background-color: transparent;
+    border-radius: 4px;
+    padding: 0 7px;
+    margin: 0;
+    border: none;
     transition: all 0.2s ease;
 }
 
@@ -124,14 +129,14 @@ window#waybar {
 #language:hover,
 #wireplumber:hover,
 #battery:hover {
-    background-color: @surface1;
-    border-color: alpha(@sky, 0.3);
+    background-color: @surface0;
+    color: @sky;
 }
 
 #network,
 #bluetooth {
-    min-width: 20px;
-    padding: 2px 6px;
+    min-width: 18px;
+    padding: 0 6px;
 }
 
 #network.disconnected,
@@ -180,12 +185,13 @@ window#waybar {
 }
 
 #custom-systemMenu {
-    color: @text;
-    background-color: @surface1;
-    min-width: 20px;
-    padding: 2px 6px;
-    margin: 2px 2px;
-    border-radius: 6px;
+    color: @sky;
+    background-color: transparent;
+    min-width: 18px;
+    padding: 0 8px;
+    margin: 0 4px 0 2px;
+    border-radius: 4px;
+    transition: all 0.15s ease;
 }
 
 #custom-systemMenu:hover {

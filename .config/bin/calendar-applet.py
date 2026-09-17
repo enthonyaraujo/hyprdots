@@ -97,7 +97,7 @@ def align_to_center(cal_w=620):
             pass
 
         target_x = mon_x + (mon_w - cal_w) // 2
-        target_y = mon_y + 46
+        target_y = mon_y + 32
         subprocess.run(
             ["hyprctl", "dispatch", "movewindowpixel", f"exact {target_x} {target_y}", ",class:^(calendar-applet)$"],
             stdout=subprocess.DEVNULL,

@@ -24,6 +24,7 @@
 !/.config/kdedefaults/
 !/.config/kitty/
 !/.config/nvim/
+!/.config/nwg-dock/
 !/.config/nwg-look/
 !/.config/rofi/
 !/.config/swappy/

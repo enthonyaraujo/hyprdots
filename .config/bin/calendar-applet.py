@@ -107,6 +107,30 @@ def align_to_center(cal_w=620):
         pass
     return False
 
+def format_relative_time(timestamp):
+    if not timestamp:
+        return ""
+    try:
+        ts = int(timestamp)
+        if ts > 1e11:
+            ts = ts / 1e6
+        dt = datetime.fromtimestamp(ts)
+        diff = datetime.now() - dt
+        seconds = int(diff.total_seconds())
+        if seconds < 60:
+            return "Agora"
+        elif seconds < 3600:
+            mins = seconds // 60
+            return f"{mins} min atrás"
+        elif seconds < 86400:
+            hours = seconds // 3600
+            return f"{hours}h atrás"
+        else:
+            days = seconds // 86400
+            return f"{days}d atrás"
+    except Exception:
+        return ""
+
 def get_notifications():
     try:
         res = subprocess.run(["dunstctl", "history"], capture_output=True, text=True, timeout=1)
@@ -126,16 +150,7 @@ def get_notifications():
                 body = parse_val(item.get("body")) or ""
                 timestamp = parse_val(item.get("timestamp"))
 
-                time_str = ""
-                if timestamp:
-                    try:
-                        ts = int(timestamp)
-                        if ts > 1e11:
-                            ts = ts / 1e6
-                        dt = datetime.fromtimestamp(ts)
-                        time_str = dt.strftime("%H:%M")
-                    except Exception:
-                        pass
+                time_str = format_relative_time(timestamp)
 
                 if summary or body:
                     notifs.append({
@@ -157,8 +172,8 @@ class NotificationCalendarApplet(Gtk.Window):
         self.set_title("Central de Notificações e Calendário")
         self.set_decorated(False)
         self.set_resizable(False)
-        self.set_default_size(620, -1)
-        self.set_size_request(620, -1)
+        self.set_default_size(660, 440)
+        self.set_size_request(660, 440)
         self.set_skip_taskbar_hint(True)
         self.set_skip_pager_hint(True)
 
@@ -169,59 +184,37 @@ class NotificationCalendarApplet(Gtk.Window):
         self.get_style_context().add_class("calendar-window")
 
         # Container Principal
-        self.main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
-        self.main_box.set_margin_top(14)
-        self.main_box.set_margin_bottom(14)
-        self.main_box.set_margin_start(14)
-        self.main_box.set_margin_end(14)
+        self.main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        self.main_box.set_margin_top(16)
+        self.main_box.set_margin_bottom(16)
+        self.main_box.set_margin_start(16)
+        self.main_box.set_margin_end(16)
         self.add(self.main_box)
 
-        # Cabeçalho Superior Integrado
-        top_header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        top_header.get_style_context().add_class("header-box")
-
-        notif_header_title = Gtk.Label(label="󰂚  Central de Notificações")
-        notif_header_title.get_style_context().add_class("header-title")
-        top_header.pack_start(notif_header_title, False, False, 0)
-
-        right_top_header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        self.btn_clear_all = Gtk.Button(label="󰃢  Limpar")
-        self.btn_clear_all.set_can_focus(False)
-        self.btn_clear_all.get_style_context().add_class("small-btn")
-        self.btn_clear_all.connect("clicked", self.on_clear_all)
-        right_top_header.pack_start(self.btn_clear_all, False, False, 0)
-
-        btn_close = Gtk.Button(label="✕")
-        btn_close.set_can_focus(False)
-        btn_close.get_style_context().add_class("btn-close")
-        btn_close.connect("clicked", lambda b: self.close_app())
-        right_top_header.pack_start(btn_close, False, False, 0)
-
-        top_header.pack_end(right_top_header, False, False, 0)
-        self.main_box.pack_start(top_header, False, False, 0)
-
-        # Layout de 2 Colunas
+        # Layout de 2 Colunas Integrado (Estilo GNOME / Ubuntu)
         columns_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
-        self.main_box.pack_start(columns_box, True, True, 4)
+        self.main_box.pack_start(columns_box, True, True, 0)
 
         # -------------------------------------------------------------
         # COLUNA ESQUERDA: NOTIFICAÇÕES
         # -------------------------------------------------------------
-        self.notif_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
-        self.notif_box.set_size_request(290, 310)
+        self.notif_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        self.notif_box.set_size_request(320, 400)
         self.notif_box.set_hexpand(True)
         columns_box.pack_start(self.notif_box, True, True, 0)
 
         # Divisor Vertical
         v_sep = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+        v_sep.set_margin_top(4)
+        v_sep.set_margin_bottom(4)
         v_sep.get_style_context().add_class("v-separator")
         columns_box.pack_start(v_sep, False, False, 0)
 
         # -------------------------------------------------------------
         # COLUNA DIREITA: CALENDÁRIO & DATA
         # -------------------------------------------------------------
-        cal_col = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
-        cal_col.set_size_request(290, 310)
+        cal_col = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        cal_col.set_size_request(290, 400)
         cal_col.set_hexpand(True)
         columns_box.pack_start(cal_col, True, True, 0)
 
@@ -229,11 +222,13 @@ class NotificationCalendarApplet(Gtk.Window):
         now = datetime.now()
         dias = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"]
         meses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
-        weekday_str = dias[now.weekday()].capitalize()
+        weekday_str = dias[now.weekday()]
         fulldate_str = f"{meses[now.month - 1]} {now.day} {now.year}"
 
-        date_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=1)
-        date_box.set_margin_start(4)
+        date_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+        date_box.set_margin_start(8)
+        date_box.set_margin_bottom(4)
+
         lbl_weekday = Gtk.Label(label=weekday_str)
         lbl_weekday.set_xalign(0.0)
         lbl_weekday.get_style_context().add_class("cal-weekday")
@@ -257,12 +252,12 @@ class NotificationCalendarApplet(Gtk.Window):
         # Card Hoje / Resumo
         today_card = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
         today_card.get_style_context().add_class("today-card")
-        lbl_today = Gtk.Label(label="󰃭  Hoje")
+        lbl_today = Gtk.Label(label="Hoje")
         lbl_today.set_xalign(0.0)
         lbl_today.get_style_context().add_class("today-title")
         today_card.pack_start(lbl_today, False, False, 0)
 
-        lbl_no_events = Gtk.Label(label="Nenhum evento agendado")
+        lbl_no_events = Gtk.Label(label="Nenhum evento")
         lbl_no_events.set_xalign(0.0)
         lbl_no_events.get_style_context().add_class("today-desc")
         today_card.pack_start(lbl_no_events, False, False, 0)
@@ -282,8 +277,6 @@ class NotificationCalendarApplet(Gtk.Window):
         notifs = get_notifications()
 
         if not notifs:
-            self.btn_clear_all.set_visible(False)
-
             # Estado Vazio com Ícone de Sino (Visual exatamente como na imagem de referência)
             empty_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
             empty_box.set_valign(Gtk.Align.CENTER)
@@ -300,43 +293,43 @@ class NotificationCalendarApplet(Gtk.Window):
 
             self.notif_box.pack_start(empty_box, True, True, 0)
         else:
-            self.btn_clear_all.set_visible(True)
-
             scrolled = Gtk.ScrolledWindow()
             scrolled.set_can_focus(False)
             scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-            scrolled.set_max_content_height(300)
             scrolled.set_propagate_natural_height(False)
             scrolled.set_vexpand(True)
 
-            cards_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
-            cards_box.set_margin_end(4)
+            cards_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+            cards_box.set_margin_end(6)
 
             for item in notifs:
-                card = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+                card = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=3)
                 card.get_style_context().add_class("notif-card")
 
                 # Linha do App + Horário + Fechar
                 header_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-                app_lbl = Gtk.Label(label=f"󰂚 {item['appname']}")
+
+                icon_lbl = Gtk.Label(label="󰂚")
+                icon_lbl.get_style_context().add_class("notif-icon")
+                header_row.pack_start(icon_lbl, False, False, 0)
+
+                app_lbl = Gtk.Label(label=item["appname"])
                 app_lbl.get_style_context().add_class("notif-appname")
                 app_lbl.set_xalign(0.0)
                 header_row.pack_start(app_lbl, False, False, 0)
 
-                right_card = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
                 if item["time"]:
                     time_lbl = Gtk.Label(label=item["time"])
                     time_lbl.get_style_context().add_class("notif-time")
-                    right_card.pack_start(time_lbl, False, False, 0)
+                    header_row.pack_start(time_lbl, False, False, 0)
 
                 if item["id"]:
                     btn_rm = Gtk.Button(label="✕")
                     btn_rm.set_can_focus(False)
                     btn_rm.get_style_context().add_class("btn-close-notif")
                     btn_rm.connect("clicked", lambda b, nid=item["id"]: self.on_remove_one(nid))
-                    right_card.pack_start(btn_rm, False, False, 0)
+                    header_row.pack_end(btn_rm, False, False, 0)
 
-                header_row.pack_end(right_card, False, False, 0)
                 card.pack_start(header_row, False, False, 0)
 
                 # Título
@@ -359,6 +352,18 @@ class NotificationCalendarApplet(Gtk.Window):
 
             scrolled.add(cards_box)
             self.notif_box.pack_start(scrolled, True, True, 0)
+
+            # Botão de Limpar no canto inferior esquerdo (Estilo pílula do Ubuntu)
+            clear_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+            clear_box.set_margin_top(10)
+            clear_box.set_margin_bottom(2)
+            clear_box.set_margin_start(2)
+            self.btn_clear_all = Gtk.Button(label="Limpar")
+            self.btn_clear_all.set_can_focus(False)
+            self.btn_clear_all.get_style_context().add_class("btn-clear-ubuntu")
+            self.btn_clear_all.connect("clicked", self.on_clear_all)
+            clear_box.pack_start(self.btn_clear_all, False, False, 0)
+            self.notif_box.pack_end(clear_box, False, False, 0)
 
         self.notif_box.show_all()
 

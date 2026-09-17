@@ -289,39 +289,41 @@ calendar.highlight {
    Central de Notificações (Layout de Duas Colunas)
    ------------------------------------------------------------ */
 .cal-weekday {
-    color: @sky;
+    color: @overlay1;
     font-family: 'FiraCode Nerd Font';
-    font-size: 13px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .cal-fulldate {
     color: @text;
     font-family: 'FiraCode Nerd Font';
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
+    margin-top: 1px;
     margin-bottom: 6px;
 }
 
 /* Card Hoje (Resumo de Eventos) */
 .today-card {
     background-color: @surface0;
-    border-radius: 8px;
-    padding: 10px 12px;
+    border-radius: 12px;
+    padding: 12px 14px;
     margin-top: 8px;
+    border: 1px solid @surface1;
 }
 
 .today-title {
-    color: @sky;
+    color: @text;
     font-family: 'FiraCode Nerd Font';
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
 }
 
 .today-desc {
     color: @overlay1;
     font-family: 'FiraCode Nerd Font';
-    font-size: 11px;
+    font-size: 12px;
     font-style: italic;
     margin-top: 2px;
 }
@@ -330,27 +332,35 @@ calendar.highlight {
 separator.v-separator {
     background-color: @surface1;
     min-width: 1px;
-    margin: 0 12px;
+    margin: 0 14px;
 }
 
-/* Cards de Notificação */
+/* Cards de Notificação Estilo GNOME/Ubuntu */
 box.notif-card {
     background-color: @surface0;
-    border-radius: 8px;
-    padding: 10px 12px;
-    margin-bottom: 6px;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
     border: 1px solid @surface1;
     transition: all 0.15s ease;
 }
 
 box.notif-card:hover {
     border-color: @sky;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+label.notif-icon {
+    color: @overlay1;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 13px;
+    margin-right: 4px;
 }
 
 label.notif-appname {
-    color: @sky;
+    color: @text;
     font-family: 'FiraCode Nerd Font';
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
 }
 
@@ -358,12 +368,13 @@ label.notif-time {
     color: @overlay1;
     font-family: 'FiraCode Nerd Font';
     font-size: 11px;
+    margin-left: 4px;
 }
 
 label.notif-title {
     color: @text;
     font-family: 'FiraCode Nerd Font';
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
     margin-top: 4px;
 }
@@ -371,28 +382,78 @@ label.notif-title {
 label.notif-body {
     color: @subtext0;
     font-family: 'FiraCode Nerd Font';
-    font-size: 11px;
+    font-size: 12px;
     margin-top: 2px;
 }
 
-/* Botão de Fechar Notificação Individual */
+/* Botão de Fechar Notificação Individual (Circular estilo Ubuntu) */
 button.btn-close-notif {
     background: none;
-    background-color: transparent;
-    background-image: none;
-    box-shadow: none;
-    outline: none;
-    color: @overlay1;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: @text;
     border: none;
-    border-radius: 4px;
-    padding: 1px 4px;
+    border-radius: 50%;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0;
     font-size: 10px;
     font-weight: bold;
+    outline: none;
+    box-shadow: none;
+    transition: all 0.15s ease;
 }
 
 button.btn-close-notif:hover {
     background-color: @red;
+    color: #ffffff;
+}
+
+/* Botão de Limpar Notificações (Pílula estilo Ubuntu no canto inferior) */
+button.btn-clear-ubuntu {
+    background: none;
+    background-color: rgba(255, 255, 255, 0.09);
     color: @text;
+    border-radius: 16px;
+    padding: 6px 20px;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    transition: all 0.15s ease;
+}
+
+button.btn-clear-ubuntu:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+}
+
+button.btn-clear-ubuntu:active {
+    background-color: @sky;
+    color: @crust;
+}
+
+/* Botão Sutil de Fechar Janela */
+button.btn-close-subtle {
+    background: none;
+    background-color: transparent;
+    color: @overlay1;
+    border: none;
+    border-radius: 50%;
+    min-width: 24px;
+    min-height: 24px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0;
+    outline: none;
+    box-shadow: none;
+    transition: all 0.15s ease;
+}
+
+button.btn-close-subtle:hover {
+    background-color: @surface1;
+    color: @red;
 }
 
 /* Estado Vazio de Notificações */
@@ -408,4 +469,5 @@ label.notif-empty-label {
     font-size: 13px;
     font-weight: 600;
 }
+
 

@@ -5,7 +5,7 @@
   <img src="https://img.shields.io/badge/Kitty-76B900?style=for-the-badge&logo=gnometerminal&logoColor=white" alt="Kitty"/>
 </h1>
 
-<h3 align="center">✨ My Hyprland Dotfiles ✨</h3>
+<h3 align="center">Hyprland Dotfiles</h3>
 
 <p align="center">
   A clean and minimal Hyprland desktop environment on Ubuntu with custom Waybar, Rofi menus, GTK applets, and a unified dark/light theme switcher.
@@ -17,7 +17,7 @@
 
 ![Desktop](preview/desktop.png)
 
-## 📸 Previews
+## Previews
 
 | | |
 |:---:|:---:|
@@ -30,7 +30,7 @@
 
 ---
 
-## 🧩 Components
+## Components
 
 | Component | Tool |
 |---|---|
@@ -45,14 +45,14 @@
 | File Manager | [Nautilus](https://apps.gnome.org/Nautilus/) |
 | Icons | [Kora](https://github.com/bikass/kora) |
 
-## 🛠️ Tools
+## Tools
 
 - [Obsidian](https://obsidian.md) — Notes & second brain
 - [Neovim](https://neovim.io) — Editor
 - [LaTeX & TeXstudio](https://www.texstudio.org) — Academic writing
 - [Xournal++](https://xournalpp.github.io) — Handwriting & PDF annotation
 
-## ⚙️ Features
+## Features
 
 - **Unified Theme Switcher** — Toggle between dark and light themes across the entire system (Waybar, Rofi, Kitty, Dunst, GTK, Hyprland borders, Btop)
 - **Wallpaper Picker** — GTK3 applet with 16:9 thumbnails for quick wallpaper switching
@@ -61,7 +61,9 @@
 
 ---
 
-## 📦 Installation
+## Installation
+
+For ArchLinux
 
 ```bash
 git clone https://github.com/enthonyaraujo/hyprdots.git ~/hyprdots
@@ -72,5 +74,5 @@ cd ~/hyprdots
 ---
 
 <p align="center">
-  <sub>Made with ☕ by <a href="https://github.com/enthonyaraujo">enthonyaraujo</a></sub>
+  <sub>Made with by <a href="https://github.com/enthonyaraujo">enthonyaraujo</a></sub>
 </p>

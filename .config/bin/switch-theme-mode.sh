@@ -109,16 +109,6 @@ EOF
         sed -i 's/^color_theme = .*/color_theme = "whiteout"/' "$HOME/.config/btop/btop.conf"
     fi
 
-    # --------------------------------------------------------------------------
-    # 8. NWG-DOCK
-    # --------------------------------------------------------------------------
-    if [[ -f "$HOME/.config/nwg-dock/style-light.css" ]]; then
-        cp "$HOME/.config/nwg-dock/style-light.css" "$HOME/.config/nwg-dock/style.css"
-        killall nwg-dock 2>/dev/null || true
-        nwg-dock -d -i 48 -mb 6 &
-        disown
-    fi
-
     notify-send -a "Theme Switcher" -i "weather-clear" "White Theme Activated" "The system has been configured to light mode." 2>/dev/null || true
 
 else
@@ -184,16 +174,6 @@ EOF
     # --------------------------------------------------------------------------
     if [[ -f "$HOME/.config/btop/btop.conf" ]]; then
         sed -i 's/^color_theme = .*/color_theme = "Default"/' "$HOME/.config/btop/btop.conf"
-    fi
-
-    # --------------------------------------------------------------------------
-    # 8. NWG-DOCK
-    # --------------------------------------------------------------------------
-    if [[ -f "$HOME/.config/nwg-dock/style-dark.css" ]]; then
-        cp "$HOME/.config/nwg-dock/style-dark.css" "$HOME/.config/nwg-dock/style.css"
-        killall nwg-dock 2>/dev/null || true
-        nwg-dock -d -i 48 -mb 6 &
-        disown
     fi
 
     notify-send -a "Theme Switcher" -i "weather-clear-night" "Dark Theme Activated" "The system has been configured to dark mode." 2>/dev/null || true

@@ -57,27 +57,6 @@ if [[ -f "$AUR_LIST" ]]; then
     done < "$AUR_LIST"
 fi
 
-echo "===== Installing nwg-dock (Dock) ====="
-if ! command -v nwg-dock >/dev/null; then
-    # Install Rust if not present
-    if ! command -v cargo >/dev/null; then
-        echo "Installing Rust toolchain..."
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        source "$HOME/.cargo/env"
-    fi
-    # Install GTK4 layer-shell dev dependencies
-    if command -v pacman >/dev/null; then
-        sudo pacman -S --needed --noconfirm gtk4 gtk4-layer-shell
-    elif command -v apt >/dev/null; then
-        sudo apt install -y libgtk-4-dev libgtk4-layer-shell-dev
-    fi
-    echo "Building nwg-dock from source (this may take a few minutes)..."
-    cargo install nwg-dock
-    echo "nwg-dock installed successfully."
-else
-    echo "nwg-dock is already installed."
-fi
-
 echo "===== Do you want to install Nvidia drivers? ====="
 echo "1) Yes"
 echo "2) No"

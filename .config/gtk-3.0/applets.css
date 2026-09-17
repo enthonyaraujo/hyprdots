@@ -284,3 +284,128 @@ calendar.highlight {
     color: @sky;
     font-weight: bold;
 }
+
+/* ------------------------------------------------------------
+   Central de Notificações (Layout de Duas Colunas)
+   ------------------------------------------------------------ */
+.cal-weekday {
+    color: @sky;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.cal-fulldate {
+    color: @text;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+/* Card Hoje (Resumo de Eventos) */
+.today-card {
+    background-color: @surface0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-top: 8px;
+}
+
+.today-title {
+    color: @sky;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.today-desc {
+    color: @overlay1;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 11px;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* Divisor Vertical entre Notificações e Calendário */
+separator.v-separator {
+    background-color: @surface1;
+    min-width: 1px;
+    margin: 0 12px;
+}
+
+/* Cards de Notificação */
+box.notif-card {
+    background-color: @surface0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    border: 1px solid @surface1;
+    transition: all 0.15s ease;
+}
+
+box.notif-card:hover {
+    border-color: @sky;
+}
+
+label.notif-appname {
+    color: @sky;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 11px;
+    font-weight: bold;
+}
+
+label.notif-time {
+    color: @overlay1;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 11px;
+}
+
+label.notif-title {
+    color: @text;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+label.notif-body {
+    color: @subtext0;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+/* Botão de Fechar Notificação Individual */
+button.btn-close-notif {
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    outline: none;
+    color: @overlay1;
+    border: none;
+    border-radius: 4px;
+    padding: 1px 4px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+button.btn-close-notif:hover {
+    background-color: @red;
+    color: @text;
+}
+
+/* Estado Vazio de Notificações */
+label.notif-empty-icon {
+    color: @overlay1;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 44px;
+}
+
+label.notif-empty-label {
+    color: @overlay1;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 13px;
+    font-weight: 600;
+}
+

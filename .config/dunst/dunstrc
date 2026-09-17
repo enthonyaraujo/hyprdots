@@ -4,7 +4,7 @@
     highlight = "#1d99f3"
 
     origin = top-center
-    offset = (0, 46)
+    offset = (0, 2)
     width = (0, 320)
     corner_radius = 16
 

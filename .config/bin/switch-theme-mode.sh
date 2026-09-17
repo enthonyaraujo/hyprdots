@@ -77,19 +77,19 @@ if [[ "$NEW_MODE" == "white" ]]; then
     # --------------------------------------------------------------------------
     if [[ -f "$HOME/.config/gtk-3.0/settings.ini" ]]; then
         sed -i 's/^gtk-theme-name=.*/gtk-theme-name=adw-gtk3/' "$HOME/.config/gtk-3.0/settings.ini"
-        sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=breeze/' "$HOME/.config/gtk-3.0/settings.ini"
+        sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=kora/' "$HOME/.config/gtk-3.0/settings.ini"
         sed -i 's/^gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=0/' "$HOME/.config/gtk-3.0/settings.ini"
     fi
 
     if [[ -f "$HOME/.config/gtk-4.0/settings.ini" ]]; then
         sed -i 's/^gtk-theme-name=.*/gtk-theme-name=adw-gtk3/' "$HOME/.config/gtk-4.0/settings.ini"
-        sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=breeze/' "$HOME/.config/gtk-4.0/settings.ini"
+        sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=kora/' "$HOME/.config/gtk-4.0/settings.ini"
         sed -i 's/^gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=0/' "$HOME/.config/gtk-4.0/settings.ini"
     fi
 
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-light' 2>/dev/null || true
     gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3' 2>/dev/null || true
-    gsettings set org.gnome.desktop.interface icon-theme 'breeze' 2>/dev/null || true
+    gsettings set org.gnome.desktop.interface icon-theme 'kora' 2>/dev/null || true
 
     # --------------------------------------------------------------------------
     # 6. HYPRLAND BORDERS
@@ -143,20 +143,20 @@ else
     # 5. GTK 3 & GTK 4 SETTINGS
     # --------------------------------------------------------------------------
     if [[ -f "$HOME/.config/gtk-3.0/settings.ini" ]]; then
-        sed -i 's/^gtk-theme-name=.*/gtk-theme-name=Breeze-Dark/' "$HOME/.config/gtk-3.0/settings.ini"
-        sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=breeze-dark/' "$HOME/.config/gtk-3.0/settings.ini"
+        sed -i 's/^gtk-theme-name=.*/gtk-theme-name=adw-gtk3-dark/' "$HOME/.config/gtk-3.0/settings.ini"
+        sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=kora/' "$HOME/.config/gtk-3.0/settings.ini"
         sed -i 's/^gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=1/' "$HOME/.config/gtk-3.0/settings.ini"
     fi
 
     if [[ -f "$HOME/.config/gtk-4.0/settings.ini" ]]; then
-        sed -i 's/^gtk-theme-name=.*/gtk-theme-name=Breeze-Dark/' "$HOME/.config/gtk-4.0/settings.ini"
-        sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=breeze-dark/' "$HOME/.config/gtk-4.0/settings.ini"
+        sed -i 's/^gtk-theme-name=.*/gtk-theme-name=adw-gtk3-dark/' "$HOME/.config/gtk-4.0/settings.ini"
+        sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=kora/' "$HOME/.config/gtk-4.0/settings.ini"
         sed -i 's/^gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=1/' "$HOME/.config/gtk-4.0/settings.ini"
     fi
 
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' 2>/dev/null || true
     gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark' 2>/dev/null || true
-    gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark' 2>/dev/null || true
+    gsettings set org.gnome.desktop.interface icon-theme 'kora' 2>/dev/null || true
 
     # --------------------------------------------------------------------------
     # 6. HYPRLAND BORDERS

@@ -1,8 +1,8 @@
-# Ignorar tudo por padrão no diretório Home
+# Ignore everything in Home by default
 /*
 /.*
 
-# Arquivos e pastas do repositório no Home
+# Repository files and folders at Home root
 !/LICENSE
 !/README.md
 !/preview/
@@ -11,10 +11,10 @@
 !/.gitignore
 !/.config/
 
-# Dentro de .config, ignorar todos os programas não versionados
+# Inside .config, ignore all non-versioned programs
 /.config/*
 
-# Apenas as configurações gerenciadas pelo hyprdots
+# Only managed hyprdots configurations
 !/.config/bin/
 !/.config/dunst/
 !/.config/fish/
@@ -30,7 +30,7 @@
 !/.config/wallpapers/
 !/.config/waybar/
 
-# Arquivos temporários e caches
+# Temporary files and caches
 *.log
 *.tmp
 __pycache__/

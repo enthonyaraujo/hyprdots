@@ -45,106 +45,17 @@ from gi.repository import Gtk, Gdk, GLib, Pango
 GLib.set_prgname("volume-applet")
 GLib.set_application_name("volume-applet")
 
-CSS_DATA = """
-window.audio-window {
-    background-color: rgba(35, 38, 41, 0.95);
-    border: 2px solid #3daee9;
-    border-radius: 12px;
-}
+CSS_FILE = os.path.expanduser("~/.config/gtk-3.0/applets.css")
 
-box.main-box {
-    background-color: transparent;
-}
-
-box.header-box {
-    background-color: #2a2e32;
-    border-radius: 8px;
-    padding: 8px 12px;
-}
-
-label.header-title {
-    color: #3daee9;
-    font-family: 'FiraCode Nerd Font';
-    font-size: 12px;
-    font-weight: bold;
-}
-
-label.badge-vol {
-    color: #eff0f1;
-    font-family: 'FiraCode Nerd Font';
-    font-size: 12px;
-    font-weight: 600;
-}
-
-button.btn-close {
-    background-color: transparent;
-    color: #7f8c8d;
-    border: none;
-    border-radius: 6px;
-    padding: 2px 6px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-button.btn-close:hover {
-    background-color: #ed1515;
-    color: #eff0f1;
-}
-
-scale trough {
-    background-color: #2a2e32;
-    border-radius: 6px;
-    min-height: 8px;
-    border: none;
-}
-
-scale highlight {
-    background-color: #3daee9;
-    border-radius: 6px;
-    min-height: 8px;
-}
-
-scale slider {
-    background-color: #eff0f1;
-    border-radius: 50%;
-    min-width: 16px;
-    min-height: 16px;
-    margin: -4px 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
-}
-
-scale slider:hover {
-    background-color: #3daee9;
-}
-
-button.action-btn {
-    background: none;
-    background-color: transparent;
-    background-image: none;
-    box-shadow: none;
-    color: #eff0f1;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-family: 'FiraCode Nerd Font';
-    font-size: 12px;
-    outline: none;
-    transition: all 0.15s ease;
-}
-
-button.action-btn:hover {
-    background-color: #3daee9;
-    background-image: none;
-    color: #141618;
-}
-
-label.section-sep {
-    color: #7f8c8d;
-    font-family: 'FiraCode Nerd Font';
-    font-size: 11px;
-    margin-top: 4px;
-}
-"""
+def load_styles():
+    provider = Gtk.CssProvider()
+    if os.path.exists(CSS_FILE):
+        provider.load_from_path(CSS_FILE)
+    Gtk.StyleContext.add_provider_for_screen(
+        Gdk.Screen.get_default(),
+        provider,
+        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+    )
 
 def get_volume_info():
     res = subprocess.run(["wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@"], capture_output=True, text=True)
@@ -344,13 +255,7 @@ class AudioApplet(Gtk.Window):
                 pass
 
 def main():
-    provider = Gtk.CssProvider()
-    provider.load_from_data(CSS_DATA.encode())
-    Gtk.StyleContext.add_provider_for_screen(
-        Gdk.Screen.get_default(),
-        provider,
-        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-    )
+    load_styles()
 
     app = AudioApplet()
     app.show_all()

@@ -1,0 +1,159 @@
+@import url("/home/enthony/.config/waybar/dark.css");
+
+/* ============================================================
+   Estilos Padronizados para Applets GTK (Volume, Calendário, etc.)
+   Paleta sincronizada com ~/.config/waybar/dark.css e Rofi applet.rasi
+   ============================================================ */
+
+/* Janela base translúcida com borda ciano e cantos arredondados */
+window.audio-window,
+window.calendar-window {
+    background-color: alpha(@base, 0.95);
+    border: 2px solid @sky;
+    border-radius: 12px;
+}
+
+box.main-box {
+    background-color: transparent;
+}
+
+/* Cabeçalho estilo pílula (igual ao inputbar do Rofi) */
+box.header-box {
+    background-color: @surface0;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+label.header-title {
+    color: @sky;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 12px;
+    font-weight: bold;
+}
+
+label.header-date,
+label.badge-vol {
+    color: @text;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Botão Fechar */
+button.btn-close {
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    color: @overlay1;
+    border: none;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+button.btn-close:hover {
+    background-color: @red;
+    background-image: none;
+    color: @text;
+}
+
+/* ============================================================
+   Applet de Volume (Slider e Lista de Ações)
+   ============================================================ */
+scale trough {
+    background-color: @surface0;
+    border-radius: 6px;
+    min-height: 8px;
+    border: none;
+}
+
+scale highlight {
+    background-color: @sky;
+    border-radius: 6px;
+    min-height: 8px;
+}
+
+scale slider {
+    background-color: @text;
+    border-radius: 50%;
+    min-width: 16px;
+    min-height: 16px;
+    margin: -4px 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+scale slider:hover {
+    background-color: @sky;
+}
+
+button.action-btn {
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    color: @text;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 12px;
+    outline: none;
+    transition: all 0.15s ease;
+}
+
+button.action-btn:hover {
+    background-color: @sky;
+    background-image: none;
+    color: @crust;
+}
+
+label.section-sep {
+    color: @overlay1;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+/* ============================================================
+   Applet de Calendário (Gtk.Calendar)
+   ============================================================ */
+calendar {
+    background-color: transparent;
+    color: @text;
+    font-family: 'FiraCode Nerd Font';
+    font-size: 12px;
+    border: none;
+    padding: 4px;
+}
+
+calendar:selected {
+    background-color: @sky;
+    color: @crust;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+calendar.header {
+    color: @sky;
+    font-weight: bold;
+    border-bottom: 1px solid @surface1;
+}
+
+calendar.button {
+    color: @sky;
+    background: none;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+calendar.button:hover {
+    background-color: @surface1;
+    color: @text;
+}
+
+calendar.highlight {
+    color: @sky;
+    font-weight: bold;
+}

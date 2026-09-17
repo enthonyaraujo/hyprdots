@@ -45,86 +45,17 @@ from gi.repository import Gtk, Gdk, GLib
 GLib.set_prgname("calendar-applet")
 GLib.set_application_name("calendar-applet")
 
-CSS_DATA = """
-window.calendar-window {
-    background-color: rgba(35, 38, 41, 0.95);
-    border: 2px solid #3daee9;
-    border-radius: 12px;
-}
+CSS_FILE = os.path.expanduser("~/.config/gtk-3.0/applets.css")
 
-box.header-box {
-    background-color: #2a2e32;
-    border-radius: 8px;
-    padding: 8px 12px;
-}
-
-label.header-title {
-    color: #3daee9;
-    font-family: 'FiraCode Nerd Font';
-    font-size: 12px;
-    font-weight: bold;
-}
-
-label.header-date {
-    color: #eff0f1;
-    font-family: 'FiraCode Nerd Font';
-    font-size: 12px;
-    font-weight: 600;
-}
-
-button.btn-close {
-    background-color: transparent;
-    color: #7f8c8d;
-    border: none;
-    border-radius: 6px;
-    padding: 2px 6px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-button.btn-close:hover {
-    background-color: #ed1515;
-    color: #eff0f1;
-}
-
-calendar {
-    background-color: transparent;
-    color: #eff0f1;
-    font-family: 'FiraCode Nerd Font';
-    font-size: 12px;
-    border: none;
-    padding: 4px;
-}
-
-calendar:selected {
-    background-color: #3daee9;
-    color: #141618;
-    border-radius: 6px;
-    font-weight: bold;
-}
-
-calendar.header {
-    color: #3daee9;
-    font-weight: bold;
-    border-bottom: 1px solid #31363b;
-}
-
-calendar.button {
-    color: #3daee9;
-    background-color: transparent;
-    border-radius: 4px;
-}
-
-calendar.button:hover {
-    background-color: #31363b;
-    color: #eff0f1;
-}
-
-calendar.highlight {
-    color: #3daee9;
-    font-weight: bold;
-}
-"""
+def load_styles():
+    provider = Gtk.CssProvider()
+    if os.path.exists(CSS_FILE):
+        provider.load_from_path(CSS_FILE)
+    Gtk.StyleContext.add_provider_for_screen(
+        Gdk.Screen.get_default(),
+        provider,
+        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+    )
 
 def align_to_center(cal_w=310):
     try:
@@ -232,13 +163,7 @@ class CalendarApplet(Gtk.Window):
                 pass
 
 def main():
-    provider = Gtk.CssProvider()
-    provider.load_from_data(CSS_DATA.encode())
-    Gtk.StyleContext.add_provider_for_screen(
-        Gdk.Screen.get_default(),
-        provider,
-        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-    )
+    load_styles()
 
     app = CalendarApplet()
     app.show_all()

@@ -137,6 +137,7 @@ def main():
     menu_options = [
         "󰂲   Desligar Bluetooth",
         "󰑓   Buscar novos dispositivos",
+        "   Abrir mais configurações de Bluetooth",
     ]
 
     dev_map = {}
@@ -155,6 +156,8 @@ def main():
     elif "Buscar novos dispositivos" in choice:
         scan_devices()
         main()
+    elif "Abrir mais configurações" in choice:
+        subprocess.Popen(["blueman-manager"])
     elif choice in dev_map:
         device_submenu(dev_map[choice])
 

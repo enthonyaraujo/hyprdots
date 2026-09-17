@@ -228,27 +228,15 @@ class CustomDock(Gtk.ApplicationWindow):
         Gtk4LayerShell.set_exclusive_zone(self, 0)
         Gtk4LayerShell.set_keyboard_mode(self, Gtk4LayerShell.KeyboardMode.NONE)
 
-        # Root layout
-        self.root_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        self.root_box.add_css_class("dock-container")
-        self.root_box.set_halign(Gtk.Align.CENTER)
-        self.root_box.set_valign(Gtk.Align.END)
-
-        # Dock pill container
+        # Dock pill container — shrink-wrapped tightly to icons, zero inactive space
         self.dock_pill = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=2)
         self.dock_pill.add_css_class("dock-pill")
-        self.dock_pill.set_margin_bottom(4)
-        self.dock_pill.set_margin_start(10)
-        self.dock_pill.set_margin_end(10)
-        self.root_box.append(self.dock_pill)
+        self.dock_pill.set_halign(Gtk.Align.CENTER)
+        self.dock_pill.set_valign(Gtk.Align.END)
+        self.dock_pill.set_hexpand(False)
+        self.dock_pill.set_vexpand(False)
 
-        # Bottom trigger strip (6px height, 800px wide for easy mouse edge trigger)
-        self.trigger_strip = Gtk.Box()
-        self.trigger_strip.add_css_class("dock-trigger")
-        self.trigger_strip.set_size_request(800, 6)
-        self.root_box.append(self.trigger_strip)
-
-        self.set_child(self.root_box)
+        self.set_child(self.dock_pill)
 
         # Hover motion detection across the dock window
         motion_ctrl = Gtk.EventControllerMotion.new()
@@ -507,10 +495,6 @@ class CustomDock(Gtk.ApplicationWindow):
 
         # 3. 9-Dots Application Grid Launcher
         if self.config.get("show_launcher", True):
-            sep2 = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
-            sep2.add_css_class("dock-sep")
-            self.dock_pill.append(sep2)
-
             launcher_btn = Gtk.Button()
             launcher_btn.add_css_class("launcher-btn")
             launcher_btn.set_tooltip_text("Applications")

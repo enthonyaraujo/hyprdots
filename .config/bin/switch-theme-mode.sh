@@ -94,10 +94,11 @@ if [[ "$NEW_MODE" == "white" ]]; then
     # --------------------------------------------------------------------------
     # 6. HYPRLAND BORDERS
     # --------------------------------------------------------------------------
-    cat <<'EOF' > "$HOME/.config/hypr/theme-colors.conf"
+    cat <<'EOF' > "$HOME/.config/hypr/.theme-colors.conf.tmp"
 $col_active_border = rgba(0284c7ee) rgba(3daee9ee) 45deg
 $col_inactive_border = rgba(c4c8cbcc)
 EOF
+    mv -f "$HOME/.config/hypr/.theme-colors.conf.tmp" "$HOME/.config/hypr/theme-colors.conf"
     hyprctl keyword general:col.inactive_border "rgba(c4c8cbcc)" 2>/dev/null || true
     hyprctl keyword general:col.active_border "rgba(0284c7ee) rgba(3daee9ee) 45deg" 2>/dev/null || true
 
@@ -160,10 +161,11 @@ else
     # --------------------------------------------------------------------------
     # 6. HYPRLAND BORDERS
     # --------------------------------------------------------------------------
-    cat <<'EOF' > "$HOME/.config/hypr/theme-colors.conf"
+    cat <<'EOF' > "$HOME/.config/hypr/.theme-colors.conf.tmp"
 $col_active_border = rgba(3daee9ee) rgba(1d99f3ee) 45deg
 $col_inactive_border = rgba(31363bcc)
 EOF
+    mv -f "$HOME/.config/hypr/.theme-colors.conf.tmp" "$HOME/.config/hypr/theme-colors.conf"
     hyprctl keyword general:col.inactive_border "rgba(31363bcc)" 2>/dev/null || true
     hyprctl keyword general:col.active_border "rgba(3daee9ee) rgba(1d99f3ee) 45deg" 2>/dev/null || true
 

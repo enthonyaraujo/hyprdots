@@ -40,6 +40,7 @@
 | Idle Daemon | [Hypridle](https://github.com/hyprwm/hypridle) |
 | Notifications | [Dunst](https://dunst-project.org) |
 | File Manager | [Nautilus](https://apps.gnome.org/Nautilus/) |
+| Dock | Custom Dash to Dock (GTK4 Layer Shell) |
 | Icons | [Kora](https://github.com/bikass/kora) |
 
 ## Tools
@@ -51,7 +52,8 @@
 
 ## Features
 
-- **Unified Theme Switcher** — Toggle between dark and light themes across the entire system (Waybar, Rofi, Kitty, Dunst, GTK, Hyprland borders, Btop)
+- **Custom Dash to Dock** — Native Wayland GTK4 dock with intellihide (visible on empty workspace, auto-hides with windows, edge reveal), running dots, right-click pinning, and Rofi app launcher
+- **Unified Theme Switcher** — Toggle between dark and light themes across the entire system (Waybar, Rofi, Kitty, Dunst, GTK, Dock, Hyprland borders, Btop)
 - **Wallpaper Picker** — GTK3 applet with 16:9 thumbnails for quick wallpaper switching
 - **Custom GTK Applets** — Wi-Fi, Bluetooth, Battery, Volume, Calendar — all built with Python + GTK3
 - **Rofi Menus** — Power menu, app launcher, and theme/wallpaper settings

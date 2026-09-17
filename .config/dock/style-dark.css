@@ -1,0 +1,123 @@
+
+
+window {
+    background: transparent;
+}
+
+.dock-container {
+    background: transparent;
+}
+
+.dock-pill {
+    background-color: rgba(35, 38, 41, 0.94);
+    border: 1px solid rgba(61, 174, 233, 0.35);
+    border-radius: 24px;
+    padding: 5px 10px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.dock-trigger {
+    background: transparent;
+}
+
+.app-btn {
+    background: transparent;
+    border: none;
+    border-radius: 14px;
+    padding: 5px 6px;
+    margin: 0 2px;
+    transition: all 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.app-btn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.app-btn:active {
+    background-color: rgba(61, 174, 233, 0.25);
+}
+
+.launcher-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    border-radius: 14px;
+    padding: 5px 8px;
+    margin-left: 4px;
+    color: #ffffff;
+    transition: all 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.launcher-btn image,
+.launcher-icon {
+    color: #ffffff;
+    -gtk-icon-palette: default;
+}
+
+.launcher-btn:hover {
+    background-color: rgba(61, 174, 233, 0.35);
+}
+
+.launcher-btn:hover image,
+.launcher-btn:hover .launcher-icon {
+    color: #ffffff;
+}
+
+.dock-sep {
+    background-color: rgba(255, 255, 255, 0.15);
+    min-width: 1px;
+    margin: 8px 4px;
+}
+
+.dot-indicator {
+    background-color: #3daee9;
+    border-radius: 3px;
+    min-height: 4px;
+    min-width: 6px;
+    margin-top: 2px;
+    transition: all 150ms ease;
+}
+
+.dot-focused {
+    background-color: #1d99f3;
+    border-radius: 3px;
+    min-height: 4px;
+    min-width: 14px;
+    margin-top: 2px;
+    box-shadow: 0 0 6px #3daee9;
+    transition: all 150ms ease;
+}
+
+.dot-empty {
+    min-height: 4px;
+    min-width: 6px;
+    margin-top: 2px;
+}
+
+/* Context Menu Popover */
+popover.dock-menu contents {
+    background-color: #2a2e32;
+    border: 1px solid rgba(61, 174, 233, 0.3);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.menu-btn {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: #eff0f1;
+    transition: all 120ms ease;
+}
+
+.menu-btn:hover {
+    background-color: rgba(61, 174, 233, 0.2);
+    color: #ffffff;
+}
+
+.menu-btn.destructive:hover {
+    background-color: rgba(237, 21, 21, 0.2);
+    color: #ff8888;
+}

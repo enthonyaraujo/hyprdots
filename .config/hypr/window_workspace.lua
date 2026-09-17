@@ -47,5 +47,12 @@ hl.window_rule({
     match   = { class = "^(volume-applet.*)$" },
     float   = true,
     pin     = true,
-    opacity = "1.0 override 1.0 override",
+})
+
+-- Regras para o Applet de Calendário GTK
+hl.window_rule({
+    name    = "calendar-applet-rules",
+    match   = { class = "^(calendar-applet.*)$" },
+    float   = true,
+    pin     = true,
 })

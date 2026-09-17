@@ -55,7 +55,8 @@
     "locale": "pt_BR.UTF-8",
     "format": "{:%b %d | %H:%M}",
     //"format-alt": "{:L%d/%m/%Y}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>"
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
+    "on-click": "$HOME/.config/bin/calendar-applet.py"
     },
 
     "wireplumber": {

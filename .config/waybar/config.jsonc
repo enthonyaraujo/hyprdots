@@ -23,10 +23,10 @@
         "cpu",
         "custom/gpu",
         "tray",  
-        "network",
-        "bluetooth",
         "hyprland/language",
+        "bluetooth",
         "wireplumber",
+        "network",
         "battery",
         "custom/systemMenu"
     ],

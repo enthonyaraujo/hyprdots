@@ -51,7 +51,7 @@ window#waybar {
 }
 
 #workspaces button {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     color: @subtext0;
     background-color: transparent;
@@ -102,6 +102,13 @@ window#waybar {
 /* =========================
    Módulos da Direita (Integrados à barra contínua)
    ========================= */
+/* Aplicando diretamente nos módulos da direita */
+.modules-right,
+.modules-right * {
+    font-size: 13px;
+    font-weight: 600;
+}
+
 #memory,
 #cpu,
 #custom-gpu,

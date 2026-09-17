@@ -60,8 +60,8 @@
     },
 
     "wireplumber": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟 {volume}%",
+        "format": "{icon}",
+        "format-muted": "󰝟",
         "format-icons": ["󰕿", "󰖀", "󰕾"],
         "max-volume": 100,
         "scroll-step": 5,
@@ -71,10 +71,10 @@
     },
 
     "battery": {
-        "format": "{icon} {capacity}%",
-        "format-charging": "󰂄 {capacity}%",
-        "format-plugged": "󰚥 {capacity}%",
-        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "format": "{icon}",
+        "format-charging": "󰂄",
+        "format-plugged": "󰂅",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰂅"],
         "interval": 5,
         "states": {
             "warning": 25,
@@ -124,7 +124,7 @@
     },
 
     "hyprland/language": {
-        "format": "󰌌 {short}"
+        "format": "{short}"
     },
 
     "tray": {

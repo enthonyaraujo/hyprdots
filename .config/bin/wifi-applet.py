@@ -136,9 +136,10 @@ def get_signal_icon(bars):
     else:
         return "󰤟"
 
-def scan_networks():
+def scan_networks(rescan=False):
+    cmd = ["nmcli", "-t", "-f", "IN-USE,SSID,BARS,SECURITY", "device", "wifi", "list", "--rescan", "yes" if rescan else "no"]
     scan_res = subprocess.run(
-        ["nmcli", "-t", "-f", "IN-USE,SSID,BARS,SECURITY", "device", "wifi", "list"],
+        cmd,
         text=True,
         stdout=subprocess.PIPE
     )
@@ -213,13 +214,13 @@ class WifiApplet(Gtk.Window):
         self.connect("key-press-event", self.on_key_press)
         self.connect("destroy", self.cleanup)
 
-    def rebuild_ui(self):
+    def rebuild_ui(self, rescan=False):
         for child in self.main_box.get_children():
             self.main_box.remove(child)
 
         self.password_mode = False
         wifi_enabled = get_wifi_status()
-        current_ssid, networks = scan_networks() if wifi_enabled else (None, [])
+        current_ssid, networks = scan_networks(rescan=rescan) if wifi_enabled else (None, [])
         saved_conns = get_saved_connections() if wifi_enabled else set()
 
         # Cabeçalho

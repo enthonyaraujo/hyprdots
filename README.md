@@ -5,7 +5,7 @@
 <h3 align="center">Dotfiles</h3>
 
 <p align="center">
-  A clean and minimal Hyprland desktop environment on Ubuntu with custom Waybar, Rofi menus, GTK applets, and a unified dark/light theme switcher.
+  A clean and minimal Hyprland with custom Waybar, Rofi menus, GTK applets, and a unified dark/light theme switcher.
 </p>
 
 ---

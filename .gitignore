@@ -31,9 +31,14 @@
 !/.config/wallpapers/
 !/.config/waybar/
 
-# Temporary files and caches
+# Temporary files, backups and caches
 *.log
 *.tmp
+*.bak
+*.old
+*~
+*.swp
+*.swo
 __pycache__/
 *.py[cod]
 .cache/

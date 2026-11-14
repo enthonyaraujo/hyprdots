@@ -48,3 +48,10 @@ hl.window_rule({
     float   = true,
     pin     = true,
 })
+
+-- Suppress maximize requests from all apps (fixes new windows covering others)
+hl.window_rule({
+    name           = "suppress-maximize-events",
+    match          = { class = ".*" },
+    suppress_event = "maximize",
+})

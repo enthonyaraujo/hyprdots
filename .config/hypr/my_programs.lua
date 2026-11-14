@@ -8,13 +8,11 @@ hl.config({
         force_zero_scaling = true,
     },
 })
-
 -- Default applications
 terminal = "kitty"
-fileManager = "dolphin"
+fileManager = "nautilus"
 menu = "rofi -show drun -theme-str 'window { width: 500px; height: 600px; }'"
 editor = "nano"
-
 -- Autostart programs on hyprland.start event
 hl.on("hyprland.start", function()
     hl.exec("udiskie -A")

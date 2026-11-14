@@ -49,7 +49,7 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("kitty nvim"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("killall waybar && waybar"))
 -- Screenshots
 hl.bind("Print", hl.dsp.exec_cmd("~/.config/bin/screenshot.sh area"))
-hl.bind("SHIFT, Print", hl.dsp.exec_cmd("~/.config/bin/screenshot.sh full"))
+hl.bind("SHIFT + Print", hl.dsp.exec_cmd("~/.config/bin/screenshot.sh full"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("~/.config/bin/screenshot.sh edit"))
 
 -- Keybind to toggle laptop monitor (WIN + P / WIN + SHIFT + P)

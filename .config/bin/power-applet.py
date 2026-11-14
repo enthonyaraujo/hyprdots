@@ -92,7 +92,7 @@ def align_to_top_right():
         target_x = mon_x + mon_w - win_w - margin_right
         target_y = mon_y + 32
         subprocess.run(
-            ["hyprctl", "dispatch", "movewindowpixel", f"exact {target_x} {target_y}", ",class:^(power-applet)$"],
+            ["hyprctl", "dispatch", f"hl.dsp.window.move({{ x = {target_x}, y = {target_y}, window = 'class:^(power-applet)$' }})"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
@@ -160,8 +160,11 @@ def get_battery_info():
     return pct, state, health, icon
 
 def get_current_profile():
-    res = subprocess.run(["powerprofilesctl", "get"], capture_output=True, text=True)
-    return res.stdout.strip()
+    try:
+        res = subprocess.run(["powerprofilesctl", "get"], capture_output=True, text=True)
+        return res.stdout.strip() or "balanced"
+    except Exception:
+        return "balanced"
 
 class PowerApplet(Gtk.Window):
     def __init__(self):
@@ -261,7 +264,10 @@ class PowerApplet(Gtk.Window):
 
     def make_profile_handler(self, p_code, p_title):
         def handler(widget):
-            subprocess.run(["powerprofilesctl", "set", p_code])
+            try:
+                subprocess.run(["powerprofilesctl", "set", p_code])
+            except Exception:
+                pass
             subprocess.run(["notify-send", "-a", "Power", "Power Profile", f"Mode '{p_code.capitalize()}' activated."])
             self.cur_profile = p_code
             for code, (btn, lbl, title) in self.profile_buttons.items():

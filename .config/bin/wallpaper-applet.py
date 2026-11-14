@@ -125,7 +125,7 @@ def align_to_center(win_w=850, win_h=260):
         target_x = mon_x + (mon_w - win_w) // 2
         target_y = mon_y + (mon_h - win_h) // 2
         subprocess.run(
-            ["hyprctl", "dispatch", "movewindowpixel", f"exact {target_x} {target_y}", ",class:^(wallpaper-applet)$"],
+            ["hyprctl", "dispatch", f"hl.dsp.window.move({{ x = {target_x}, y = {target_y}, window = 'class:^(wallpaper-applet)$' }})"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )

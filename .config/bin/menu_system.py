@@ -9,7 +9,7 @@ def system_menu():
     menu_items = [
         ("󰌾   Lock Screen", "hyprlock"),
         ("󰤄   Suspend", "systemctl suspend"),
-        ("󰍃   Log Out", "hyprctl dispatch exit"),
+        ("󰍃   Log Out", "hyprctl dispatch hl.dsp.exit()"),
         ("󰜉   Restart", "systemctl reboot"),
         ("   UEFI Firmware", "systemctl reboot --firmware-setup"),
         ("󰐥   Power Off", "systemctl poweroff"),

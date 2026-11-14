@@ -14,3 +14,11 @@ hl.monitor({
     position = "2092x1080",
     scale = 1.0,
 })
+
+hl.monitor({
+    output = "HDMI-A-2",
+    mode = "1920x1080@180",
+    position = "2092x1080",
+    scale = 1.0,
+})
+

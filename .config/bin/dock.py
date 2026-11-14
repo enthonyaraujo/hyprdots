@@ -189,12 +189,12 @@ class HyprlandState:
 
     @staticmethod
     def focus_window(address):
-        subprocess.run(["hyprctl", "dispatch", "focuswindow", f"address:{address}"],
+        subprocess.run(["hyprctl", "dispatch", f"hl.dsp.focus({{ window = 'address:{address}' }})"],
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     @staticmethod
     def close_window(address):
-        subprocess.run(["hyprctl", "dispatch", "closewindow", f"address:{address}"],
+        subprocess.run(["hyprctl", "dispatch", f"hl.dsp.window.close({{ window = 'address:{address}' }})"],
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 

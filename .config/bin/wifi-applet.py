@@ -92,7 +92,7 @@ def align_to_top_right():
         target_x = mon_x + mon_w - win_w - margin_right
         target_y = mon_y + 32
         subprocess.run(
-            ["hyprctl", "dispatch", "movewindowpixel", f"exact {target_x} {target_y}", ",class:^(wifi-applet)$"],
+            ["hyprctl", "dispatch", f"hl.dsp.window.move({{ x = {target_x}, y = {target_y}, window = 'class:^(wifi-applet)$' }})"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )

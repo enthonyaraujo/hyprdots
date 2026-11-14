@@ -42,9 +42,9 @@ def config_menu():
         if action == "back":
             menu_main()
         elif action.startswith("sh -c"):  
-            subprocess.run(['hyprctl', 'dispatch', 'exec', action])
+            subprocess.Popen(action, shell=True)
         else:
-            subprocess.run(action.split(), shell=False)
+            subprocess.Popen(action.split())
 
 def system_menu():
     keys = (
@@ -121,7 +121,6 @@ def theme_menu():
 
 def menu_main():
     keys = (
-        "󰣇   Archlinux Wiki",
         "   Hyprland Wiki",
         "󰀻   Applications",
         "   Switch Wallpaper",
@@ -134,7 +133,6 @@ def menu_main():
     )
 
     actions = (
-        "firefox --new-tab https://wiki.archlinux.org/title/Main_page",
         "firefox --new-tab https://wiki.hypr.land",
         "rofi -show drun",
         "$HOME/.config/bin/switch-theme.sh", 
@@ -167,7 +165,7 @@ def menu_main():
         if callable(action):
             action()
         else:
-            subprocess.run(['hyprctl', 'dispatch', 'exec', action])
+            subprocess.Popen(action, shell=True)
 
 if __name__ == "__main__":
     menu_main()

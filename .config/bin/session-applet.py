@@ -91,7 +91,7 @@ def align_to_top_right():
         target_x = mon_x + mon_w - win_w - margin_right
         target_y = mon_y + 32
         subprocess.run(
-            ["hyprctl", "dispatch", "movewindowpixel", f"exact {target_x} {target_y}", ",class:^(session-applet)$"],
+            ["hyprctl", "dispatch", f"hl.dsp.window.move({{ x = {target_x}, y = {target_y}, window = 'class:^(session-applet)$' }})"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
@@ -166,7 +166,7 @@ class SessionApplet(Gtk.Window):
         actions = [
             ("󰌾   Lock Screen", "hyprlock", False),
             ("󰤄   Suspend System", "systemctl suspend", False),
-            ("󰍃   Log Out", "hyprctl dispatch exit", False),
+            ("󰍃   Log Out", "hyprctl dispatch hl.dsp.exit()", False),
             ("󰜉   Restart", "systemctl reboot", False),
             ("   Reboot to UEFI Firmware", "systemctl reboot --firmware-setup", False),
             ("󰐥   Power Off", "systemctl poweroff", True),

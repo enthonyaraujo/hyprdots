@@ -120,7 +120,7 @@ def align_to_top_right(app_win=None):
         margin_right = 12
         target_x = mon_x + mon_w - win_w - margin_right
         target_y = mon_y + 32
-        subprocess.run(["hyprctl", "dispatch", "movewindowpixel", f"exact {target_x} {target_y}", ",class:^(volume-applet)$"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["hyprctl", "dispatch", f"hl.dsp.window.move({{ x = {target_x}, y = {target_y}, window = 'class:^(volume-applet)$' }})"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         pass
     return False

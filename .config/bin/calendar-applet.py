@@ -99,7 +99,7 @@ def align_to_center(cal_w=620):
         target_x = mon_x + (mon_w - cal_w) // 2
         target_y = mon_y + 32
         subprocess.run(
-            ["hyprctl", "dispatch", "movewindowpixel", f"exact {target_x} {target_y}", ",class:^(calendar-applet)$"],
+            ["hyprctl", "dispatch", f"hl.dsp.window.move({{ x = {target_x}, y = {target_y}, window = 'class:^(calendar-applet)$' }})"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
